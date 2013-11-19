@@ -1,0 +1,243 @@
+<html>
+    <head>
+        <title>Registrar</title>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="http://www.boteroibanez.com/img/botero.ico">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos.css"></style>
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos2.css"></style>
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/css_permisos.css"></style>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css" />
+        <script type="text/javascript">
+            $(function(){
+                 $("#logo").click(function(){
+                    location.href="<?php echo Conexion::ruta();?>home";
+                })
+                $( "#datepicker" ).datepicker();
+
+                $("#abrir").click(function(){
+                        
+                    $("#footer,#formulario").fadeIn();
+                    });//click
+                
+                $("#cerrar").click(function(){
+                    $("#footer,#formulario").fadeOut();
+                    })
+                $("#nuevo").click(function(){
+                        $("#fproducto").val(" ");
+                        $("#fcantidad").val(" ");
+                        $("#fvu").val(" ");
+                        $("#fimp").val(" ");
+                        $("#f_grabar").val(" ");
+                    location.href="<?php echo Conexion::ruta()?>Registrar?n=1";
+                    });
+                $("#guardar").click(function(){
+                    var clave=$("#clave");
+                    var clavec=$("#clave_c");
+                    if(clave.val() < 0 && clavec.val() < 0){
+                        clave.prop("disabled",true);
+                        clavec.prop("disabled",true);
+                        document.form.submit();
+                    }else{
+                        if(clave.val() == clavec.val()){
+                            if(confirm("Recuerde que para que tome los cambios es necesario Cerrar Sesión")){
+
+                            }
+                          document.form.submit();  
+                        }else{
+                            alert("La Claves no coinciden");
+                        }
+                    }
+                    
+                    });
+                $("#estadod").click(function(){
+                    alert("estado");
+                });
+
+                $("#sucursal").click(function(){
+                    alert("sucursal");
+                })
+
+                $("#buscar").click(function(){
+                    var dato=$("#txtbuscar").val();
+                    location.href="<?php echo Conexion::ruta()?>Registrar?b="+dato;
+                })
+
+                $("#txtbuscar").keypress(function(event){
+                    if(event.which==13){
+                        var dato=$("#txtbuscar").val();
+                        location.href="<?php echo Conexion::ruta()?>Registrar?b="+dato;    
+                    }
+                });
+
+                $("#principal").change(function(){
+                    var id=$("#principal").val();
+                    $.get("<?php echo Conexion::ruta()?>view/ajax_menu.phtml",{id:id},function(data){
+                    $("#ajax").html(data);
+                });
+                });
+
+
+                });//main    
+        </script>
+        <script type="text/javascript">
+        function eliminar(id,id_requi){
+            if(confirm("Desea eliminar este detalle")){
+                location.href="<?php echo Conexion::ruta()?>Requisicion&e="+id+"&b="+id_requi;
+            }
+        }
+
+        function editar(id,requi,producto,cantidad,Vu,imp){
+            $("#fproducto").val(producto);
+            $("#fcantidad").val(cantidad);
+            $("#fvu").val(Vu);
+            $("#fimp").val(imp);
+            $("#f_grabar").val("si2");
+            $("#fid").val(id);
+            $("#footer,#formulario").fadeIn();
+        }
+
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                
+            </div>
+            <div id="menu">
+                <?php include"view/Menu.phtml";?>
+            </div>
+             <div id="sesion">
+                <a href="<?php echo Conexion::ruta()?>cerrar" title="Cerrar Sesion"><img class="cerrar_c" src="<?php echo Conexion::ruta()?>images/cerrar.png"></a><br>
+                <?php echo ucwords($_SESSION["Nombre"]);?><br>
+                <strong><?php echo $centro;?></strong>
+            </div>
+        </div>
+        <div id="linea"></div>
+        <div id="espacio"></div>
+        <form action="" method="POST" name="form">
+        <div id="lateral">
+            <ul>
+                <li><img title="Nuevo" id="nuevo" class="imagen" src="<?php echo Conexion::ruta()?>images/agregar.jpg"></li>
+                <li><img title="Guardar" class="imagen" src="<?php echo Conexion::ruta()?>images/guardar.png" id="guardar">
+                    <input type="hidden" name="grabar" value="si"></li>
+                <li><img title="Buscar" class="imagen" id="buscar" src="<?php echo Conexion::ruta()?>images/buscar.png"></li>
+                <li><input type="text" name="txtbuscar" size=10 id="txtbuscar"></li>
+            </ul>
+        </div>
+        <div id="contenido">
+            <h2>Registro Usuarios</h2>
+            
+            <div class="caja">
+               <table>
+                <tr>
+
+                    <td><span>Id</span></td>
+                    <td><input type="text" name="Id" value="<?php echo (isset($d[0]["No"]))?$d[0]["No"]:"";?>" readonly></td>
+                </tr>
+               
+                <tr>
+                    <td><span>Nombre</span></td>
+                    <td><input type="text" name="nombre" value="<?php echo (isset($d[0]["Nombre"]))?$d[0]["Nombre"]:"";?>"></td>
+                </tr>
+                <tr>
+                    <td><span>Apellido</span></td>
+                    <td><input type="text" name="apellido" value="<?php echo (isset($d[0]["Apellido"]))?$d[0]["Apellido"]:"";?>"></td>
+                </tr>
+            </table>
+          
+            </div>
+            
+            <div class="caja">
+               <table>
+                    <tr>
+                    <td><span>Correo</span></td>
+                    <td><input type="text" name="correo" value="<?php echo (isset($d[0]["Correo"]))?$d[0]["Correo"]:"";?>"></td>
+                    
+                </tr>
+                <tr>
+                    <td><span>Clave</span></td>
+                    <td><input type="password" name="clave" id="clave" value="<?php echo (isset($d[0]["Clave"]))?$d[0]["Clave"]:"";?>"></td>
+                </tr>
+                <tr>
+                    <td><span>Confirmación</span></td>
+                    <td><input type="password" name="clave_c" id="clave_c" value="<?php echo (isset($d[0]["Confirmacion"]))?$d[0]["Confirmacion"]:"";?>"></td>
+                </tr>
+
+                 </table>   
+            </div>
+            <div class="caja">
+                  <table>
+                     <tr>
+                        <td><span>Cédula</span></td>
+                        <td><input type="text" name="cedula" value="<?php echo (isset($d[0]["Cedula"]))?$d[0]["Cedula"]:"";?>"></td>
+                    </tr>                  
+                 </table> 
+            </div>
+            <div id="lugar">
+                <table>
+                    <tr>
+                        <td><span>Centros de Costo</span></td>
+                        <td>
+                            <select name="Centrocosto[]" multiple>
+                                <?php
+                                foreach ($centrop as $valor) {
+
+                                    if(stripos($d[0]["Centrocosto"],$valor["Nombre"])){
+                                        $check="selected";
+                                    }else{
+                                        $check="";
+                                    }
+                                ?>
+                                <option <?php echo $check;?> value="<?php echo $valor["Id"];?>"><?php echo $valor["Nombre"]?></option>
+                                <?php    
+                                }
+                                ?>
+                            </select>
+                        </td>
+                        <td><span>Sucursal</span></td>
+                        <td width="20%">
+                            <select name="Sucursal[]" multiple>
+                                <?php
+                                foreach ($sucursal as $k => $valor) {
+
+                                ?>
+                                <option value="<?php echo $valor["Id"];?>"><?php echo $valor["Nombre"]?></option>
+                                <?php    
+                                }
+                                ?>
+                            </select>
+                        </td>
+
+                        <td><span>Roles</span></td>
+                        <td width="20%">
+                            <select name="Roles[]" multiple>
+                                <?php
+                                foreach ($roles as $k => $valor) {
+                                    if(stripos($d[0]["Rol"], $valor["Rol"])){
+                                        $sel="selected";
+                                    }
+                                    else{
+                                        $sel="";
+                                    }
+                                ?>
+                                <option <?php echo $sel;?> value="<?php echo $valor["Id"];?>"><?php echo $valor["Rol"]?></option>
+                                <?php    
+                                }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                
+                
+            </div>
+            
+            </form>      
+
+        </div>
+    </body>
+</html>
+

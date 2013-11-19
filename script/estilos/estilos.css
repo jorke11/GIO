@@ -1,0 +1,1456 @@
+  /*rgb(0,43,87)*/
+  @font-face {
+              font-family: "Robson Celtic";
+              src: url("http://websenior/fonts/rob-celt")
+              }
+  
+  body{
+                margin: 0 auto;
+                font-size: 13px;
+                text-align: center;
+            }
+
+.imagen3{
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+}
+.imagen3:hover{
+    width: 90px;
+    height: 90px;
+    cursor: pointer;
+}
+
+
+#footer_muestra{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario_muestra{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:3%;
+              left:25%;
+              width:45%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario_muestra li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario_muestra form{
+              margin-left: 30px;          
+              }
+              
+              #formulario_muestra form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario_muestra form .ent2{
+                width: 180px;
+              }
+              
+              #footer_muestra ,#formulario_muestra{
+              display: none;
+              }
+
+
+
+
+
+#footer_act{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario_act{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:3%;
+              left:25%;
+              width:45%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario_act li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario_act form{
+              margin-left: 30px;          
+              }
+              
+              #formulario_act form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario_act form .ent2{
+                width: 180px;
+              }
+              
+              #footer_act ,#formulario_act{
+              display: none;
+              }
+
+
+
+#footer_vehi{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario_vehi{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:3%;
+              left:25%;
+              width:45%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario_vehi li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario_vehi form{
+              margin-left: 30px;          
+              }
+              
+              #formulario_vehi form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario_vehi form .ent2{
+                width: 180px;
+              }
+              
+              #footer_vehi ,#formulario_vehi{
+              display: none;
+              }
+
+
+
+#footer_tip{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario_tip{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:3%;
+              left:25%;
+              width:45%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario_tip li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario_tip form{
+              margin-left: 30px;          
+              }
+              
+              #formulario_tip form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario_tip form .ent2{
+                width: 180px;
+              }
+              
+              #footer_tip ,#formulario_tip{
+              display: none;
+              }
+
+
+#footer_boni{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario_boni{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:3%;
+              left:25%;
+              width:45%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario_boni li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario_boni form{
+              margin-left: 30px;          
+              }
+              
+              #formulario_boni form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario_boni form .ent2{
+                width: 180px;
+              }
+              
+              #footer_boni ,#formulario_boni{
+              display: none;
+              }
+
+
+
+#footer_des{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario_des{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:3%;
+              left:25%;
+              width:45%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario_des li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario_des form{
+              margin-left: 30px;          
+              }
+              
+              #formulario_des form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario_des form .ent2{
+                width: 180px;
+              }
+              
+              #footer_des ,#formulario_des{
+              display: none;
+              }
+
+
+
+#footer_foto{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario_foto{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:3%;
+              left:25%;
+              width:45%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario_foto li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario_foto form{
+              margin-left: 30px;          
+              }
+              
+              #formulario_foto form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario_foto form .ent2{
+                width: 180px;
+              }
+              
+              #footer_foto ,#formulario_foto{
+              display: none;
+              }
+
+#footer_bot{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario_bot{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:3%;
+              left:25%;
+              width:45%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario_bot li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario_bot form{
+              margin-left: 30px;          
+              }
+              
+              #formulario_bot form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario_bot form .ent2{
+                width: 180px;
+              }
+              
+              #footer_bot ,#formulario_bot{
+              display: none;
+              }
+
+
+#footer_m{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario_m{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:3%;
+              left:25%;
+              width:45%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario_m li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario_m form{
+              margin-left: 30px;          
+              }
+              
+              #formulario_m form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario_m form .ent2{
+                width: 180px;
+              }
+              
+              #footer_m ,#formulario_m{
+              display: none;
+              }
+
+
+          #footer_mt{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario_mt{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:10%;
+              left:30%;
+              width:35%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario_mt li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario_mt form{
+              margin-left: 30px;          
+              }
+              
+              #formulario_mt form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario_mt form .ent2{
+                width: 180px;
+              }
+              
+              #footer_mt ,#formulario_mt{
+              display: none;
+              }
+
+
+           #footer_t{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario_t{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:10%;
+              left:30%;
+              width:35%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario_t li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario_t form{
+              margin-left: 30px;          
+              }
+              
+              #formulario_t form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario_t form .ent2{
+                width: 180px;
+              }
+              
+              #footer_t ,#formulario_t{
+              display: none;
+              }
+
+
+              #footer_e{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario_e{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:10%;
+              left:30%;
+              width:35%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario_e li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario_e form{
+              margin-left: 30px;          
+              }
+              
+              #formulario_e form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario_e form .ent2{
+                width: 180px;
+              }
+              
+              #footer_e ,#formulario_e{
+              display: none;
+              }
+
+
+
+
+            .tam{
+              width: 155px;
+            }
+            
+            h1,h2,h3,h4{
+              color: rgb(0,43,87);
+            }
+
+            #header{
+                width: 100%;
+                height: 70px;
+            }
+                #logo{
+                    width: 15%;
+                    height: 100%;
+                    background: url("../../images/blog.png");
+                    background-size: 100% 100%;
+                    background-repeat: no-repeat;
+                    float:left;
+                }
+                #menu{
+                    width: 75%;
+                    height: 30px;
+                    
+                    float: left;
+                }
+                #sesion{
+                    width: 10%;
+                    height: 100%;
+                    float: left;
+                    
+                }
+            #linea{
+                height: 2px;
+                background: #000;
+                z-index: 10;
+            }
+            #lateral{
+              width: 9%;
+              height: 560px;
+              float: left;
+            }
+            #lateral_izq{
+              width: 2%;
+              height: 510px;
+              float: left;
+              z-index: 10;
+              padding-left: 2px;
+            }
+            #contenido{
+                background: #EDF2F5;
+                height: 510px;
+                width:1100px;
+                box-shadow:3px 3px 10px #A8A8A8;
+                float: left;
+                z-index:2;
+            }
+              #boton{
+              width:100%;
+              height: 60px;
+              float: left;
+              margin-left: auto;
+              margin-right: auto;
+              }
+
+              #enlace{
+                width:100%;
+                height: 100px;
+              }
+              
+            #footer{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 200;
+              top:10%;
+              left:40%;
+              width:auto;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              
+              
+              }
+              
+              #formulario li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario form{
+              margin-left: 30px;          
+              }
+              
+              #formulario form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario form .ent2{
+                width: 180px;
+              }
+              
+              #footer ,#formulario{
+              display: none;
+              }
+            
+           
+              ul{
+              list-style-type: none;
+              }
+              #l_menu{
+                margin-left: 0px;
+                padding: 0px;
+              }
+              #l_menu li a{
+              padding: 2px 10px;
+              display: block;
+          }
+          #l_menu li a:hover{
+              background: #545C69;
+              border-radius: 15px;
+              color:#FFFFFF;
+              
+              }
+          #l_menu > li{
+              float: left;
+          }
+          #l_menu li ul li{
+              background: rgba(155, 155, 165, 0.8);
+              width: 100px;
+          }
+          #l_menu li ul{
+              display: none;
+              position: absolute;
+              min-height: 140px;
+              padding: 0;
+          }
+          #l_menu li:hover > ul{
+              display: block;
+          }
+          a{
+            text-decoration: none;
+            color: rgb(0,43,87);
+          }
+          .caja{
+              width:33%;
+              height: auto;
+              float: left;
+              
+          }
+           #formu1 formu label{
+              width: 250px;   
+         }
+         #formu1 formu input{
+              padding: 7px;
+         }
+
+         #tabla{
+              width:100%;
+              height: 250px;
+              float: left;
+        }
+        #tablaesp{
+              width:100%;
+              height: 150px;
+              float: left;
+        }
+        #paginador{
+              width:100%;
+              height: 30px;
+              float: left;
+              background-color: #fee;
+        }
+
+        #tabla1{
+              width:100%;
+              height: 250px;
+              float: left;
+
+        }
+        #tabla2{
+              width:100%;
+              height: 200px;
+              float: left;
+        }
+        .tabla3{
+              width:100%;
+              height: 200px;
+              float: left;
+        }
+        #tabla4{
+              width:100%;
+              height: 200px;
+              float: left;
+        }
+
+
+        #trabajos{
+              width:960px;
+              height: 200px;
+              float: left;
+        }
+
+        .imagen{
+              width: 50px;
+              height: 50px;
+              cursor: pointer;
+        }
+        .imagen2{
+              width: 30px;
+              height: 30px;
+              cursor: pointer;
+        }
+        .imagen:hover{
+              width: 63px;
+              height: 63px;
+        }
+        
+        table{
+            border-collapse:collapse;
+            border-color: rgb(0,43,87);
+
+           }
+            .bordered{
+            border: solid #ccc 1px;
+            border-radius: 6px;
+            -webkit-box-shadow: 0 1px 1px #ccc; 
+            -moz-box-shadow: 0 1px 1px #ccc; 
+            box-shadow: 0 1px 1px #ccc; 
+           }
+
+           .bordered tr:hover {
+    background: #fbf8e9;
+    -o-transition: all 0.1s ease-in-out;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;     
+}
+.bordered th {
+  color: white;
+  width: auto;
+  font-size: 14px;
+}
+
+.bordered td {
+  color: rgb(0,43,87);
+  font-size: 12px;
+}
+.bordered td, .bordered th {
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    padding: 3px;
+    text-align: left;    
+}
+.bordered th {
+    background-color: rgb(0,43,87);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#545C69), to(#9A9EA5));
+    background-image: -webkit-linear-gradient(top, #545C69, #9A9EA5);
+    background-image:    -moz-linear-gradient(top, #545C69, #9A9EA5);
+    background-image:     -ms-linear-gradient(top, #545C69, #9A9EA5);
+    background-image:      -o-linear-gradient(top, #545C69, #9A9EA5);
+    background-image:         linear-gradient(top, #545C69, #9A9EA5);
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
+    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;  
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
+    border-top: none;
+}
+.bordered td:first-child, .bordered th:first-child {
+    border-left: none;
+}
+
+#footer3{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario3{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:3%;
+              left:25%;
+              width:45%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario3 li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario3 form{
+              margin-left: 30px;          
+              }
+              
+              #formulario3 form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario3 form .ent2{
+                width: 180px;
+              }
+              
+              #footer3 ,#formulario3{
+              display: none;
+              }
+
+
+          #footer4{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario4{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:10%;
+              left:30%;
+              width:35%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario4 li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario4 form{
+              margin-left: 30px;          
+              }
+              
+              #formulario4 form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario4 form .ent2{
+                width: 180px;
+              }
+              
+              #footer4 ,#formulario4{
+              display: none;
+              }
+
+
+#footer5{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario5{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:10%;
+              left:30%;
+              width:35%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario5 li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario5 form{
+              margin-left: 30px;          
+              }
+              
+              #formulario5 form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario5 form .ent2{
+                width: 180px;
+              }
+              
+              #footer5 ,#formulario5{
+              display: none;
+              }
+
+
+
+ #footer6{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario6{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:10%;
+              left:30%;
+              width:35%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario6 li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario6 form{
+              margin-left: 30px;          
+              }
+              
+              #formulario6 form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario6 form .ent2{
+                width: 180px;
+              }
+              
+              #footer6 ,#formulario6{
+              display: none;
+              }
+
+#footer7{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario7{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:10%;
+              left:30%;
+              width:35%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario7 li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario7 form{
+              margin-left: 30px;          
+              }
+              
+              #formulario7 form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario7 form .ent2{
+                width: 180px;
+              }
+              
+              #footer7 ,#formulario7{
+              display: none;
+              }
+
+#footer8{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario8{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:10%;
+              left:30%;
+              width:35%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario8 li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario8 form{
+              margin-left: 30px;          
+              }
+              
+              #formulario8 form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario8 form .ent2{
+                width: 180px;
+              }
+              
+              #footer8 ,#formulario8{
+              display: none;
+              }
+
+#footer9{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario9{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:10%;
+              left:30%;
+              width:35%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario9 li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario9 form{
+              margin-left: 30px;          
+              }
+              
+              #formulario9 form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario9 form .ent2{
+                width: 180px;
+              }
+              
+              #footer9 ,#formulario9{
+              display: none;
+              }
+
+#footer10{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario10{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:10%;
+              left:30%;
+              width:35%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario10 li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario10 form{
+              margin-left: 30px;          
+              }
+              
+              #formulario10 form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario10 form .ent2{
+                width: 180px;
+              }
+              
+              #footer10 ,#formulario10{
+              display: none;
+              }
+
+ #footer_c{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 100;
+              
+            }
+            
+            #formulario_c{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 200;
+              top:10%;
+              left:25%;
+              width:auto;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              
+              
+              }
+              
+              #formulario_c li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario_c form{
+              margin-left: 30px;          
+              }
+              
+              #formulario_c form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario_c form .ent2{
+                width: 180px;
+              }
+              
+              #footer_c ,#formulario_c{
+              display: none;
+              }
+
+
+
+.letra{
+  
+}
+
+
+     #footerfoto{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulariofoto{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 200;
+              top:10%;
+              left:10%;
+              width:80%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              
+              
+              }
+              
+              #formulariofoto li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulariofoto form{
+              margin-left: 30px;          
+              }
+              
+              #formulariofoto form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulariofoto form .ent2{
+                width: 180px;
+              }
+              
+              #footerfoto ,#formulariofoto{
+              display: none;
+              }
+
+##tabladetalle{
+text-align: center;
+}
+
+#tabladetalle td label{
+  font-size: 13px;
+  text-align: center;
+}
+#footer_pag{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario_pag{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:3%;
+              left:25%;
+              width:45%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario_pag li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario_pag form{
+              margin-left: 30px;          
+              }
+              
+              #formulario_pag form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario_pag form .ent2{
+                width: 180px;
+              }
+              
+              #footer_pag ,#formulario_pag{
+              display: none;
+              }

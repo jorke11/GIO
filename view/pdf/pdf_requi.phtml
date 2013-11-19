@@ -1,0 +1,379 @@
+<?php
+require_once("class.ezpdf.php");
+class ajax {
+	private $centro=array();
+	private $requi=array();
+	private $detalle=array();
+
+	public function conectar(){
+	    $con=mysql_connect("localhost","monitore_admin","soporte123z");
+	    mysql_select_db("monitore_ipam");
+	    //mysql_query("SET NAMES 'utf-8'");
+	    return $con;
+	}
+
+	public function get_requi($con,$id_centro){
+        $this->conectar();
+
+        $sql="SELECT Id,Consecutivo,Fr,Estadodoc,Observaciones,Fentrega,Sucursal,Centrocosto,Observaciones,Lentrega,Centro_costo,
+        Ps,Bloqueado 
+        from Alm_requi as a 
+        inner join
+        Usuarios_centro as u
+        on
+        a.Ur=u.id_usuario
+        where 
+        Consecutivo=$con 
+        and 
+        Centrocosto=".$id_centro;
+
+        $res=mysql_query($sql);
+
+        if($row=mysql_fetch_assoc($res)){
+            $this->requi[]=$row;
+        }    
+        return $this->requi;    
+    }
+
+     public function get_requidet($id){
+        $this->conectar();
+        $sql="SELECT * from Alm_requidet where Id_Requisicion=$id";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->detalle[]=$row;
+        }
+
+        return $this->detalle;
+    }
+
+    public function get_sal($con,$id_centro){
+        $this->conectar();
+        $sql="SELECT Id,Consecutivo,Fr,Estadodoc,Sucursal,Centrocosto,Observaciones,Centro_costo,Proyecto,Tipo,Destino,EntregadoA,
+        Requisicion,Bloqueado 
+        from 
+        Alm_sal as a
+        inner join
+        Usuarios_centro as u
+        on
+        a.Ur=u.id_usuario
+        where 
+        Consecutivo=$con 
+        and 
+        Centrocosto=".$id_centro;
+        $res=mysql_query($sql);
+
+        if($row=mysql_fetch_assoc($res)){
+            $this->requi[]=$row;
+        }    
+        return $this->requi;   
+    }
+
+     public function get_saldet($id){
+        $this->conectar();
+        $sql="SELECT * from Alm_saldet where Id_sal=$id";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->detalle[]=$row;
+        }
+
+        return $this->detalle;
+    }
+
+	public function get_ent($con,$id_centro){
+        $this->conectar();
+        $sql="SELECT Id,Consecutivo,Fr,Estadodoc,Sucursal,Centrocosto,Observaciones,Centro_costo,Proyecto,
+        Tipo,Trasportado,Proveedor,Id_oc,Bloqueado 
+        from 
+        Alm_ent as a
+        inner join
+        Usuarios_centro as u
+        on
+        a.Ur=u.id_usuario
+        where 
+        Consecutivo=$con 
+        and 
+        Centrocosto=".$id_centro;
+        $res=mysql_query($sql);
+
+        if($row=mysql_fetch_assoc($res)){
+            $this->requi[]=$row;
+        }    
+        return $this->requi;   
+    }
+
+    public function get_entdet($id){
+        $this->conectar();
+        $sql="SELECT * from Alm_entdet where Id_ent=$id";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->detalle[]=$row;
+        }
+
+        return $this->detalle;
+    }
+
+    public function get_OC($con,$id_centro){
+        $this->conectar();
+        $sql="SELECT Id,Consecutivo,Fr,Estadodoc,Sucursal,Centrocosto,Observaciones,Centro_costo,Festadodoc,Norequi,Lugar_entrega,Proveedor,
+        Lugar_entrega,Transportado,Tiempo_entrega,Tipo_pago,Estado_proceso,Bloqueado
+        from 
+        Alm_oc as a
+        inner join
+        Usuarios_centro as u
+        on
+        a.Ur=u.id_usuario
+        where Consecutivo=$con 
+        and 
+        Centrocosto=".$id_centro;
+        $res=mysql_query($sql);
+
+        if($row=mysql_fetch_assoc($res)){
+            $this->requi[]=$row;
+        }    
+        return $this->requi;  
+    }
+
+    public function get_ocdet($id){
+        $this->conectar();
+        $sql="SELECT * from Alm_ocdet where Id_oc=$id";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->detalle[]=$row;
+        }
+
+        return $this->detalle;
+    }
+
+}
+$obj=new ajax;
+
+$pdf =& new Cezpdf("a4","landscape");   
+$pdf->selectFont('fonts/Courier.afm');
+$pdf->ezImage("BOTERO.jpg", 0, 100, 'none', 'left');
+
+$options=array(
+               'shadeCol'=>array(0.9,0.9,0.9),
+               'xOrientation'=>'center',
+               'width'=>600
+               );
+
+
+if(isset($_GET)){
+	if($_GET["Requi"]){
+		$resultado=$obj->get_requi($_GET["Requi"],$_GET["id_centro"]);
+		$detalle=$obj->get_requidet($_GET["Requi"]);
+        $txttit.= "\n <b>REQUISICION</b> \n  " ;
+        $pdf->ezText($txttit, 20,array('justification'=>'center'));
+        
+        $pdf->ezText(" <b>Numero Requisicion:</b>".$_GET["Requi"]."\n",14);
+
+         $titles=array(
+                
+                'Producto'=>'Producto',
+                'Cantidad'=>'Cantidad',
+                'Vu'=>'Valor Unitario',
+                'Imp'=>'Impuesto',
+                'Vn'=>'Valor Neto',
+                'Vt'=>'Valor Total'
+              );
+
+        for($i=0;$i<sizeof($detalle);$i++){
+        $data[]=array(
+                    
+                    'Producto'=>$detalle[$i]["Producto"],
+                    'Cantidad'=>$detalle[$i]["Cantidad"],
+                    'Vu'=>$detalle[$i]["Vu"],
+                    'Imp'=>$detalle[$i]["Imp"],
+                    'Vn'=>$detalle[$i]["Vn"],
+                    'Vt'=>$detalle[$i]["Vt"]
+                   );
+        }
+        $titles2=array(
+                
+                'Consecutivo'=>'Consecutivo',
+                'Estadodoc'=>'Estadodoc',
+                'Fentrega'=>'Fentrega',
+                'Centrocosto'=>'Centrocosto',
+                'Centro_costo'=>'Centro_costo',
+                'Observaciones'=>'Observaciones'
+              );
+         for($i=0;$i<sizeof($resultado);$i++){
+            $data2[]=array(
+                    'Id'=>utf8_decode($resultado[$i]["Id"]),
+                    'Consecutivo'=>$resultado[$i]["Consecutivo"],
+                    'Estadodoc'=>$resultado[$i]["Estadodoc"],
+                    'Centrocosto'=>$resultado[$i]["Centrocosto"],
+                    'Centro_costo'=>$resultado[$i]["Centro_costo"],
+                    'Observaciones'=>$resultado[$i]["Observaciones"]
+                   );
+         }
+
+    }//FINAL SI
+        
+
+	if($_GET["Salida"]){
+		$resultado=$obj->get_sal($_GET["Salida"],$_GET["id_centro"]);
+		$detalle=$obj->get_saldet($_GET["Salida"]);
+
+        $txttit.= "\n <b>SALIDA</b> \n  " ;
+        $pdf->ezText($txttit, 20,array('justification'=>'center'));
+        
+        $pdf->ezText(" <b>Numero Salida:</b>".$_GET["Salida"]."\n",14);
+
+         $titles=array(
+                
+                'Producto'=>'Producto',
+                'Cantidad'=>'Cantidad',
+                'Vu'=>'Valor Unitario',
+                'Imp'=>'Impuesto',
+                'Vn'=>'Valor Neto',
+                'Vt'=>'Valor Total'
+              );
+
+        for($i=0;$i<sizeof($detalle);$i++){
+        $data[]=array(
+                    'Producto'=>$detalle[$i]["Producto"],
+                    'Cantidad'=>$detalle[$i]["Cantidad"],
+                    'Vu'=>$detalle[$i]["Vu"],
+                    'Imp'=>$detalle[$i]["Imp"],
+                    'Vn'=>$detalle[$i]["Vn"],
+                    'Vt'=>$detalle[$i]["Vt"]
+                   );
+        }
+        $titles2=array(
+                
+                'Consecutivo'=>'Consecutivo',
+                'Estadodoc'=>'Estadodoc',
+                'Fentrega'=>'Fentrega',
+                'Centrocosto'=>'Centrocosto',
+                'Centro_costo'=>'Centro_costo',
+                'Observaciones'=>'Observaciones'
+              );
+         for($i=0;$i<sizeof($resultado);$i++){
+            $data2[]=array(
+                    'Id'=>utf8_decode($resultado[$i]["Id"]),
+                    'Consecutivo'=>$resultado[$i]["Consecutivo"],
+                    'Estadodoc'=>$resultado[$i]["Estadodoc"],
+                    'Centrocosto'=>$resultado[$i]["Centrocosto"],
+                    'Centro_costo'=>$resultado[$i]["Centro_costo"],
+                    'Observaciones'=>$resultado[$i]["Observaciones"]
+                   );
+         }
+
+
+
+	}
+	if($_GET["Entrada"]){
+		$resultado=$obj->get_ent($_GET["Entrada"],$_GET["id_centro"]);
+		$detalle=$obj->get_entdet($_GET["Entrada"]);
+
+        $txttit.= "\n <b>ENTRADA</b> \n  " ;
+        $pdf->ezText($txttit, 20,array('justification'=>'center'));
+        
+        $pdf->ezText(" <b>Numero Entrada:</b>".$_GET["Entrada"]."\n",14);
+
+         $titles=array(
+                'Id'=>'Id',
+                'Producto'=>'Producto',
+                'Cantidad'=>'Cantidad',
+                'Vu'=>'Valor Unitario',
+                'Imp'=>'Impuesto',
+                'Vn'=>'Valor Neto',
+                'Vt'=>'Valor Total'
+              );
+
+        for($i=0;$i<sizeof($detalle);$i++){
+        $data[]=array(
+                    'Id'=>utf8_decode($detalle[$i]["Id"]),
+                    'Producto'=>$detalle[$i]["Producto"],
+                    'Cantidad'=>$detalle[$i]["Cantidad"],
+                    'Vu'=>$detalle[$i]["Vu"],
+                    'Imp'=>$detalle[$i]["Imp"],
+                    'Vn'=>$detalle[$i]["Vn"],
+                    'Vt'=>$detalle[$i]["Vt"]
+                   );
+        }
+        $titles2=array(
+                'Id'=>'Id',
+                'Consecutivo'=>'Consecutivo',
+                'Estadodoc'=>'Estadodoc',
+                'Fentrega'=>'Fentrega',
+                'Centrocosto'=>'Centrocosto',
+                'Centro_costo'=>'Centro_costo',
+                'Observaciones'=>'Observaciones'
+              );
+         for($i=0;$i<sizeof($resultado);$i++){
+            $data2[]=array(
+                    'Id'=>utf8_decode($resultado[$i]["Id"]),
+                    'Consecutivo'=>$resultado[$i]["Consecutivo"],
+                    'Estadodoc'=>$resultado[$i]["Estadodoc"],
+                    'Centrocosto'=>$resultado[$i]["Centrocosto"],
+                    'Centro_costo'=>$resultado[$i]["Centro_costo"],
+                    'Observaciones'=>$resultado[$i]["Observaciones"]
+                   );
+         }
+
+	}//fin si
+	if($_GET["Alm_OC"]){
+		$resultado=$obj->get_OC($_GET["Alm_OC"],$_GET["id_centro"]);
+		$detalle=$obj->get_ocdet($_GET["Alm_OC"]);
+        $txttit.= "\n <b>Orden de Compra</b> \n  " ;
+        $pdf->ezText($txttit, 20,array('justification'=>'center'));
+        
+        $pdf->ezText(" <b>Numero Orden:</b>".$_GET["Alm_OC"]."\n",14);
+
+         $titles=array(
+                'Id'=>'Id',
+                'Producto'=>'Producto',
+                'Cantidad'=>'Cantidad',
+                'Vu'=>'Valor Unitario',
+                'Imp'=>'Impuesto',
+                'Vn'=>'Valor Neto',
+                'Vt'=>'Valor Total'
+              );
+
+        for($i=0;$i<sizeof($detalle);$i++){
+        $data[]=array(
+                    'Id'=>utf8_decode($detalle[$i]["Id"]),
+                    'Producto'=>$detalle[$i]["Producto"],
+                    'Cantidad'=>$detalle[$i]["Cantidad"],
+                    'Vu'=>$detalle[$i]["Vu"],
+                    'Imp'=>$detalle[$i]["Imp"],
+                    'Vn'=>$detalle[$i]["Vn"],
+                    'Vt'=>$detalle[$i]["Vt"]
+                   );
+        }
+        $titles2=array(
+                'Id'=>'Id',
+                'Consecutivo'=>'Consecutivo',
+                'Estadodoc'=>'Estadodoc',
+                'Fentrega'=>'Fentrega',
+                'Centrocosto'=>'Centrocosto',
+                'Centro_costo'=>'Centro_costo',
+                'Observaciones'=>'Observaciones'
+              );
+         for($i=0;$i<sizeof($resultado);$i++){
+            $data2[]=array(
+                    'Id'=>utf8_decode($resultado[$i]["Id"]),
+                    'Consecutivo'=>$resultado[$i]["Consecutivo"],
+                    'Estadodoc'=>$resultado[$i]["Estadodoc"],
+                    'Centrocosto'=>$resultado[$i]["Centrocosto"],
+                    'Centro_costo'=>$resultado[$i]["Centro_costo"],
+                    'Observaciones'=>$resultado[$i]["Observaciones"]
+                   );
+         }
+
+	}
+}
+
+
+$pdf->ezTable($data2,$titles2,'',$options);
+$pdf->ezText("\n");
+$pdf->ezTable($data,$titles,'',$options);
+                                                                                                                                        
+$pdf->ezStream(); 
+?>

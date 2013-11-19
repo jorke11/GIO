@@ -1,0 +1,97 @@
+<?php
+class ajax {
+	private $submenu=array();
+    private $principal=array();
+    private $trabajo=array();
+    private $detalle=array();
+    private $mante=array();
+    private $equipos=array();
+
+	public function conectar(){
+	    $arcConexion="../lib/GIO.ini";
+    
+        $datos = parse_ini_file($arcConexion,true);
+        $conexion=mysql_connect($datos["database_host"],$datos["database_user"],$datos["database_pass"]);
+        mysql_select_db($datos["database_name"]);
+
+        return $conexion;
+	}
+
+   public function get_submenu($id){
+         $this->conectar();
+        $sql="SELECT id_menu,id_submenu,pagina,submenu from Menu_sub where id_menu=$id;";
+        
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->principal[]=$row;
+        }
+
+        return $this->principal;
+    }
+
+    public function get_submenu_user($cedula){
+        $this->conectar();
+        
+        $sql="SELECT id_principal as id_menu,id_submenu,Pagina,Submenu
+        from Usuario_permiso_sub 
+        WHERE Cedula=".$cedula;
+
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->submenu[]=$row;
+        }
+
+        return $this->submenu;
+    }
+
+}
+
+$obj=new ajax;
+
+
+if(isset($_POST["dato"])){
+    $user=$obj->get_submenu_user($_POST["cedula"]);
+    $datos=$obj->get_submenu($_POST["dato"]);  
+
+    foreach ($user as $key => $v) {
+       foreach ($user[$key] as $i => $value) {
+            $texto=$user[$key]["id_submenu"];
+           
+       }
+       $arreglo[$key]=$texto;
+    }
+
+        
+
+}
+
+?>
+ <table align="center" class="bordered">
+                <thead>
+                    <th>Control</th>
+                    <th>Lista</th>
+                    
+                </thead>
+                
+                    <?php
+                    foreach ($datos as $x => $v) {
+                        
+                            ?>
+                            <tr>
+                                <td><?php echo $datos[$x]["submenu"]?></td>
+                                <td><input type="checkbox"  name="Submenu[]" value="<?php echo $datos[$x]["id_submenu"]?>"></td>
+                            </tr>
+                        <?php
+                        
+                                    
+                        }                
+                    ?>  
+                    
+            </table>
+
+
+
+
+

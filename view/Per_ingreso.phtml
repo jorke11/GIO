@@ -1,0 +1,442 @@
+<html>
+    <head>
+        <title>Ingreso</title>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="http://www.boteroibanez.com/img/botero.ico">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos.css"></style>
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos2.css"></style>
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/css_personal.css"></style>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <script type="text/javascript" src="<?php echo Conexion::ruta();?>script/js/traduccion.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css" />
+        <script type="text/javascript">
+            $(function(){
+                
+                $( ".datepicker" ).datepicker();
+
+                $("#abrir").click(function(){
+                        
+                    $("#footer,#formulario").fadeIn();
+                    });//click
+                
+                $("#cerrar").click(function(){
+                    $("#footer,#formulario").fadeOut();
+                    })
+                $("#nuevo").click(function(){
+                    location.href="<?php echo Conexion::ruta()?>Per_ingreso?n=1";
+                    });
+                $("#guardar").click(function(){
+                    if(confirm("Esta seguro se guardar esta Informacion?")){
+                        document.form.submit();
+                    }
+                    
+                    });
+                $("#estadod").click(function(){
+                    alert("estado");
+                });
+
+                $("#sucursal").click(function(){
+                    alert("sucursal");
+                })
+
+                $("#buscar").click(function(){
+                    var dato=$("#txtbuscar").val();
+                    location.href="<?php echo Conexion::ruta()?>Per_ingreso?b="+dato;
+
+                })
+
+                $("#botones").click(function(){
+                    $("#footer_bot,#formulario_bot").fadeIn();
+                 });//ver botones
+
+                $("#cerrar_bot").click(function(){
+                    $("#footer_bot,#formulario_bot").fadeOut();
+                    });  
+
+                $("#pagos").click(function(){
+                    $("#footer_bot,#formulario_bot").fadeOut();
+                    $("#footer_pag,#formulario_pag").fadeIn();
+                 });//ver botones
+
+                $("#cerrar_pag").click(function(){
+                    $("#footer_pag,#formulario_pag").fadeOut();
+                    }); 
+
+
+                $("#txtbuscar").keypress(function(event){
+                    if(event.which==13){
+                        var dato=$("#txtbuscar").val();
+                        location.href="<?php echo Conexion::ruta()?>Per_ingreso?b="+dato;
+                    }
+                });
+
+                });//main    
+        </script>
+        <script type="text/javascript">
+        function eliminar(id,id_requi){
+            if(confirm("Desea eliminar este detalle")){
+                location.href="<?php echo Conexion::ruta()?>Per_ingreso?e="+id+"&b="+id_requi;
+            }
+        }
+        function editar(id){
+            var id=$("#jid").val();
+            var producto=$("#jproducto").val();
+            var cantidad=$("#jcantidad").val();
+            var vunitario=$("#jvu").val();
+            var impuesto=$("#jimp").val();
+
+            $("#fid").val(id);
+            $("#fproducto").val(producto);
+            $("#fcantidad").val(cantidad);
+            $("#fvu").val(vunitario);
+            $("#fimp").val(impuesto);
+            $("#f_grabar").val("si2");
+            $("#footer,#formulario").fadeIn();
+
+        }
+
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                
+            </div>
+            <div id="menu">
+                <?php include"view/Menu.phtml";?>
+            </div>
+             <div id="sesion">
+            <a href="<?php echo Conexion::ruta()?>cerrar" title="Cerrar Sesion"><img class="cerrar_c" src="<?php echo Conexion::ruta()?>images/cerrar.png"></a><br>
+                <?php echo ucwords($_SESSION["Nombre"]);?><br>
+                <strong><?php echo $centro;?></strong>
+            </div>
+        </div>
+        <div id="linea"></div>
+        <form action="" method="POST" name="form">
+        <div id="lateral">
+            <ul>
+                <li><img title="Nuevo" id="nuevo" class="imagen" src="<?php echo Conexion::ruta()?>images/agregar.jpg"></li>
+                <li><img title="Guardar" class="imagen" src="<?php echo Conexion::ruta()?>images/guardar.png" id="guardar">
+                    <input type="hidden" name="grabar" value="si"></li>
+                <li><img title="Imprimir" class="imagen" src="<?php echo Conexion::ruta()?>images/impresora.png"></li>
+                <li><img title="Buscar" class="imagen" id="buscar" src="<?php echo Conexion::ruta()?>images/buscar.png"></li>
+                <li><input type="text" name="txtbuscar" size=10 id="txtbuscar"></li>
+            </ul>
+        </div>
+        <div id="contenido">
+            <h2>Ingreso de Personal</h2>
+            <div class="cuadro">
+               <table >
+                <tr align="center">
+                    <td colspan="8"><h4>Información Personal</h4></td>
+                </tr>
+                <tr>
+                    <td width='8%'><span>Id</span></td>
+                    <td><input type="text" name="Id" class="tam" value="<?php echo (isset($d[0]["Consecutivo"]))?$d[0]["Consecutivo"]:"";?>" readonly></td>
+                    <td width='8%'><span>Identificación</span></td>
+                    <td><input type="text" class="tam" name="Identificacion" value="<?php echo (isset($d[0]["Identificacion"]))?$d[0]["Identificacion"]:"";?>"></td>
+                    <td width='8%'><span>Nombres</span></td>
+                    <td><input type="text" name="Nombres" class="tam" value="<?php echo (isset($d[0]["Nombres"]))?$d[0]["Nombres"]:"";?>"></td>
+                    <td width='8%'><span>Apellidos</span></td>
+                    <td><input type="text" name="Apellidos" class="tam" value="<?php echo (isset($d[0]["Apellidos"]))?$d[0]["Apellidos"]:"";?>"></td>
+                </tr>
+                <tr>    
+
+                    <td width='8%'><span>Sexo</span></td>
+                    <td><SELECT name="Sexo" class="tam">
+                        <option value="0">Seleccione</option>
+                        <option value="1" <?php echo ($d[0]["Sexo"]==1)?"selected":""?> >Masculino</option>
+                        <option value="2" <?php echo ($d[0]["Sexo"]==2)?"selected":""?>>Femenino</option>
+                        </SELECT>
+                    <td width='8%'><span>Fexpedición</span></td>
+                    <td><input type="text" name="Fexpedicion" class="tam datepicker" value="<?php echo (isset($d[0]["Fexpedicion"]))?$d[0]["Fexpedicion"]:"";?>"></td>
+                    <td width='8%'><span>Fnacimiento</span></td>
+                    <td><input type="text" name="Fnacimiento" class="tam datepicker" value="<?php echo (isset($d[0]["Fnacimiento"]))?$d[0]["Fnacimiento"]:"";?>"></td>
+                    <td width='8%'><span>Estadocivil</span></td>
+                    <td><select name="Estadocivil" class="tam">
+                            <option value="0">Seleccione</option>
+                            <option value="1" <?php echo ($d[0]["Estadocivil"]==1)?"selected":""?> >Soltero</option>
+                            <option value="2" <?php echo ($d[0]["Estadocivil"]==2)?"selected":""?> >Casado</option>
+                            <option value="3" <?php echo ($d[0]["Estadocivil"]==3)?"selected":""?> >Union Libre</option>
+                        </select>
+                </td>
+                </tr>
+                <tr>
+                    <td width='8%'><span>Dirección</span></td>
+                    <td><input type="text" name="Direccion" class="tam" value="<?php echo (isset($d[0]["Direccion"]))?$d[0]["Direccion"]:"";?>"></td>
+                    <td width='8%'><span>Telefono 1</span></td>
+                    <td><input type="text" name="Telefono1" class="tam" value="<?php echo (isset($d[0]["Telefono1"]))?$d[0]["Telefono1"]:"";?>"></td>
+                    <td width='8%'><span>Telefono 2</span></td>
+                    <td><input type="text" name="Telefono2" class="tam" value="<?php echo (isset($d[0]["Telefono2"]))?$d[0]["Telefono2"]:"";?>"></td>
+                    <td width='8%'><span>Gruporh</span></td>
+                    <td ><input type="text" name="Gruporh" class="tam" value="<?php echo (isset($d[0]["Gruporh"]))?$d[0]["Gruporh"]:"";?>"></td>
+                </tr>
+                <tr>
+                    <td width='8%'><span>E-mail</span></td>
+                    <td><input type="text" name="Email" class="tam" value="<?php echo (isset($d[0]["Email"]))?$d[0]["Email"]:"";?>"></td>
+                    <td width='8%'><span>Personacontacto</span></td>
+                        <td><input type="text" name="Personacontacto" class="tam" value="<?php echo (isset($d[0]["Personacontacto"]))?$d[0]["Personacontacto"]:"";?>"></td>
+                    <td width='8%'><span>Telcontacto</span></td>
+                    <td><input type="text" name="Telcontacto" class="tam" value="<?php echo (isset($d[0]["Telcontacto"]))?$d[0]["Telcontacto"]:"";?>"></td>
+                </tr>
+                </table> 
+            </div>
+            <br>
+            <div class="cuadro">
+               <table >
+                <tr align="center">
+                    <td colspan="8"><h4>Información Laboral</h4></td>
+                </tr>
+                <tr>
+                    <td width='8%'><span>Centrocosto</span></td>
+                    <td><input type="text" name="CentroCosto" class="tam" readonly value="<?php echo (isset($d[0]["Centro_costo"]))?$d[0]["Centro_costo"]:"";?>"></td>
+                    <td width='8%'><span>Sucursal</span></td>
+                    <td><input type="text" name="Sucursal" class="tam" readonly value="<?php echo (isset($d[0]["Sucursal"]))?$d[0]["Sucursal"]:"";?>"></td>
+                    <td width='8%'><span>Centrotrabajo</span></td>
+                    <td>
+		    	<select name="Centrotrabajo" class="tam">
+                            <option value="0">Seleccione</option>
+                            <?php
+                            foreach ($Centrotrabajo as $key => $value) {
+                                if($Centrotrabajo[$key]["No"]==$d[0]["Centrotrabajo"]){
+                                 ?>
+                                    <option selected="selected" value="<?php echo $Centrotrabajo[$key]['No']?>"><?php echo $Centrotrabajo[$key]["Lista"]?></option>   
+                                 <?php   
+                                }else{
+                                ?>
+                                    <option value="<?php echo $Centrotrabajo[$key]['No']?>"><?php echo $Centrotrabajo[$key]["Lista"]?></option>
+                                <?php        
+                                }
+                            }
+                            ?>
+                        </select>
+		    
+                    <td width='8%'><span>Tipocontrato</span></td>
+                    <td>
+			<select name="Tipocontrato" class="tam">
+                            <option value="0">Seleccione</option>
+                            <?php
+                            foreach ($Tipocontrato as $key => $value) {
+                                if($Tipocontrato[$key]["No"]==$d[0]["Tipocontrato"]){
+                                 ?>
+                                    <option selected="selected" value="<?php echo $Tipocontrato[$key]['No']?>"><?php echo $Tipocontrato[$key]["Lista"]?></option>   
+                                 <?php   
+                                }else{
+                                ?>
+                                    <option value="<?php echo $Tipocontrato[$key]['No']?>"><?php echo $Tipocontrato[$key]["Lista"]?></option>
+                                <?php        
+                                }
+                            }
+                            ?>
+                        </select>
+		    </td>
+		
+		</tr>
+                <tr>
+                    <td width='8%'><span>Salario</span></td>
+                    <td><input type="text" name="Salario" readonly class="tam" value="<?php echo (isset($d[0]["Salario"]))?$d[0]["Salario"]:"";?>"></td>
+		    <td width='8%'><span>Periodo Pago</span></td>
+                    <td>
+                        <select name="Periodopago" class="tam">
+                            <option value="0">Seleccione</option>
+                            <?php
+                            foreach ($Periodopago as $key => $value) {
+                                if($Periodopago[$key]["No"]==$d[0]["Periodopago"]){
+                                 ?>
+                                    <option selected="selected" value="<?php echo $Periodopago[$key]['No']?>"><?php echo $Periodopago[$key]["Lista"]?></option>   
+                                 <?php   
+                                }else{
+                                ?>
+                                    <option value="<?php echo $Periodopago[$key]['No']?>"><?php echo $Periodopago[$key]["Lista"]?></option>
+                                <?php        
+                                }
+                            }
+                            ?>
+                        </select>
+                    </td>
+
+                    <td width='8%'><span>Fingreso</span></td>
+                    <td><input type="text" name="Fingreso" class="tam datepicker" value="<?php echo (isset($d[0]["Fingreso"]))?$d[0]["Fingreso"]:"";?>"></td>
+                    <td width='8%'><span>Fretiro</span></td>
+                    <td><input type="text" name="Fretiro" class="tam datepicker" value="<?php echo (isset($d[0]["Fretiro"]))?$d[0]["Fretiro"]:"";?>"></td>
+                </tr>
+                <tr>
+		    <td width='8%'><span>Motivoret</span></td>
+                    <td><input type="text" name="Motivoret" class="tam" value="<?php echo (isset($d[0]["Motivoret"]))?$d[0]["Motivoret"]:"";?>"></td>
+                    <td width='8%'><span>Carnet</span></td>
+                    <td><input type="text" name="Carnet" class="tam" value="<?php echo (isset($d[0]["Carnet"]))?$d[0]["Carnet"]:"";?>"></td>
+                    <td width='8%'><span>Estadoact</span></td>
+                    <td><input type="text" name="Estadoact" class="tam" value="<?php echo (isset($d[0]["Estadoact"]))?$d[0]["Estadoact"]:"";?>"></td>
+                    <td width='8%'><span>Banco</span></td>
+		    <td><input type="text" name="Banco" class="tam" value="<?php echo (isset($d[0]["Banco"]))?$d[0]["Banco"]:"";?>"></td>
+		</tr>
+                <tr>
+		    <td width='8%'><span>Cargo</span></td>
+                    <td>
+ 
+                        <select name="Cargo" class="tam">
+                            <option value="0">Seleccione</option>
+                            <?php
+                            foreach ($cargo as $key => $value) {
+                                if($cargo[$key]["No"]==$d[0]["Cargo"]){
+                                 ?>
+                                    <option selected="selected" value="<?php echo $cargo[$key]['No']?>"><?php echo $cargo[$key]["Lista"]?></option>   
+                                 <?php   
+                                }else{
+                                ?>
+                                    <option value="<?php echo $cargo[$key]['No']?>"><?php echo $cargo[$key]["Lista"]?></option>
+                                <?php        
+                                }
+                            }
+                            ?>
+                        </select>
+                    </td>
+                </tr>
+		<tr>
+		    <td><span>Agregar</span></td>
+		    <td>
+			<img title="Ver iconos" class="imagen2" style="cursor:pointer" id="botones" src="<?php echo Conexion::ruta()?>images/adelante.png">
+		    </td>
+                </tr>
+            </table>
+            </div>
+            <br>
+            <div class="cuadro">
+                 <table >
+                    <tr align="center">
+                        <td colspan="8"><h4>Información Aporte Social</h4></td>
+                    </tr>
+                        <td width='8%'><span>EPS</span></td>
+                        <td><input type="text" name="EPS" class="tam" value="<?php echo (isset($d[0]["EPS"]))?$d[0]["EPS"]:"";?>"></td>
+                        <td width='8%'><span>AFP</span></td>
+                        <td><input type="text" name="AFP" class="tam" value="<?php echo (isset($d[0]["AFP"]))?$d[0]["AFP"]:"";?>"></td>
+                        <td width='8%'><span>ARL</span></td>
+                        <td><input type="text" name="ARL" class="tam" value="<?php echo (isset($d[0]["ARL"]))?$d[0]["ARL"]:"";?>"></td>
+                        <td width='8%'><span>Nocuenta</span></td>
+                        <td><input type="text" name="Nocuenta" class="tam" value="<?php echo (isset($d[0]["Nocuenta"]))?$d[0]["Nocuenta"]:"";?>"></td>
+                    <tr>
+                        
+                        <td><span>Observaciones</span></td>
+                        <td><textarea name="Observaciones" class="tam"><?php echo (isset($d[0]["Observaciones"]))?$d[0]["Observaciones"]:"";?></textarea></td>
+                    </tr>
+                   
+                 </table>   
+            </div>
+            <div id="paginador">
+                 <?php
+            if(isset($_GET["error"])){
+                switch ($_GET["error"]) {
+                    case '1':
+                        echo "<h3 style='color:red'>Persona ya existe, por favor verique</h3>";
+                        break;
+                    case '2':
+                        echo "<h3 style='color:red'>El Producto no esta registrado, por favor verifique</h3>";
+                        break;
+                    case '3':
+                        echo "<h3 style='color:red'>Cantidad del Producto NO Esta disponible, por favor verifique</h3>";
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+            }
+            ?>
+            </div>
+            <div id="boton">
+            <!--<a href="#" id="abrir" style="color: rgb(0,43,87);"><img title="Agregar Detalle" id="nuevo" class="imagen" src="<?php echo Conexion::ruta()?>images/detalle.png"></a>-->
+            </div>
+            </form>      
+            <div id="tabla" style="display:none;">
+
+            <table align="center" class="bordered">
+                <thead>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Vunitario</th>
+                    <th>Impuesto</th>
+                    <th>Vneto</th>
+                    <th>Vtotal</th>
+                    <th>Editar</th>
+                    <th>Eliminar</td>
+                </thead>
+                
+                    <?php
+                    for($i=0;$i<sizeof($detalle);$i++){
+                        ?>
+                        <tr>
+                            <td><?php echo $detalle[$i]["Producto"]?></td>
+                            <td><?php echo $detalle[$i]["Cantidad"]?></td>
+                            <td><?php echo $detalle[$i]["Vu"]?></td>
+                            <td><?php echo $detalle[$i]["Imp"]?></td>
+                            <td><?php echo "$ ".number_format($detalle[$i]["Vn"],3,",",".")?></td>
+                            <td><?php echo "$ ".number_format($detalle[$i]["Vt"],3,",",".")?></td>
+                            <td><img title="Editar" class="icono2" src="<?php echo Conexion::ruta()?>images/editar.jpg" onclick="editar('<?php echo $detalle[$i]["Id"]?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="<?php echo Conexion::ruta()?>images/eliminar.png" onclick="eliminar('<?php echo $detalle[$i]["Id"]?>','<?php echo $detalle[$i]["Id_Requisicion"]?>')"></td>
+                        <input type="hidden" id="jid"  value="<?php echo $detalle[$i]["Id"]?>">
+                        <input type="hidden" id="jproducto"  value="<?php echo $detalle[$i]["Producto"]?>">
+                        <input type="hidden" id="jcantidad" value="<?php echo $detalle[$i]["Cantidad"]?>">
+                        <input type="hidden" id="jvu" value="<?php echo $detalle[$i]["Vu"]?>">
+                        <input type="hidden" id="jimp" value="<?php echo $detalle[$i]["Imp"]?>">
+                        <input type="hidden" id="jvn" value="<?php echo $detalle[$i]["Vn"]?>">
+                        <input type="hidden" id="jvt" value="<?php echo $detalle[$i]["Vt"]?>">
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+        </div>
+
+        </div>
+        
+
+
+	<div id="footer_bot">
+                <div id="formulario_bot">
+		    <img title="Agregar Pagos"  class="imagen3" id="pagos" src="<?php echo Conexion::ruta()?>images/pagos.png">
+                    <br>
+                    <br>
+                    <a href="#" id="cerrar_bot">Cerrar</a>   
+                </div>
+        </div>
+
+        <div id="footer_pag">
+                <div id="formulario_pag">
+                    <li><div id="titulo">Salarios</div></li>
+                  <form action="" method=post name="formulario">
+                    <label>Id</label>
+                    <input type="text" class="ent2" name="Id" value="<?php echo $d[0]["Consecutivo"]?>" readonly>
+                    <br>
+                    <label>Tipo</label>
+                    <select name="Tipo" class="ent2" id="tipo_p">
+                        <option value="0">Seleccione</option>
+                        <?php
+                        foreach ($tpagos as $key => $value) {
+                        ?>
+                        <option value="<?php echo $value['Numeracion']?>"><?php echo $value["Lista"]?></option>
+                        <?php
+                        }
+                        ?>
+                        
+                    </select>
+                    <br>
+                    <label>Valor</label>
+                    <input type="text" class="ent2" name="Valor" id="valor_p" >
+                    <br>      
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_pagos" name="f_pagos" value="si">
+                    <input type="hidden" name="tipo" value="Pagos">
+                    <input type="hidden" name="Consecutivo_p" id="Consecutivo_p" value="">
+                    <input type="hidden" name="Identificacion" value="<?php echo $d[0]["Identificacion"]?>">
+                    <a href="#" id="cerrar_pag">Cerrar</a>
+                </form>
+                </div>
+            </div>
+
+
+        
+    </body>
+</html>

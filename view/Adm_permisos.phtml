@@ -1,0 +1,191 @@
+<html>
+    <head>
+        <title>Administrar Permisos</title>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="http://www.boteroibanez.com/img/botero.ico">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos.css"></link>
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos2.css"></link>
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/css_permisos.css"></link>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css" />
+        <script type="text/javascript">
+            $(function(){
+                 $("#logo").click(function(){
+                    location.href="<?php echo Conexion::ruta();?>home";
+                })
+                $( "#datepicker" ).datepicker();
+
+                $("#permisos").click(function(){
+                    $("#footer_per,#formulario_per").fadeIn();
+                    });//click
+              
+                $("#cerrar").click(function(){
+                    $("#footer_per,#formulario_per").fadeOut();
+                    });
+                
+                $("#buscar").click(function(){
+                    var dato=$("#txtbuscar").val();
+                    if(!dato==0){
+                    location.href="<?php echo Conexion::ruta()?>Adm_permisos?b="+dato;    
+                    }
+                });
+
+               $("#guardar").click(function(){
+                    if(confirm("Si modificas tu Usuario, es necesario Cerrar Sesión para que tome los cambios")){
+                        document.form.submit();
+                    }
+                    
+               })
+
+                $("#txtbuscar").keypress(function(e){
+                    if(e.which==13){
+                        var dato=$("#txtbuscar").val();
+                        location.href="<?php echo Conexion::ruta()?>Adm_permisos?b="+dato;    
+                    }
+                });
+
+                $("input[name=todos]").change(function(){
+                    $('input[type=checkbox]').each( function() {
+                        if($("input[name=todos]:checked").length == 1){
+                            this.checked = true;
+                        } else {
+                            this.checked = false;
+                        }
+                    });  
+                })
+
+                });//main    
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                
+            </div>
+            <div id="menu">
+                <?php include"view/Menu.phtml";?>
+            </div>
+
+             <div id="sesion">
+                <a href="<?php echo Conexion::ruta()?>cerrar" title="Cerrar Sesion"><img class="cerrar_c" src="<?php echo Conexion::ruta()?>images/cerrar.png"></a><br>
+                <?php echo ucwords($_SESSION["Nombre"]);?><br>
+                <strong><?php echo $centro;?></strong>
+            </div>
+        </div>
+        <div id="linea"></div>
+        <div id="espacio"></div>
+        <form action="" method="POST" name="form">
+        <div id="lateral">
+            <ul>
+                <li><img title="Guardar" class="imagen" id="guardar" src="<?php echo Conexion::ruta()?>images/guardar.png"></li>
+                <li><img title="Buscar" class="imagen" id="buscar" src="<?php echo Conexion::ruta()?>images/buscar.png"></li>
+                <input type="hidden" name="guardar" value="si">
+                <li><input type="text" name="txtbuscar" size=10 id="txtbuscar"></li>
+            </ul>
+        </div>
+        <div id="contenido">
+            <div id="informacion">
+                <h3>Información Personal</h3>
+                
+                <div id="tituloCon">
+                    <table align="center">
+                        <tr>
+                            <td><input type="text" name="Nombre" value="<?php echo (isset($d[0]["Nombre"]))?$d[0]["Nombre"]:"";?>"></td>
+                            <td><input type="text" name="Apellido" value="<?php echo (isset($d[0]["Apellido"]))?$d[0]["Apellido"]:"";?>"></td>
+                            <td><input type="text" name="Cedula" value="<?php echo (isset($d[0]["Cedula"]))?$d[0]["Cedula"]:"";?>"></td>
+                        </tr>
+                        
+                    </table>
+                </div>
+                <div class="cuadrosCon">
+                    <table align="center" class="bordered">
+                        <thead>
+                            <th>Principal</th>
+                            <th>Submenu</th>
+                            <th>Activar</th>
+                        </thead>
+                        <tr align="center">
+                            <td>Seleccionar Todos</td>
+                            <td><input type="checkbox" id="todos" name="todos"></td>
+                            
+                        </tr>
+                        <?php
+                        foreach ($modulo as $value) {
+                            switch ($value["id_menu"]) {
+                                case '1':
+                                    $var="Administrador";
+                                    break;
+                                case '2':
+                                    $var="Logistica";
+                                    break;
+                                case '3':
+                                    $var="Operaciones";
+                                    break;
+                                case '4':
+                                    $var="Personal";
+                                    break;
+                                case '5':
+                                    $var="Contabilidad";
+                                    break;
+                                case '6':
+                                    $var="Almacen";
+                                    break;
+                                default:
+                                    # code...
+                                    break;
+                            }
+                        ?>
+                            <tr align="center">
+                                <td><?php echo $value["Principal"]?></td>
+                                <td><?php echo $value["Submenu"]?></td>
+                                <td>
+                                    <?php
+                                    if(stripos($d[0]["Trama_sub"], $value["pagina"])){
+                                        $check="checked";
+                                    }else{
+                                        $check="";
+                                    }
+                                    ?>
+                                    <input type="checkbox" <?php echo $check;?> name="<?php echo $var?>[]" value="<?php echo $value["id_menu"]?>,<?php echo $value["pagina"]?>">
+                                </td>
+                            </tr>    
+                        <?php    
+                        }
+                        ?>
+                        
+
+                    </table>
+                </div>
+                
+                
+                
+                </form>
+            </div>  
+        </div>
+        
+        <div id="footer_per">
+                <div id="formulario_per">
+                    <li>Permisos de Usuarios</li>
+                    <form action="" method=post name="formulario">
+                        <table>
+                            <tr>
+                                <td>Modulo</td>
+                                <td>Permiso</td>
+                                <td>Descripción</td>
+                            </tr>
+                            
+                        </table>
+                    
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_grabar" id name="grabar_formu" value="si">
+                    <input type="hidden" name="fid" id="fid" value="">
+                    <a href="#" id="cerrar">Cerrar</a>
+                    </form>
+            </div>  
+        </div>
+
+    </body>
+</html>
+

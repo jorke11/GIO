@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <title>Buzon</title>
+        <link rel="shortcut icon" href="http://www.boteroibanez.com/img/botero.ico">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos.css"></style>
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos2.css"></style>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css" />
+        <script type="text/javascript">
+            $(function(){
+                 $("#logo").click(function(){
+                    location.href="<?php echo Conexion::ruta();?>home";
+                })
+                $( "#datepicker" ).datepicker();
+
+                $("#abrir").click(function(){
+                        
+                    $("#footer,#formulario").fadeIn();
+                    });//click
+                
+                $("#cerrar").click(function(){
+                    $("#footer,#formulario").fadeOut();
+                    });
+
+                $("#nuevo").click(function(){
+                        $("#fproducto").val(" ");
+                        $("#fcantidad").val(" ");
+                        $("#fvu").val(" ");
+                        $("#fimp").val(" ");
+                        $("#f_grabar").val(" ");
+                    location.href="<?php echo Conexion::ruta()?>Requisicion&n=1";
+                    });
+                $("#guardar").click(function(){
+                    document.form.submit();
+                    });
+
+                $("#Imprimir").click(function(){
+                    var id=$("#Id").val();
+                    window.open("<?php echo Conexion::ruta()?>view/pdf/pdf_requi.phtml?Requi="+id+"&id_centro=<?php echo $_SESSION["id_centro"]?>","Impresion" ,"width=700,height=700,scrollbars=NO"); 
+                    location.href="<?php echo Conexion::ruta()?>Requisicion&i="+id;
+
+                })
+                $("#estadod").click(function(){
+                    alert("estado");
+                });
+
+                $("#sucursal").click(function(){
+                    alert("sucursal");
+                })
+
+                $("#ver").click(function(){
+                    var dato=$("#Con").val();
+                    alert(dato);
+                    /*if(!dato==0){
+                    location.href="<?php echo Conexion::ruta()?>Requisicion&b="+dato;    
+                    }*/
+                })
+
+          
+
+                });//main    
+        </script>
+        <script type="text/javascript">
+        function ver(id){
+        	location.href="<?php echo Conexion::ruta()?>Cont_caja&b="+id;
+        }
+      
+
+      
+
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                
+            </div>
+            <div id="menu">
+                <?php include"view/Menu.phtml";?>
+            </div>
+
+             <div id="sesion">
+                <a href="<?php echo Conexion::ruta()?>cerrar"><img class="cerrar_c" src="<?php echo Conexion::ruta()?>images/cerrar.png"></a><br>
+            <?php echo ucwords($_SESSION["Nombre"]);?><br>
+                <strong><?php echo $centro;?></strong>
+            </div>
+        </div>
+        <div id="linea"></div>
+        <div id="espacio"></div>
+        <form action="" method="POST" name="form">
+        <div id="lateral">
+            <ul>
+                <li><img title="Nuevo" id="nuevo" style="visibility:hidden;" class="imagen" src="<?php echo Conexion::ruta()?>images/agregar.jpg"></li>
+                <li><img title="Guardar" style="visibility:hidden;" class="imagen" src="<?php echo Conexion::ruta()?>images/guardar.png" id="guardar">
+                    <input type="hidden" name="grabar" value="si"></li>
+                <li><img title="Imprimir" style="visibility:hidden;" id="Imprimir" class="imagen" src="<?php echo Conexion::ruta()?>images/impresora.png"></li>
+                <li><img title="Buscar" style="visibility:hidden;" class="imagen" id="buscar" src="<?php echo Conexion::ruta()?>images/buscar.png"></li>
+                <li><input type="text" style="visibility:hidden;" name="txtbuscar" size=10 id="txtbuscar"></li>
+            </ul>
+        </div>
+        <div id="contenido">
+            <h2>Buzon</h2>
+            
+           
+
+            <table align="center" class="bordered">
+                <thead>
+                    <th>No</th>
+                    <th>Caja</th>
+                </thead>
+                
+                    <?php
+                    for($i=0;$i<sizeof($detalle);$i++){
+                        ?>
+                        <tr align="center">
+                            <td><?php echo $detalle[$i]["Id"]?></td>
+                            <td><a href="#" onclick="ver('<?php echo $detalle[$i]["Id"];?>')">Ver</a></td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>  
+            </table>
+        </div>
+
+        </div>
+        
+       
+        <div id="ajax"></div>
+    </body>
+</html>
+

@@ -1,0 +1,240 @@
+<html>
+    <head>
+        <title>Movimiento de Equipos</title>
+        <meta charset="utf-8"> 
+        <link rel="shortcut icon" href="http://www.boteroibanez.com/img/botero.ico">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos.css"></style>
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos2.css"></style>
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos3.css"></style>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css" />
+        <script type="text/javascript" src="<?php echo Conexion::ruta();?>script/js/traduccion.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                 $("#logo").click(function(){
+                    location.href="<?php echo Conexion::ruta();?>home";
+                })
+                $( ".datepicker" ).datepicker();
+
+                $("#abrir").click(function(){
+                        
+                    $("#footer,#formulario").fadeIn();
+                    });//click
+                
+                $("#cerrar").click(function(){
+                    $("#footer,#formulario").fadeOut();
+                    });
+                $("#cerrar2").click(function(){
+                    $("#footer2,#formulario2").fadeOut();
+                    })
+                $("#nuevo").click(function(){
+                    location.href="<?php echo Conexion::ruta()?>Alm_equimov?n=1";
+                    });
+                $("#guardar").click(function(){
+                    document.form.submit();
+                    });
+
+                $("#Imprimir").click(function(){
+                    var id=$("#Id").val();
+                    window.open("<?php echo Conexion::ruta()?>view/pdf/pdf_requi.phtml?Entrada="+id+"&id_centro=<?php echo $_SESSION['Id_centro']?>","Impresion" ,"width=700,height=700,scrollbars=NO");
+                    location.href="<?php echo Conexion::ruta()?>Alm_equimov?i="+id;
+                });
+
+                $("#buscar").click(function(){
+                    var dato=$("#txtbuscar").val();
+                    location.href="<?php echo Conexion::ruta()?>Alm_equimov?b="+dato;
+                });
+                
+                var availableTags2=new Array(<?php echo $serial; ?>);
+                $( "#Serial" ).autocomplete({
+                        source: availableTags2
+                });
+
+                
+                });//main    
+        </script>
+        <script type="text/javascript">
+        function eliminar(id,id_requi){
+            if(confirm("Desea eliminar este detalle")){
+                location.href="<?php echo Conexion::ruta()?>Alm_equimov?e="+id+"&b="+id_requi;
+            }
+        }
+        function editar(id,Consecutivo,Serial,Movimiento){
+            $("#Id_mov").val(id);
+            $("#Serial").val(Serial);
+            $("#Movimiento").val(Movimiento);
+            $("#f_grabar").val("si2");
+            $("#fid").val(id);
+            $("#footer,#formulario").fadeIn();
+            
+        }
+
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                
+            </div>
+            <div id="menu">
+                <?php include"view/Menu.phtml";?>
+            </div>
+             <div id="sesion">
+            <a href="<?php echo Conexion::ruta()?>cerrar" title="Cerrar Sesion"><img class="cerrar_c" src="<?php echo Conexion::ruta()?>images/cerrar.png"></a><br>
+                <?php echo ucwords($_SESSION["Nombre"]);?><br>
+                <strong><?php echo $centro;?></strong>
+            </div>
+        </div>
+        <div id="linea"></div>
+        
+        <form action="" method="POST" name="form">
+        <div id="lateral">
+            <ul>
+                <li><img title="Nuevo" id="nuevo" class="imagen" src="<?php echo Conexion::ruta()?>images/agregar.jpg"></li>
+                <li><img title="Guardar" class="imagen" id="guardar"src="<?php echo Conexion::ruta()?>images/guardar.png" id="guardar">
+                    <input type="hidden" name="grabar" value="si"></li>
+                <li><img title="Imprimir" id="Imprimir" class="imagen" src="<?php echo Conexion::ruta()?>images/impresora.png"></li>
+                <li><img title="Buscar" class="imagen" id="buscar" src="<?php echo Conexion::ruta()?>images/buscar.png"></li>
+                <li><input type="text" name="txtbuscar" size=8 id="txtbuscar"></li>
+            </ul>
+        </div>
+        <div id="contenido">
+            <h2>Movimiento de Equipos</h2>
+            
+            <div class="caja">
+               <table>
+                <tr>
+                    <td><span>Id</span></td>
+                    <td><input type="text" name="Id" id="Id" value="<?php echo (isset($d[0]["Consecutivo"]))?$d[0]["Consecutivo"]:"";?>" readonly></td>
+                </tr>
+                <tr>
+                    <td><span>Estadodoc</span></td>
+                    <td><input type="text" name="Estadodoc" class="tam" value="<?php echo (isset($d[0]["Estadodoc"]))?$d[0]["Estadodoc"]:"";?>" readonly></td>
+                </tr>
+            </table>
+          
+            </div>
+            
+            <div class="caja">
+               <table>
+                <tr>
+                    <td><span>Festadodoc</span></td>
+                    <td><input type="text" name="Festadodoc" <?php echo $imp?> value="<?php echo (isset($d[0]["Festadodoc"]))?$d[0]["Festadodoc"]:"";?>" readonly></td>
+                </tr>
+                <tr>
+                    <td><span>Fecha</span></td>
+                    <td><input type="text" <?php echo $imp?> class="datepicker" name="Fecha" value="<?php echo (isset($d[0]["Fecha"]))?$d[0]["Fecha"]:"";?>"></td>
+                </tr>
+                 </table>   
+            </div>
+            <div class="caja">
+                 <table>
+                     <tr>
+                    <td><span>Localización</span></td>
+                    <td><select name="Localizacion" <?php echo (isset($imp))?$imp:"";?> class="tam">
+                            <option value="0">Seleccione</option>
+                            <?php
+                            foreach ($localizacion as $k => $valor) {
+                                if($localizacion[$k]["Numeracion"]==$d[0]["Localizacion"]){
+                                 ?>
+                                    <option selected="selected" value="<?php echo $localizacion[$k]['Numeracion']?>"><?php echo $localizacion[$k]["Lista"]?></option>   
+                                 <?php   
+                                }else{
+                                ?>
+                                    <option value="<?php echo $localizacion[$k]['Numeracion']?>"><?php echo $localizacion[$k]["Lista"]?></option>
+                                <?php        
+                                }
+                            }
+                            ?>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td><span>Destino</span></td>
+                    <td>
+                        <select name="Destino" <?php echo (isset($imp))?$imp:"";?> class="tam">
+                            <option value="0">Seleccione</option>
+                            <?php
+                            foreach ($destino as $k => $valor) {
+                                if($destino[$k]["Numeracion"]==$d[0]["Destino"]){
+                                 ?>
+                                    <option selected="selected" value="<?php echo $destino[$k]['Numeracion']?>"><?php echo $destino[$k]["Lista"]?></option>   
+                                 <?php   
+                                }else{
+                                ?>
+                                    <option value="<?php echo $destino[$k]['Numeracion']?>"><?php echo $destino[$k]["Lista"]?></option>
+                                <?php        
+                                }
+                            }
+                            ?>
+                        </select>
+                    </td>
+                </tr>
+                 </table>
+            </div>
+            <div id="boton">
+            <a href="#" id="abrir" style="color: rgb(0,43,87);"><img title="Agregar Detalle" id="nuevo" class="imagen" src="<?php echo Conexion::ruta()?>images/detalle.png"></a>
+            </div>
+
+            </form>      
+            <div id="tabla">
+
+            <table align="center" class="bordered">
+                <thead>
+                    <th>Serial</th>
+                    <th>Movimiento</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </thead>
+                
+                    <?php
+                    for($i=0;$i<sizeof($detalle);$i++){
+                        ?>
+                        <tr>
+                            <td><?php echo $detalle[$i]["Serial"]?></td>
+                            <td><?php echo $detalle[$i]["Movimiento"]?></td>
+                            <td><img title="Editar" class="icono2" src="<?php echo Conexion::ruta()?>images/editar.jpg" onclick="editar('<?php echo $detalle[$i]["Id"]?>','<?php echo $detalle[$i]["Consecutivo"]?>','<?php echo $detalle[$i]["Serial"]?>','<?php echo $detalle[$i]["Movimiento"]?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="<?php echo Conexion::ruta()?>images/eliminar.png" onclick="eliminar('<?php echo $detalle[$i]["Id"]?>','<?php echo $detalle[$i]["Consecutivo"]?>')">
+                            </td>
+                       
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+        </div>
+
+        </div>
+        
+        <div id="footer">
+                <div id="formulario">
+                    <li>Movimiento</li>
+                    <form action="" method=post name="formulario">
+                    <label>Id</label>
+                    <input type="text" name="Id_mov" class="tam" value="<?php echo $d[0]["Consecutivo"]?>" readonly>
+                    <br>
+                    <label>Serial</label>
+                    <input name="Serial" type="text" class="tam" id="Serial">
+                        <br>
+                    <label>Movimiento</label>
+                    <select name="Movimiento" class="tam" id="Movimiento">
+                        <option>Seleccione</option>
+                        <option>Salida</option>
+                        <option>Reintegro</option>
+                        
+                    </select>
+                    <br>    
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_grabar" name="grabar_formu" value="si">
+                    <input type="hidden" name="fid" id="fid" value="">
+                    <a href="#" id="cerrar">Cerrar</a>
+                </form>
+            </div>  
+        </div>
+
+        
+    </body>
+</html>

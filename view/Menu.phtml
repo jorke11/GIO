@@ -1,0 +1,33 @@
+<ul id="l_menu">
+<?php
+$c=0;
+  for($i=0;$i<sizeof($principal);$i++){
+      $c++;
+      $submenu=0;
+      // $submenu=$menu->get_submenu($c);
+      $submenu=$menu->get_submenu_user($_SESSION["Trama_sub"],$c);
+      ?>
+      <li><a href="#"><?php echo $principal[$i]["principal"]?></a>
+          <ul>
+            <?php
+                for($j=0;$j<sizeof($submenu);$j++){
+                    if($submenu[$j]["id_menu"]==$principal[$i]["id_menu"]){                                   
+                      ?>
+                      <li>
+                        <a href="<?php echo Conexion::ruta().$submenu[$j]["pagina"]?>"><?php echo $submenu[$j]["submenu"]?></a>
+
+                        </li>
+                  <?php
+                      }                                                          
+                    }
+                  ?>
+            </ul>
+                    
+        </li>
+          <?php
+              }
+          ?>    
+</ul>
+
+
+

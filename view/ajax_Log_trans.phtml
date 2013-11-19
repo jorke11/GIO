@@ -1,0 +1,98 @@
+<?php
+class ajax {
+    private $centro=array();
+    private $consumo=array();
+    private $viajes=array();
+    private $tanqueadas=array();
+    private $parqueos=array();
+    
+
+    public function conectar(){
+        $arcConexion="../lib/GIO.ini";
+        $datos = parse_ini_file($arcConexion,true);
+        
+        $conexion=mysql_connect($datos["database_host"],$datos["database_user"],$datos["database_pass"]);
+        mysql_select_db($datos["database_name"]);
+
+        return $conexion;
+    }
+
+    public function get_detalle_consumo($id){
+        $this->conectar();
+        $sql="SELECT * from Log_vehi_consumo where Id=$id";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->consumo[]=$row;
+        }
+
+        return $this->consumo;
+    }
+
+    public function get_detalle_viajes($id){
+        $this->conectar();
+        $sql="SELECT * from Log_vehi_viajes where Id=$id";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->viajes[]=$row;
+        }
+
+        return $this->viajes;
+    }
+
+
+    public function get_detalle_tanqueadas($id){
+        $this->conectar();
+        $sql="SELECT * from Log_vehi_tanqueadas where Id=$id";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->tanqueadas[]=$row;
+        }
+
+        return $this->tanqueadas;
+    }
+
+    public function get_detalle_parqueos($id){
+        $this->conectar();
+        $sql="SELECT * from Log_vehi_parqueos where Id=$id";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->parqueos[]=$row;
+        }
+
+        return $this->parqueos;
+    }
+
+}
+
+$obj=new ajax;
+
+if(isset($_POST)){
+    switch ($_POST["tipo"]) {
+        case 'Consumo':
+            $consumo=$obj->get_detalle_consumo($_POST["id"]);
+            echo json_encode($consumo);
+            break;
+        case 'Viajes':
+            $viajes=$obj->get_detalle_viajes($_POST["id"]);
+            echo json_encode($viajes);
+            break;
+        case 'Tanqueadas':
+            $tanqueadas=$obj->get_detalle_tanqueadas($_POST["id"]);
+            echo json_encode($tanqueadas);
+            break;
+        case 'Parqueos':
+            $parqueos=$obj->get_detalle_parqueos($_POST["id"]);
+            echo json_encode($parqueos);
+            break;
+    }
+}
+?>
+
+
+
+
+

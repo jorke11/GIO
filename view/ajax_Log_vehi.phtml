@@ -1,0 +1,252 @@
+<?php
+class ajax {
+    private $centro=array();
+    private $detalle=array();
+    private $mante=array();
+    private $equipos=array();
+    private $tan=array();
+
+    public function conectar(){
+        $arcConexion="../lib/GIO.ini";
+        $datos = parse_ini_file($arcConexion,true);
+        
+        $conexion=mysql_connect($datos["database_host"],$datos["database_user"],$datos["database_pass"]);
+        mysql_select_db($datos["database_name"]);
+
+        return $conexion;
+    }
+
+    public function get_centro($cedula){
+        $this->conectar();
+        $sql="SELECT * from Usuarios_centro where Id_usuario=$cedula";      
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->centro[]=$row;
+
+        }   
+        return $this->centro;
+    }
+
+    public function get_consumo($id){
+        $this->conectar();
+        $sql="SELECT * from Log_vehi_consumo where Id_consumo=$id";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->detalle[]=$row;
+
+        }   
+        return $this->detalle;
+    }
+
+    public function get_viajes($id){
+        $this->conectar();
+        $sql="SELECT * from Log_vehi_viajes where Id_viajes=$id";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->detalle[]=$row;
+
+        }   
+        return $this->detalle;
+    }
+
+     public function get_tanqueados($id){
+        $this->conectar();
+        $sql="SELECT * from Log_vehi_tanqueadas where Id_tanqueadas=$id";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->tan[]=$row;
+
+        }   
+        return $this->tan;
+    }
+
+     public function get_parqueos($id){
+        $this->conectar();
+        $sql="SELECT * from Log_vehi_parqueos where Id_parqueo=$id";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->equipos[]=$row;
+
+        }   
+        return $this->equipos;
+    }
+
+}
+
+$obj=new ajax;
+
+if(isset($_POST)){
+    switch ($_POST["tipo"]) {
+        case 'Consumo':
+            $detalle=$obj->get_consumo($_POST["id"]);
+            ?>
+            <table align="center" class="bordered">
+                <thead>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Vunitario</th>
+                    <th>Impuesto</th>
+                    <th>Vneto</th>
+                    <th>Vtotal</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </thead>
+                
+                    <?php
+                    for($i=0;$i<sizeof($detalle);$i++){
+                        ?>
+                        <tr>
+                            <td><?php echo $detalle[$i]["Producto"]?></td>
+                            <td><?php echo $detalle[$i]["Cantidad"]?></td>
+                            <td><?php echo $detalle[$i]["Vu"]?></td>
+                            <td><?php echo $detalle[$i]["Imp"]?></td>
+                            <td><?php echo "$ ".number_format($detalle[$i]["Vn"],3,",",".")?></td>
+                            <td><?php echo "$ ".number_format($detalle[$i]["Vt"],3,",",".")?></td>
+                            <td><img title="Editar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/editar.jpg" onclick="editar('<?php echo $detalle[$i]["Id"]?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/eliminar.png" onclick="eliminar('<?php echo $detalle[$i]["Id"]?>','<?php echo $detalle[$i]["Id_consumo"]?>')"></td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+            <?php
+            break;
+        case 'Viajes':
+            $detalle=$obj->get_viajes($_POST["id"]);
+            ?>
+            <table align="center" class="bordered">
+                <thead>
+                    <th>Documento</th>
+                    <th>Valecantera</th>
+                    <th>Vehiculo</th>
+                    <th>Tipoviaje</th>
+                    <th>Origen</th>
+                    <th>Destino</th>
+                    <th>Conductor</th>
+                    <th>Cantviajes</th>
+                    <th>Propio</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </thead>
+                
+                    <?php
+                    for($i=0;$i<sizeof($detalle);$i++){
+                        ?>
+                        <tr>
+                            <td><?php echo $detalle[$i]["Documento"]?></td>
+                            <td><?php echo $detalle[$i]["Valecantera"]?></td>
+                            <td><?php echo $detalle[$i]["Vehiculo"]?></td>
+                            <td><?php echo $detalle[$i]["Tipoviaje"]?></td>
+                            <td><?php echo $detalle[$i]["Origen"]?></td>
+                            <td><?php echo $detalle[$i]["Destino"]?></td>
+                            <td><?php echo $detalle[$i]["Conductor"]?></td>
+                            <td><?php echo $detalle[$i]["Cantviajes"]?></td>
+                            <td><?php echo $detalle[$i]["Propio"]?></td>
+                            <td><img title="Editar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/editar.jpg" onclick="editar('<?php echo $detalle[$i]["Id"]?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/eliminar.png" onclick="eliminar('<?php echo $detalle[$i]["Id"]?>','<?php echo $detalle[$i]["Id_consumo"]?>')"></td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+            <?php
+            break;
+        case 'Tanqueadas':
+            $detalle=$obj->get_tanqueados($_POST["id"]);
+            ?>
+            <table align="center" class="bordered">
+                <thead>
+                    <th>Proyecto</th>
+                    <th>Documento</th>
+                    <th>Proveedor</th>
+                    <th>Vehiculo</th>
+                    <th>Galones</th>
+                    <th>Kilomts</th>
+                    <th>Vunitario</th>
+                    <th>Impuesto</th>
+                    <th>Vneto</th>
+                    <th>Vtotal</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </thead>
+                
+                    <?php
+                    for($i=0;$i<sizeof($detalle);$i++){
+                        ?>
+                        <tr>
+                            <td><?php echo $detalle[$i]["Proyecto"]?></td>
+                            <td><?php echo $detalle[$i]["Documento"]?></td>
+                            <td><?php echo $detalle[$i]["Proveedor"]?></td>
+                            <td><?php echo $detalle[$i]["Vehiculo"]?></td>
+                            <td><?php echo $detalle[$i]["Galones"]?></td>
+                            <td><?php echo $detalle[$i]["Km"]?></td>
+                            <td><?php echo $detalle[$i]["Vu"]?></td>
+                            <td><?php echo $detalle[$i]["Imp"]?></td>
+                            <td><?php echo $detalle[$i]["Vn"]?></td>
+                            <td><?php echo $detalle[$i]["Vt"]?></td>
+                            <td><img title="Editar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/editar.jpg" onclick="editar('<?php echo $detalle[$i]["Id"]?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/eliminar.png" onclick="eliminar('<?php echo $detalle[$i]["Id"]?>','<?php echo $detalle[$i]["Id_consumo"]?>')"></td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+            <?php
+
+            break;
+        case 'Parqueos':
+            $detalle=$obj->get_parqueos($_POST["id"]);
+            ?>
+            <table align="center" class="bordered">
+                <thead>
+                    <th>Proyecto</th>
+                    <th>Documento</th>
+                    <th>Vehiculo</th>
+                    <th>Conductor</th>
+                    <th>Direccion</th>
+                    <th>Valor</th>
+                    <th>Valortransp</th>
+                    <th>Observaciones</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </thead>
+                
+                    <?php
+                    for($i=0;$i<sizeof($detalle);$i++){
+                        ?>
+                        <tr>
+                            <td><?php echo $detalle[$i]["Proyecto"]?></td>
+                            <td><?php echo $detalle[$i]["Documento"]?></td>
+                            <td><?php echo $detalle[$i]["Vehiculo"]?></td>
+                            <td><?php echo $detalle[$i]["Conductor"]?></td>
+                            <td><?php echo $detalle[$i]["Direccion"]?></td>
+                            <td><?php echo $detalle[$i]["Valor"]?></td>
+                            <td><?php echo $detalle[$i]["Valortransp"]?></td>
+                            <td><?php echo $detalle[$i]["Observaciones"]?></td>
+                            <td><img title="Editar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/editar.jpg" onclick="editar('<?php echo $detalle[$i]["Id"]?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/eliminar.png" onclick="eliminar('<?php echo $detalle[$i]["Id"]?>','<?php echo $detalle[$i]["Id_consumo"]?>')"></td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+            <?php
+            break;
+        default:
+            # code...
+            break;
+    }
+}
+?>
+
+
+

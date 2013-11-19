@@ -1,0 +1,48 @@
+<?php
+class ajax {
+	private $centro=array();
+
+	public function conectar(){
+	    $arcConexion="../lib/GIO.ini";
+        $datos = parse_ini_file($arcConexion,true);
+        
+        $conexion=mysql_connect($datos["database_host"],$datos["database_user"],$datos["database_pass"]);
+        mysql_select_db($datos["database_name"]);
+	    return $conexion;
+	}
+
+	public function get_submenu($id){
+		$this->conectar();
+		$sql="SELECT * from Menu_sub where id_menu=$id";		
+		$res=mysql_query($sql);
+
+		while($row=mysql_fetch_assoc($res)){
+			$this->centro[]=$row;
+
+		}	
+		return $this->centro;
+	}
+}
+
+$obj=new ajax;
+$res=$obj->get_submenu($_GET["id"]);
+?>
+<table align="center">
+	<tr style="background:#545C69;color:white;font-weight:bold;">
+		<td>No</td>
+		<td>Submenu</td>
+		<td>Permiso</td>
+	</tr>	
+	<?php
+	foreach ($res as $key => $value) {
+		?>
+		<tr>
+			<td><?php echo $key + 1;?></td>
+			<td><?php echo $res[$key]["submenu"]?></td>
+			<td><input type="checkbox" name="permiso<?php echo $key?>"> </td>
+		</tr>
+		<?php
+	}
+	?>
+	
+</table>

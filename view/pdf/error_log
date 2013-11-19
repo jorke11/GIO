@@ -1,0 +1,63 @@
+[29-May-2013 02:30:17 America/Bogota] PHP Parse error:  syntax error, unexpected T_STRING, expecting ',' or ';' in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 67
+[29-May-2013 02:35:03 America/Bogota] PHP Fatal error:  Class 'Conexion' not found in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 15
+[29-May-2013 02:35:49 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 31
+[29-May-2013 02:36:10 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 31
+[29-May-2013 02:38:08 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 31
+[29-May-2013 02:40:39 America/Bogota] PHP Warning:  Missing argument 2 for ajax::get_requi(), called in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 55 and defined in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 14
+[29-May-2013 02:40:39 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 31
+[29-May-2013 02:41:06 America/Bogota] PHP Fatal error:  Call to undefined method ajax::c_mysqli() in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 38
+[29-May-2013 02:41:53 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects at least 1 parameter, 0 given in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 42
+[29-May-2013 02:49:46 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 66
+[29-May-2013 02:49:46 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 77
+[29-May-2013 02:50:11 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 66
+[29-May-2013 02:50:11 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 77
+[29-May-2013 02:54:33 America/Bogota] PHP Fatal error:  Call to undefined method ajax::get_ent() in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 96
+[29-May-2013 02:56:18 America/Bogota] PHP Fatal error:  Class 'Conexion' not found in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 84
+[29-May-2013 02:58:35 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 133
+[29-May-2013 02:58:35 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 144
+[29-May-2013 02:59:11 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 132
+[29-May-2013 02:59:11 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 143
+[29-May-2013 02:59:51 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 143
+[29-May-2013 07:57:35 America/Bogota] PHP Fatal error:  Call to undefined method ajax::get_detalle() in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 156
+[29-May-2013 08:02:52 America/Bogota] PHP Fatal error:  Call to undefined method ajax::get_detalle() in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 156
+[29-May-2013 10:22:45 America/Bogota] PHP Parse error:  syntax error, unexpected $end in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 236
+[29-May-2013 10:24:02 America/Bogota] PHP Parse error:  syntax error, unexpected $end in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 236
+[29-May-2013 10:24:07 America/Bogota] PHP Parse error:  syntax error, unexpected $end in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 236
+[29-May-2013 10:24:32 America/Bogota] PHP Parse error:  syntax error, unexpected $end in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 236
+[29-May-2013 10:25:08 America/Bogota] PHP Parse error:  syntax error, unexpected $end in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 236
+[29-May-2013 11:31:18 America/Bogota] PHP Parse error:  syntax error, unexpected $end in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 236
+[29-May-2013 11:31:53 America/Bogota] PHP Parse error:  syntax error, unexpected $end in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 235
+[29-May-2013 11:37:17 America/Bogota] PHP Parse error:  syntax error, unexpected T_DOUBLE_ARROW in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 170
+[29-May-2013 11:37:40 America/Bogota] PHP Parse error:  syntax error, unexpected T_DOUBLE_ARROW in /home/monitore/public_html/Ipam/view/pdf/pdf_requi.phtml on line 170
+[16-Jun-2013 12:12:12 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 32
+[22-Jun-2013 22:40:48 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 32
+[22-Jun-2013 22:44:43 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 32
+[22-Jun-2013 22:49:04 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 100
+[22-Jun-2013 23:02:53 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 32
+[22-Jun-2013 23:58:52 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 100
+[23-Jun-2013 00:00:39 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 100
+[23-Jun-2013 00:01:03 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 100
+[23-Jun-2013 00:21:38 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 66
+[23-Jun-2013 00:21:57 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 66
+[23-Jun-2013 00:22:46 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 66
+[23-Jun-2013 00:33:17 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 133
+[23-Jun-2013 00:34:04 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 133
+[23-Jun-2013 00:34:23 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 133
+[23-Jun-2013 00:37:49 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 133
+[23-Jun-2013 00:38:11 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 133
+[23-Jun-2013 00:45:35 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 133
+[23-Jun-2013 00:50:42 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 66
+[23-Jun-2013 00:51:25 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 133
+[06-Jul-2013 13:11:05 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 100
+[06-Jul-2013 13:12:23 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 32
+[06-Jul-2013 13:13:41 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 100
+[06-Jul-2013 13:20:53 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 100
+[07-Jul-2013 13:02:10 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 32
+[07-Jul-2013 13:27:31 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 100
+[09-Jul-2013 20:19:54 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 32
+[15-Jul-2013 22:16:06 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 32
+[17-Jul-2013 21:01:25 America/Bogota] PHP Warning:  mysql_fetch_assoc() expects parameter 1 to be resource, boolean given in /home/monitore/public_html/GIO/view/pdf/pdf_requi.phtml on line 32
+[30-Sep-2013 14:33:06 America/Bogota] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/local/lib/php/extensions/no-debug-non-zts-20100525/mssql.so' - /usr/local/lib/php/extensions/no-debug-non-zts-20100525/mssql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[30-Sep-2013 14:33:07 America/Bogota] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/local/lib/php/extensions/no-debug-non-zts-20100525/mssql.so' - /usr/local/lib/php/extensions/no-debug-non-zts-20100525/mssql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[30-Sep-2013 14:33:07 America/Bogota] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/local/lib/php/extensions/no-debug-non-zts-20100525/mssql.so' - /usr/local/lib/php/extensions/no-debug-non-zts-20100525/mssql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[30-Sep-2013 14:33:08 America/Bogota] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/local/lib/php/extensions/no-debug-non-zts-20100525/mssql.so' - /usr/local/lib/php/extensions/no-debug-non-zts-20100525/mssql.so: cannot open shared object file: No such file or directory in Unknown on line 0

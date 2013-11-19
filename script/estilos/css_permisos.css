@@ -1,0 +1,92 @@
+#informacion{
+	width: 100%;
+	height: auto;
+	float: left;
+}
+
+.menu_prin h3{
+	text-align: center;
+}
+.menu_prin{
+	width:32%;
+	height: 60%;
+	float: left;
+	text-align: left;
+}
+#lugar{
+	width: 100%;
+	height: 40%;
+	padding-top: 4%;
+	float: left;
+}
+#tituloCon{
+	width: 100%;
+	height: 15%;
+	float: left;
+}
+.cuadrosCon{
+	width: 100%;
+	height: 75%;
+	float: left;
+  overflow: auto;
+}
+.cuadrosCon2{
+  width: 49%;
+  height: 75%;
+  float: left;
+}
+.cajas{
+	width: 70%;
+	height: 100%;
+	background: #fee;
+	float: left;
+
+}
+
+#footer_per{
+              background: rgba(0, 0, 0, 0.698);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 10;
+              
+            }
+            
+            #formulario_per{
+              background:#EDF2F5;
+              position: absolute;
+              z-index: 100;
+              top:3%;
+              left:25%;
+              width:45%;
+              height: auto;
+              border-radius: 30px;
+              border:medium solid rgb(0,43,87);    
+              }
+              
+              #formulario_per li{
+              list-style: none;
+              background: rgb(0,43,87);
+              border-top-left-radius: 25px;
+              border-top-right-radius: 25px;
+              padding-top: 14px;
+              font-size: 27px;
+              color: white;
+              }
+              
+              #formulario_per form{
+              margin-left: 30px;          
+              }
+              
+              #formulario_per form label{
+              width: 100px;
+              float: left;
+              color: rgb(0,43,87);
+              }
+              #formulario_per form .ent2{
+                width: 180px;
+              }
+              
+              #footer_per ,#formulario_per{
+              display: none;
+              }

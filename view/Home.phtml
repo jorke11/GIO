@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>Home</title>
+        <link rel="shortcut icon" href="http://www.boteroibanez.com/img/botero.ico">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos.css"></style>
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos2.css"></style>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $("#logo").click(function(){
+                    location.href="<?php echo Conexion::ruta();?>home";
+                })
+                
+                });//main    
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                
+            </div>
+            <div id="menu">
+                <?php include"view/Menu.phtml";?>
+            </div>
+            <div id="sesion">
+            <a href="<?php echo Conexion::ruta()?>cerrar" title="Cerrar Sesion"><img class="cerrar_c" src="<?php echo Conexion::ruta()?>images/cerrar.png"></a><br>
+                <?php echo ucwords($_SESSION["Nombre"]);?><br>
+                <strong><?php echo $centro;?></strong>
+            </div>
+        </div>
+        <div id="linea"></div>
+        <div id="lateral">
+            
+        </div>
+        <div id="contenido">
+            <br>
+            <h1>Bienvenido <?php 
+            echo ucwords($_SESSION["Nombre"]);
+            
+            ?></h1>
+            <pre>
+            
+            <form>
+                
+            </form>      
+            <?php
+            if(isset($_GET["m"])){
+                switch($_GET["m"]){
+                    case "1":{
+                        ?>
+                        <h2 style="color:red;">Usuario no existe</h2>
+                        <?php
+                        break;
+                    }
+                }
+            }
+            ?>
+        </div>
+        <div id="footer">
+                
+        </div>
+    </body>
+</html>

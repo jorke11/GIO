@@ -1,0 +1,315 @@
+<html>
+    <head>
+        <title>Asistencia</title>
+        <link rel="shortcut icon" href="http://www.boteroibanez.com/img/botero.ico">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos.css"></style>
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos2.css"></style>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css" />
+        
+        <script type="text/javascript" src="<?php echo Conexion::ruta();?>script/js/traduccion.js">
+        </script>
+        <script type="text/javascript">
+        $(function(){
+
+                 $("#logo").click(function(){
+                    location.href="<?php echo Conexion::ruta();?>home";
+                })
+                $( "#datepicker" ).datepicker();
+
+                $("#abrir").click(function(){
+                        $("#Producto").val("");
+                        $("#Cantidad").val("");
+                        $("#Vu").val("");
+                        $("#Imp").val("");
+                    $("#footer,#formulario").fadeIn();
+                    });//click
+                
+                $("#cerrar").click(function(){
+                    $("#footer,#formulario").fadeOut();
+                    });
+
+                $("#nuevo").click(function(){
+                        $("#Producto").val("");
+                        $("#Cantidad").val("");
+                        $("#Vu").val("");
+                        $("#Imp").val("");
+                        $("#f_grabar").val("");
+                    location.href="<?php echo Conexion::ruta()?>Per_asistencia?n=1";
+                    });
+                $("#guardar").click(function(){
+                    document.form.submit();
+                    });
+
+                $("#Imprimir").click(function(){
+                    var id=$("#Id").val();
+                    window.open("<?php echo Conexion::ruta()?>view/pdf/pdf_requi.phtml?Requi="+id+"&id_centro=<?php echo $_SESSION["Id_centro"]?>","Impresion" ,"width=700,height=700,scrollbars=NO"); 
+                    location.href="<?php echo Conexion::ruta()?>Requisicion?i="+id;
+
+                })
+                
+
+                $("#buscar").click(function(){
+                    var dato=$("#txtbuscar").val();
+                    if(!dato==0){
+                    location.href="<?php echo Conexion::ruta()?>Per_asistencia?d="+dato;    
+                    }
+                })
+
+                $("#txtbuscar").keypress(function(event){
+                    if(event.which==13){
+                        var dato=$("#txtbuscar").val();
+                        var arreglo=dato.split(",");
+
+                        if(arreglo[0]=="ver" && arreglo[1].length > 0){
+                            window.open("<?php echo Conexion::ruta()?>view/Per_asistencia.phtml?num="+arreglo[1]+"&centro="+<?php echo $_SESSION["Id_centro"];?>, this.target, 'width=700,height=600');
+                        }
+                        else{
+                            location.href="<?php echo Conexion::ruta()?>Per_asistencia?b="+dato;
+                        }
+                    }
+                    
+                });
+
+                var availableTags=new Array(<?php echo $persona; ?>);
+                $( "#auto" ).autocomplete({
+                        source: availableTags
+                });
+
+                var availableTags2=new Array(<?php echo $productos; ?>);
+                $( "#Producto" ).autocomplete({
+                        source: availableTags2
+                });
+
+               
+
+                });//main    
+
+        </script>
+        <script type="text/javascript" >
+        function eliminar(id,id_requi){
+            if(confirm("Desea eliminar este detalle")){
+                location.href="<?php echo Conexion::ruta()?>Per_asistencia?e="+id+"&b="+id_requi;
+            }
+        }
+        function editar(id,requi,Persona,Fecha,Horai,Horaf){
+            $("#Persona").val(Persona);
+            $("#Fecha").val(Fecha);
+            $("#Horai").val(Horai);
+            $("#Horaf").val(Horaf);
+            $("#f_grabar").val("si2");
+            $("#fid").val(id);
+            $("#footer,#formulario").fadeIn();
+        }
+
+        function copiar(id,id_requi){
+            if(confirm("Esta seguro copiar esta fila?")){
+             location.href="<?php echo Conexion::ruta()?>Per_asistencia?Con="+id+"&id="+id_requi;   
+            }else{
+                $(".ck").removeAttr("checked");
+            }
+        }
+
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                
+            </div>
+            <div id="menu">
+                <?php include"view/Menu.phtml";?>
+            </div>
+
+             <div id="sesion">
+                <a href="<?php echo Conexion::ruta()?>cerrar" title="Cerrar Sesion"><img class="cerrar_c" src="<?php echo Conexion::ruta()?>images/cerrar.png"></a><br>
+                <?php echo ucwords($_SESSION["Nombre"]);?><br>
+           
+            </div>
+        </div>
+
+        <div id="linea"></div>
+        <!-- <div id="espacio"></div> -->
+        <form action="" method="POST" name="form">
+        <div id="lateral">
+
+            <ul>
+                <li><img title="Nuevo" id="nuevo" class="imagen" src="<?php echo Conexion::ruta()?>images/agregar.jpg"></li>
+                <li><img title="Guardar" class="imagen" src="<?php echo Conexion::ruta()?>images/guardar.png" id="guardar">
+                    <input type="hidden" name="grabar" value="si"></li>
+                <li><img title="Imprimir" id="Imprimir" class="imagen" src="<?php echo Conexion::ruta()?>images/impresora.png"></li>
+                <li><img title="Buscar" class="imagen" id="buscar" src="<?php echo Conexion::ruta()?>images/buscar.png"></li>
+                <li><input type="text" name="txtbuscar" size=10 id="txtbuscar"></li>
+            </ul>
+        </div>
+        <div id="contenido">
+            <h2>Asistencia</h2>
+            
+            <div class="caja">
+               <table>
+                <tr>
+
+                    <td><span>Id</span></td>
+                    <td><input type="text" name="Id" class="tam" id="Id" value="<?php echo (isset($d[0]["Consecutivo"]))?$d[0]["Consecutivo"]:"";?>" readonly></td>
+                </tr>
+                <tr>
+                    <td><span>Sucursal</span></td>
+                    <td><input type="text" name="Sucursal" readonly <?php echo $imp?> class="tam" value="<?php echo (isset($d[0]["Sucursal"]))?$d[0]["Sucursal"]:"";?>"></td>
+                </tr>
+            </table>
+          
+            </div>
+            
+            <div class="caja">
+               <table>
+                <tr>
+
+                    <td><span>Centro Costo</span></td>
+                    <td><input type="text" name="Centrocosto"  class="tam" value="<?php echo (isset($d[0]["Centro"]))?$d[0]["Centro"]:"";?>" readonly></td>
+                </tr>
+		<tr>
+                    <td><span>Hora Inicio</span></td>
+                    <td>
+		       <select name="Horai" class="tam">
+                            <option value="0">Seleccione</option>
+                            <?php
+                            foreach ($Hora as $key => $value) {
+                                if($Hora[$key]["Lista"]==$d[0]["Horai"]){
+                                 ?>
+                                    <option selected="selected" value="<?php echo $Hora[$key]['Lista']?>"><?php echo $Hora[$key]["Lista"]?></option>   
+                                 <?php   
+                                }else{
+                                ?>
+                                    <option value="<?php echo $Hora[$key]['Lista']?>"><?php echo $Hora[$key]["Lista"]?></option>
+                                <?php        
+                                }
+                            }
+                            ?>
+                        </select>
+		    </td>
+                </tr>
+                </table>   
+            </div>
+            <div class="caja">
+                
+                 <table>    
+                    <tr>
+                    <td><span>Fecha</span></td>
+                    <td><input type="text" name="Fecha" readonly <?php echo $imp?> class="tam" value="<?php echo (isset($d[0]["Fecha"]))?$d[0]["Fecha"]:"";?>"></td>
+                </tr>
+		<tr>
+                    <td><span>Hora Final</span></td>
+                    <td>
+		    	<select name="Horaf" class="tam">
+                            <option value="0">Seleccione</option>
+                            <?php
+                            foreach ($Hora as $key => $value) {
+                                if($Hora[$key]["Lista"]==$d[0]["Horaf"]){
+                                 ?>
+                                    <option selected="selected" value="<?php echo $Hora[$key]['Lista']?>"><?php echo $Hora[$key]["Lista"]?></option>   
+                                 <?php   
+                                }else{
+                                ?>
+                                    <option value="<?php echo $Hora[$key]['Lista']?>"><?php echo $Hora[$key]["Lista"]?></option>
+                                <?php        
+                                }
+                            }
+                            ?>
+                        </select>
+		    </td>
+                </tr>
+                 </table>   
+            </div>
+            <div id="boton">
+            <a href="#" id="<?php echo $bt;?>" style="color: rgb(0,43,87);visibility:hidden;"><img title="Agregar Detalle" id="nuevo" class="imagen" src="<?php echo Conexion::ruta()?>images/detalle.png"></a>
+            </div>
+            </form>      
+            <div id="tabla">
+
+            <table align="center" class="bordered">
+                <thead>
+                    <th>Persona</th>
+                    <th>Fecha</th>
+                    <th>Horai</th>
+                    <th>HoraF</th>
+                    <th>Editar</th>
+                    <th>Eliminar</td>
+                    <th>Copiar</td>
+                </thead>
+                
+                    <?php
+                    for($i=0;$i<sizeof($detalle);$i++){
+                        ?>
+                        <tr align="center">
+                            <td><?php echo $detalle[$i]["Persona"]?></td>
+                            <td><?php echo $detalle[$i]["Fecha"]?></td>
+                            <td><?php echo $detalle[$i]["Horai"]?></td>
+                            <td><?php echo $detalle[$i]["HoraF"]?></td>
+                            <td><img title="Editar" class="icono2" src="<?php echo Conexion::ruta()?>images/editar.jpg" onclick="editar('<?php echo $detalle[$i]["Id"]?>','<?php echo $detalle[$i]["id_asi"]?>','<?php echo $detalle[$i]["Persona"]?>','<?php echo $detalle[$i]["Fecha"]?>','<?php echo $detalle[$i]["Horai"]?>','<?php echo $detalle[$i]["HoraF"]?>')"> 
+                            </td>
+                            <td><img title="Eliminar" class="icono2" src="<?php echo Conexion::ruta()?>images/eliminar.png" onclick="eliminar('<?php echo $detalle[$i]["Id"]?>','<?php echo $detalle[$i]["id_asi"]?>')"></td>
+                            <td align="center">
+                                    <input type="checkbox" class="ck" onclick="copiar('<?php echo $detalle[$i]["Id"]?>','<?php echo $detalle[$i]["id_asi"]?>');">
+                                </div>
+                            </td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>  
+            </table>
+        </div>
+        <div id="paginador">
+            <?php
+            if(isset($_GET["error"])){
+                switch ($_GET["error"]) {
+                    case '1':
+                        echo "<h3 style='color:red'>Persona ingresada no esta registrada</h3>";
+                        break;
+                    case '2':
+                        echo "<h3 style='color:red'>La persona No existe ,no registrado por favor verifique</h3>";
+                        break;
+                    case '3':
+                        echo "<h3 style='color:red'>La persona No existe ,no registrado por favor verifique</h3>";
+                        break;
+		    case '4':
+                        echo "<h3 style='color:red'>La asistencia YA se genero, por favor verifique</h3>";
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+            }
+            ?>
+        </div>
+        </div>
+        
+        <div id="footer">
+                <div id="formulario">
+                    <li>Detalle</li>
+                    <form action="" method=post name="formulario"><br>
+                    <label>Id</label>
+                    <input type="text" name="Id_asis" readonly id="Id_asis" value="<?php echo $d[0]['Consecutivo']?>"><br>
+                    <label>Persona</label>
+                    <input type="text" name="Persona" readonly id="Persona"><br>
+                    <label>Fecha</label>
+                    <input type="text" name="Fecha" readonly id="Fecha"><br>
+                    <label>Hora I</label>
+                    <input type="text" name="Horai" id="Horai" class="noletra"><br>
+                    <label>Hora F</label>
+                    <input type="text" name="Horaf" id="Horaf" ><br>
+                    <br>    
+
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_grabar" id name="grabar_formu" value="si">
+                    <input type="hidden" name="fid" id="fid" value="">
+                    <a href="#" id="cerrar">Cerrar</a>
+                </form>
+            </div>  
+        </div>
+        
+    </body>
+</html>
+

@@ -1,0 +1,23 @@
+#tipo2{
+	width: 99%;
+	height: 10%;
+	
+	float:left;
+}
+#ajax{
+	width:99%;
+	height: 10%;
+	
+	float:left;
+}
+#ajax2{
+	width:99%;
+	height: 10%;
+	
+	float:left;
+}
+.imagen2{
+	width: 25px;
+    height: 25px;
+    cursor: pointer;
+}

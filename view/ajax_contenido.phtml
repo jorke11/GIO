@@ -1,0 +1,46 @@
+<?php
+class ajax {
+	private $productos=array();
+
+
+	public function conectar(){
+
+	    $arcConexion="../lib/GIO.ini";
+        $datos = parse_ini_file($arcConexion,true);
+        
+        $conexion=mysql_connect($datos["database_host"],$datos["database_user"],$datos["database_pass"]);
+        mysql_select_db($datos["database_name"]);
+
+        return $conexion;
+	}
+
+    public function get_listas($id){
+        $this->conectar();
+        $sql="SELECT c.Descripcion,l.Lista,l.numeracion 
+                FROM G_listas l
+                JOIN G_controles c ON c.No=l.Id_control
+                WHERE Id_control=$id;";
+
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->productos[]=$row;
+        }
+
+        return $this->productos;
+    }
+
+}
+
+$obj=new ajax;
+
+if(isset($_POST["dato"])){
+    $datos=$obj->get_listas($_POST["dato"]);    
+    echo json_encode($datos);
+}
+
+?>
+
+
+
+

@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>Entrada</title>
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos.css"></style>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                
+                
+                });//main    
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                
+            </div>
+            <div id="menu">
+                <?php include"view/Menu.phtml";?>
+            </div>
+        </div>
+        <div id="linea"></div>
+        <div id="contenido">
+            <br>
+            <h1>Bienvenidos al Sistema Gio</h1>
+            <form action="" method="POST" name="form">
+                <table align="center">
+                    <tr>
+                        <td>Usuario</td>
+                        <td><input type="text" name="usuario"></td>
+                    </tr>
+                    <tr>
+                        <td>Clave</td>
+                        <td><input type="password" name="clave"></td>
+                    </tr>
+                    <tr align="center">
+                        <td colspan="2"><input type="submit" name="Ingresar" value="Ingresar">
+                        <input type="hidden" name="grabar" value="si">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><br></td>
+                    </tr>
+                    <tr align="center">
+                        <td colspan="2"><a href="<?php echo Conexion::ruta()?>?control=olvido">Olvido Clave</a></td>
+                    </tr>
+                    <tr align="center">
+                        <td colspan="2"><a href="<?php echo Conexion::ruta()?>?control=registrar">Registrar Usuario</a></td>
+                    </tr>
+                </table>
+                
+            </form>      
+            <?php
+            if(isset($_GET["m"])){
+                switch($_GET["m"]){
+                    case "1":{
+                        ?>
+                        <h2 style="color:red;">Usuario no existe</h2>
+                        <?php
+                        break;
+                    }
+                }
+            }
+            ?>
+        </div>
+        <div id="footer">
+                
+        </div>
+    </body>
+</html>

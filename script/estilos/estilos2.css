@@ -1,0 +1,71 @@
+
+#formu1 formu label{
+    width: 100px;
+    color: white;
+    display: block;
+}
+.ent{
+    width: 150px;
+    border-radius: 10px;
+    padding: 6px;
+    border:none;
+}
+.ent:hover{
+    background: #A7C5F9;
+}
+
+.log:hover{
+    font-size: 18px;
+}
+#login{
+    width:70px;
+    height:70px;
+}
+#login:hover{
+    width:72px;
+    height:72px;
+}
+#registrar{
+    width:80px;
+    height:60px;
+}
+#registrar:hover{
+    width:82px;
+    height:62px;
+}
+span{
+  color: rgb(0,43,87);  
+  font-size: 13px;
+}
+.det{
+    border: 1px solid rgb(0,43,87);
+}
+.icono{
+    width: 30%;
+    height: 25%;
+    cursor: pointer;
+}
+
+.icono2{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+.icono2:hover{
+   width: 21px;
+    height: 21px;   
+}
+.cerrar_c{
+    width: 30px;
+    height: 30px;
+}
+#espacio{
+    width: 100%;
+    height: 3%;
+}
+.mostrar{
+    width: 50%;
+    height: auto;
+    float: left;
+}

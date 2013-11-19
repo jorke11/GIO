@@ -1,0 +1,107 @@
+<?php
+class ajax {
+    private $materiales=array();
+    private $transportes=array();
+    private $mantenimientos=array();
+    private $equipos=array();
+    
+
+    public function conectar(){
+        $arcConexion="../lib/GIO.ini";
+        $datos = parse_ini_file($arcConexion,true);
+        
+        $conexion=mysql_connect($datos["database_host"],$datos["database_user"],$datos["database_pass"]);
+        mysql_select_db($datos["database_name"]);
+
+        return $conexion;
+    }
+
+    public function get_materiales($id){
+        $this->conectar();
+        $sql="SELECT * 
+                FROM Ope_pre_matapu
+                WHERE Id=$id
+
+        ";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->materiales[]=$row;
+        }
+        return $this->materiales;
+    }
+
+    public function get_mantenimientos($id){
+        $this->conectar();
+        $sql="SELECT * 
+                FROM Ope_pre_moapu
+                WHERE Id=$id
+        ";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->mantenimientos[]=$row;
+        }
+        return $this->mantenimientos;
+    }
+
+
+    public function get_transporte($id){
+        $this->conectar();
+        $sql="SELECT * 
+                FROM Ope_pre_trasapu
+                WHERE Id=$id
+        ";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->transportes[]=$row;
+        }
+        return $this->transportes;
+    }
+
+    public function get_equipos($id){
+        $this->conectar();
+         $sql="SELECT * 
+                FROM Ope_pre_equiapu
+                WHERE Id=$id
+        ";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->equipos[]=$row;
+        }
+        return $this->equipos;
+    }
+
+}
+
+
+$obj=new ajax;
+
+if(isset($_POST)){
+    switch ($_POST["tipo"]) {
+        case 'Materiales':
+            $materiales=$obj->get_materiales($_POST["id"]);
+            echo json_encode($materiales);
+            break;
+        case 'Mantenimientos':
+            $mante=$obj->get_mantenimientos($_POST["id"]);
+            echo json_encode($mante);
+            break;
+        case 'Transportes':
+            $trans=$obj->get_transporte($_POST["id"]);
+            echo json_encode($trans);
+            break;
+        case 'Equipos':
+            $equipo=$obj->get_equipos($_POST["id"]);
+            echo json_encode($equipo);
+            break;
+    }
+}
+?>
+
+
+
+
+

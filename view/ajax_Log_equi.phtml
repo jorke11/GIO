@@ -1,0 +1,128 @@
+<?php
+class ajax{
+	private $productos=array();
+    private $consumo=array();
+    private $trabajo=array();
+    private $detalle=array();
+    private $mante=array();
+    private $equipos=array();
+
+	public function conectar(){
+        
+	    $arcConexion="../lib/GIO.ini";
+        $datos = parse_ini_file($arcConexion,true);
+        
+        $conexion=mysql_connect($datos["database_host"],$datos["database_user"],$datos["database_pass"]);
+        mysql_select_db($datos["database_name"]);
+
+        return $conexion;
+	}
+
+    public function get_productos(){
+        $this->conectar();
+        $sql="SELECT * from G_producto;";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->productos[]=$row;
+        }
+
+        return $this->productos;
+    }
+
+	public function get_detalle_consumo($id){
+        $this->conectar();
+        $sql="SELECT * from Log_equi_consumo where Id=$id";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->consumo[]=$row;
+        }
+
+        return $this->consumo;
+    }
+
+    public function get_detalle_trabajo($id){
+        $this->conectar();
+        $sql="SELECT * from Log_equi_trabajos where Id=$id";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->trabajo[]=$row;
+
+        }   
+        return $this->trabajo;
+    }
+
+    public function get_detalle_man($id){
+        $this->conectar();
+        $sql="SELECT * from Log_equi_mantenimiento where Id=$id";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->mante[]=$row;
+
+        }   
+        return $this->mante;   
+    }
+
+
+     public function get_equiposm($id){
+        $this->conectar();
+        echo $sql="SELECT * from Log_equi_actividades where Id_actividad=$id";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->equipos[]=$row;
+
+        }   
+        return $this->equipos;
+    }
+
+     public function get_detalle_pal($id){
+        $this->conectar();
+        echo $sql="SELECT * from Log_equi_trabajos where Id=$id";
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->Palas[]=$row;
+
+        }   
+        return $this->Palas;
+    }
+
+}
+
+$obj=new ajax;
+if(isset($_POST)){
+    $productos=$obj->get_productos();
+	switch ($_POST["tipo"]) {
+		case 'Consumo':
+            $consumo=$obj->get_detalle_consumo($_POST["id"]);
+            echo json_encode($consumo);
+			break;
+        
+		case 'Trabajo':
+            $trabajo=$obj->get_detalle_trabajo($_POST["id"]);
+            echo json_encode($trabajo);
+			break;
+        
+		case 'Mantenimiento':
+            $man=$obj->get_detalle_man($_POST["id"]);
+            echo json_encode($man);
+            
+			break;
+
+		case 'Palas':
+            $man=$obj->get_detalle_pal($_POST["id"]);
+            echo json_encode($man);
+            
+			break;
+    }
+}
+
+?>
+
+
+
+

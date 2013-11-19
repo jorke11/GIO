@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <title>Entrada</title>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="http://www.boteroibanez.com/img/botero.ico">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos.css"></style>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $("#abrir").click(function(){
+                    $("#footer,#formulario").fadeIn();
+                    });//click
+                
+                $("#cerrar").click(function(){
+                    $("#footer,#formulario").fadeOut();
+                    })
+                $("#nuevo").click(function(){
+                    location.href="<?php echo Conexion::ruta()?>Requisicion&n=1";
+                    });
+                $("#guardar").click(function(){
+                    document.form.submit();
+                    });
+                });//main    
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                
+            </div>
+            <div id="menu">
+                <?php include"view/Menu.phtml";?>
+            </div>
+             <div id="sesion">
+            <a href="<?php echo Conexion::ruta()?>cerrar">Cerrar Sesion</a><br>
+            <?php echo $_SESSION["usuario"];?>
+            <strong><?php echo $centro;?></strong>
+            </div>
+        </div>
+        <div id="linea"></div>
+        <form action="" method="POST" name="form">
+        <div id="lateral">
+            <ul>
+                <li><img title="Guardar" class="imagen" src="<?php echo Conexion::ruta()?>images/guardar.png" id="guardar">
+                    <input type="hidden" name="grabar" value="si"></li>
+                
+            </ul>
+        </div>
+        <div id="contenido">
+            <h2>Cambio de clave</h2>
+            
+            <div class="caja">
+               <table>
+                <tr>
+                    <td></td>
+                </tr>
+            </table>
+            </div>
+            
+            <div class="caja">
+                
+            </div>
+
+            <div class="caja">
+                 <table>
+                <tr>
+                    <td>Usuario</td>
+                    <td><input type="text" name="usuario"></td>
+                </tr>
+                 
+                <tr>
+                    <td>Clave Antigua</td>
+                    <td><input type="text" name="clave_a"></td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <td>Clave Nueva</td>
+                    <td><input type="text" name="clave_n"></td>
+                </tr>
+                <tr>
+                    <td>Confirmación</td>
+                    <td><input type="text" name="clave_c"></td>
+                </tr>
+                </table>
+            </div>
+
+            <div id="boton">
+            <a href="<?php echo Conexion::ruta()?>home" id="abrir" style="color: white;">Volver</a>
+            </div>
+            </form>      
+        
+        </div>
+            </div>  
+        </div>
+    
+        
+    </body>
+</html>

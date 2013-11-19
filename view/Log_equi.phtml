@@ -1,0 +1,932 @@
+<html>
+    <head>
+        <title>Equipos</title>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="http://www.boteroibanez.com/img/botero.ico">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos2.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos3.css">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <script type="text/javascript" src="<?php echo Conexion::ruta();?>/script/js/traduccion.js">
+      
+        </script>
+        <script type="text/javascript">
+            $(function(){
+                
+                $( ".datepicker" ).datepicker();
+
+                $("#Consumo").click(function(){
+                    var id=$("#Id").val();
+                    var serial=$("#Serial").val();
+                    if(!id==0){
+                        var tipo='Consumo';
+                        $("#titulo").text("Consumo");
+                        location.href="<?php echo Conexion::ruta()?>Log_equi?Con="+id+"&tipo="+tipo;
+                    } 
+                        
+                    });
+
+                $("#Trabajo").click(function(){
+
+                     var id=$("#Id").val();
+                     var serial=$("#Serial").val();
+                    if(!id==0){
+                        var tipo='Trabajo';
+                       $("#titulo").text("Trabajo");
+                        location.href="<?php echo Conexion::ruta();?>Log_equi?Con="+id+"&tipo="+tipo;
+                    } 
+                    
+                    });
+
+                $("#Mantenimiento").click(function(){
+
+                     var id=$("#Id").val();
+                    if(!id==0){
+                        var tipo='Mantenimiento';
+                        $("#titulo").text("Mantenimiento");
+                        location.href="<?php echo Conexion::ruta()?>Log_equi?Con="+id+"&tipo="+tipo;
+                    } 
+                    });
+
+                $("#Palas").click(function(){
+                    var id=$("#Id").val();
+
+                    if(!id==0){
+                        var tipo='Palas';
+                        $("#titulo").text("Palas y Fresas");
+                        location.href="<?php echo Conexion::ruta()?>Log_equi?Con="+id+"&tipo="+tipo;
+                    } 
+                    });
+
+                $("#buscar").click(function(){
+                    var dato=$("#txtbuscar").val();
+                    location.href="<?php echo Conexion::ruta()?>Log_equi&b="+dato;
+
+                });
+
+                $("#txtbuscar").keypress(function(event){
+                    if(event.which==13){
+                        var dato=$("#txtbuscar").val();
+                        location.href="<?php echo Conexion::ruta()?>Log_equi&b="+dato;
+                    }
+                });
+
+                 $("#abrir").click(function(){
+                               $("#footer,#formulario").fadeIn();    
+                    });//clic
+                 $(".cerrar").click(function(){
+                    $("#footer,#formulario").fadeOut();
+                    });
+
+                 $("#cerrar_a").click(function(){
+                    $("#footer6,#formulario6").fadeOut();
+                    });
+                 
+
+
+                 $("#tra").click(function(){
+                               $("#footer3,#formulario3").fadeIn();    
+                    });//clic
+                 $("#cerrar3").click(function(){
+                    $("#footer3,#formulario3").fadeOut();
+                    });
+
+                 $("#man").click(function(){
+                        $("#fecham").val("");
+                        $("#documentom").val("");
+                        $("#tipom").val("");
+                        $("#actividadm").val("");
+                        $("#cantidadm").val("");
+                        $("#vum").val("");
+                        $("#impm").val("");
+                        $("#observacionesm").val("");
+
+                           $("#footer4,#formulario4").fadeIn();    
+                    });//clic
+                 $("#cerrar4").click(function(){
+                    $("#footer4,#formulario4").fadeOut();
+                    });
+
+                 $("#equi").click(function(){
+
+                               $("#footer5,#formulario5").fadeIn();    
+                    });//clic
+                 $("#cerrar5").click(function(){
+                    $("#footer5,#formulario5").fadeOut();
+                    });
+                 
+                 $("#ver").click(function(){
+                        
+                    $("#footerfoto,#formulariofoto").fadeIn();
+                    });//click
+                 $("#footerfoto").click(function(){
+                        
+                    $("#footerfoto,#formulariofoto").fadeOut();
+                    });//click
+
+                 var availableTags2=new Array(<?php echo $productos; ?>);
+                $( "#Producto" ).autocomplete({
+                        source: availableTags2
+                });
+
+                var availableTags3=new Array(<?php echo $productos; ?>);
+                $( "#Producto2" ).autocomplete({
+                        source: availableTags3
+                });
+
+                var availableTags=new Array(<?php echo $proveedores; ?>);
+                $( "#Proveedor" ).autocomplete({
+                        source: availableTags
+                });
+
+                var arregloActividades=new Array(<?php echo $actividades; ?>);
+                $( ".actividad" ).autocomplete({
+                        source: arregloActividades
+                });
+
+
+                $("#botones").click(function(){
+                    $("#footer_bot,#formulario_bot").fadeIn();
+                 });//ver botones
+
+                $("#cerrar_bot").click(function(){
+                    $("#footer_bot,#formulario_bot").fadeOut();
+                    });  
+
+                $("#actividad").click(function(){
+                    $("#footer_bot,#formulario_bot").fadeOut();
+                    $("#footer_act,#formulario_act").fadeIn();
+                 });//ver botones
+
+                $("#cerrar_act").click(function(){
+                    $("#footer_act,#formulario_act").fadeOut();
+                    });                  
+
+
+
+                });//main    
+        </script>
+        <script type="text/javascript">
+        function eliminar(id,Con,tipo){
+            id_requi=$("#Id").val();
+            if(id_requi!=0){
+                if(confirm("Desea eliminar este detalle")){
+                    location.href="<?php echo Conexion::ruta()?>Log_equi?e="+id+"&c="+Con+"&tipo="+tipo;
+                }
+               
+            }
+
+        }
+
+        function editar(id,Con,tipo){
+                
+            switch(tipo){
+                case 'Consumo':
+                    $("#footer,#formulario").fadeIn();
+                    $("#grabar_formu").val("si2");
+                    $.ajax({
+                        type:"POST",
+                        url:'<?php echo Conexion::ruta();?>view/ajax_Log_equi.phtml',
+                        dataType:"JSON",
+                        data:"tipo=" + tipo +"&Con="+Con+"&id="+id,
+                        success:function(data){
+                            $.each(data,function(i,valor){
+                                $("#formulario #f_fecha").val(valor.Fecha);
+                                $("#formulario #Documento").val(valor.Documento);
+				$("#formulario #Tipo").val(valor.Tipo);
+				$("#formulario #Producto").val(valor.Producto);
+				$("#formulario #Clasificacion").val(valor.Clasificacion);
+                                $("#formulario #Proveedor").val(valor.Proveedor);
+                                $("#formulario #f_cantidad").val(valor.Cantidad);
+                                $("#formulario #f_vu").val(valor.Vu);
+                                $("#formulario #f_imp").val(valor.Imp);
+                                $("#formulario #f_observaciones").val(valor.Observaciones);
+                                $("#formulario #Consecutivodet").val(valor.Consecutivo);
+                                
+                            })
+                            
+                        }
+                    });//ajax
+                    break;
+
+                case 'Trabajo':
+                    $("#footer3,#formulario3").fadeIn();
+                    $("#f_formulario3").val("si2");
+                    $.ajax({
+                        type:"POST",
+                        url:'<?php echo Conexion::ruta();?>view/ajax_Log_equi.phtml',
+                        data:"tipo="+tipo+"&Con="+Con+"&id="+id,
+                        dataType:'JSON',
+                        success:function(data){
+                            $.each(data,function(i,valor){
+                                $("#formulario3 #fecha_t").val(valor.Fecha);
+                                $("#formulario3 #documento_t").val(valor.Documento);
+                                $("#formulario3 #actividad_t").val(valor.Actividad);
+                                $("#formulario3 #Producto2").val(valor.Producto);
+                                $("#formulario3 #cantidad_t").val(valor.Cantidad);
+                                $("#formulario3 #vu_t").val(valor.Vu);
+                                $("#formulario3 #imp_t").val(valor.Imp);
+                                $("#formulario3 #observaciones_t").val(valor.Observaciones);
+                                $("#formulario3 #orometroi_t").val(valor.Orometroi);
+				$("#formulario3 #orometrof_t").val(valor.Orometrof);
+				$("#formulario3 #horas_t").val(valor.Horas);
+                                $("#formulario3 #profundidad_t").val(valor.Profundidad);
+				$("#formulario3 #Largo_t").val(valor.Largo);
+				$("#formulario3 #ancho_t").val(valor.Ancho);
+				$("#formulario3 #pilotes_t").val(valor.Pilotes);
+				$("#formulario3 #mts_t").val(valor.Mts);
+				$("#formulario3 #mtsc_t").val(valor.Mtsc);
+				$("#formulario3 #porcentaje_t").val(valor.Porcentaje);
+                                $("#formulario3 #Consecutivodet_t").val(valor.Consecutivo);
+                            })
+                        }
+
+                    });//ajax
+                        
+                    break;
+                case 'Mantenimiento':
+                $("#footer4,#formulario4").fadeIn();
+                    $("#f_formulario4").val("si2");
+                    $.ajax({
+                        type:"POST",
+                        url:'<?php echo Conexion::ruta();?>view/ajax_Log_equi.phtml',
+                        dataType:"JSON",
+                        data:"tipo="+tipo+"&Con="+Con+"&id="+id,
+                        success:function(data){
+                            $.each(data,function(i,valor){
+                                
+                                $("#formulario4 #fecha_m").val(valor.Fecha);
+                                $("#formulario4 #documento_m").val(valor.Documento);
+                                $("#formulario4 #tipo_m").val(valor.Tipo);
+                                $("#formulario4 #actividad_m").val(valor.Actividad);
+                                $("#formulario4 #cantidad_m").val(valor.Cantidad);
+                                $("#formulario4 #vu_m").val(valor.Vu);
+                                $("#formulario4 #imp_m").val(valor.Imp);
+                                $("#formulario4 #observaciones_m").val(valor.Observaciones);
+                                $("#formulario4 #Consecutivo_m").val(valor.Consecutivo);
+                            });//each
+                        }
+                    });//ajax    
+                    break;
+
+
+                case 'Palas':
+                    $("#footer5,#formulario5").fadeIn();
+                    $("#f_trabajos").val("si2");
+                    $.ajax({
+                        type:"POST",
+                        url:'<?php echo Conexion::ruta();?>view/ajax_Log_equi.phtml',
+                        data:"tipo="+tipo+"&Con="+Con+"&id="+id,
+                        dataType:'JSON',
+                        success:function(data){
+                            $.each(data,function(i,valor){
+                                $("#formulario5 #fecha_tra").val(valor.Fecha);
+                                $("#formulario5 #documento_tra").val(valor.Documento);
+                                $("#formulario5 #actividad_tra").val(valor.Actividad);
+                                $("#formulario5 #vu_tra").val(valor.Vu);
+                                $("#formulario5 #Porcentaje_tra").val(valor.Porcentaje);
+                                $("#formulario5 #observaciones_tra").val(valor.Observaciones);
+                                $("#formulario5 #orometroi_tra").val(valor.Orometroi);
+                                $("#formulario5 #orometrof_tra").val(valor.Orometrof);
+                                $("#formulario5 #Consecutivodet_tra").val(valor.Consecutivodet_tra);
+                            })
+                        }
+
+                    });//ajax
+                        
+                    break;
+                
+            }
+        }
+
+        function copiar(id,Con,tipo){
+            if(confirm("Esta seguro copiar esta fila?")){
+             location.href="<?php echo Conexion::ruta()?>Log_equi?Cop="+id+"&id="+Con+"&tipo="+tipo;   
+            }else{
+                $(".ck").removeAttr("checked");
+            }
+        }
+
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                
+            </div>
+            <div id="menu">
+                <?php include"view/Menu.phtml";?>
+            </div>
+             <div id="sesion">
+            <a href="<?php echo Conexion::ruta()?>cerrar" title="Cerrar Sesion"><img class="cerrar_c" src="<?php echo Conexion::ruta()?>images/cerrar.png"></a><br>
+                <?php echo ucwords($_SESSION["Nombre"]);?><br>
+                <strong><?php echo $centro;?></strong>
+            </div>
+        </div>
+        <div id="linea"></div>
+        <form action="" method="POST" name="form">
+        <div id="lateral">
+            <ul>
+                <li><img title="Buscar" class="imagen" id="buscar" src="<?php echo Conexion::ruta()?>images/buscar.png"></li>
+                <li><input type="text" name="txtbuscar" size=10 id="txtbuscar"></li>
+            </ul>
+        </div>
+        <div id="contenido">
+            <h2>Equipos</h2>
+            
+            <div class="caja">
+               <table>
+                <tr>
+                    <td><span>Id</span></td>
+                    <td><input type="text" name="Id" id="Id" value="<?php echo (isset($d[0]["Consecutivo"]))?$d[0]["Consecutivo"]:"";?>" readonly></td>
+                </tr>
+                
+                <tr>
+                    <td><span>Sucursal</span></td>
+                    <td><input type="text" readonly name="Proyecto" value="<?php echo (isset($d[0]["Sucursal"]))?$d[0]["Sucursal"]:"";?>"></td>
+                </tr>
+                <tr>
+                    <td><span>Centocosto</span></td>
+                    <td><input type="text" name="tipo" readonly value="<?php echo (isset($d[0]["Centrocosto"]))?$d[0]["Centrocosto"]:"";?>"></td>
+                </tr>
+                <tr>
+                    <td><span>Proyecto</span></td>
+                    <td><input type="text" name="proyecto" readonly value="<?php echo (isset($d[0]["Proyecto"]))?$d[0]["Proyecto"]:"";?>"></td>
+                </tr>
+            </table>
+          
+            </div>
+            
+            <div class="caja">
+               <table>
+
+	        <tr>
+
+                    <td><span>Codigo</span></td>
+                    <td><input type="text" name="Codigo" readonly id="Codigo" value="<?php echo (isset($d[0]["Codigo"]))?$d[0]["Codigo"]:"";?>"></td>
+                </tr>
+                
+                <tr>
+
+                    <td><span>Serial</span></td>
+                    <td><input type="text" name="Serial" readonly id="Serial" value="<?php echo (isset($d[0]["Serial"]))?$d[0]["Serial"]:"";?>"></td>
+                </tr>
+                    <tr>
+                    <td><span>Valor</span></td>
+                    <td><input type="text" name="Valor" readonly value="<?php echo (isset($d[0]["Valor"]))?$d[0]["Valor"]:"";?>"></td>
+                </tr>
+                <tr>
+                        <td><span>Marca</span></td>
+                        <td><input type="text" name="marca" readonly value="<?php echo (isset($d[0]["Marca"]))?$d[0]["Marca"]:"";?>"></td>
+                </tr>
+                <tr>
+                        <td><span>Ver Foto</span></td>
+                        <td><img title="Ver Foto" class="imagen" readonly id="ver" src="<?php echo Conexion::ruta()?>images/camara.png"></td>
+                    </tr>
+                
+                 </table>   
+            </div>
+            <div class="caja">
+                 <table>
+		    <tr>
+                        <td><span>Nombre</span></td>
+                        <td><input type="text" name="Nombre" readonly value="<?php echo (isset($d[0]["Nombre"]))?$d[0]["Nombre"]:"";?>"></td>
+                    </tr>
+                    <tr>
+                        <td><span>Modelo</span></td>
+                        <td><input type="text" name="modelo" readonly  value="<?php echo (isset($d[0]["Modelo"]))?$d[0]["Modelo"]:"";?>"></td>
+                    </tr>
+                    <tr>
+                        <td><span>Propiedad</span></td>
+                        <td><input type="text" name="propiedad"  readonly value="<?php echo (isset($d[0]["Propiedad"]))?$d[0]["Propiedad"]:"";?>"></td>
+                    </tr>
+                    <tr>
+                        <td><span>Localizacion</span></td>
+                        <td><input type="text" name="localizacion" readonly value="<?php echo (isset($d[0]["Localizacion"]))?$d[0]["Localizacion"]:"";?>"></td>
+                    </tr>
+                   <tr>
+                        <td><span>Agregar</span></td>
+                        <td>
+                            <img title="Ver iconos" class="imagen2" style="cursor:pointer" id="botones" src="<?php echo Conexion::ruta()?>images/adelante.png">
+                        </td>
+                    </tr>
+                   
+                 </table>   
+            </div>
+            <div id="boton">
+            <a href="#" id="abrir">
+                <img title="Agregar Consumo" style="<?php echo $con;?>" id="con" class="imagen" src="<?php echo Conexion::ruta()?>images/detalle.png"></a>
+                <img title="Agregar Trabajos" style="<?php echo $tra;?>" id="tra" class="imagen" src="<?php echo Conexion::ruta()?>images/detalle.png"></a>
+                <img title="Agregar Mantenimientos" style="<?php echo $man;?>" id="man" class="imagen" src="<?php echo Conexion::ruta()?>images/detalle.png"></a>
+                <img title="Agregar Equipos" style="<?php echo $eq;?>"  class="imagen" id="equi" src="<?php echo Conexion::ruta()?>images/detalle.png"></a>
+            </div>
+            </form>      
+
+
+            <!--
+                MANEJO DETALLE DE CONSUMO
+            -->
+
+            <div id="tabla1" style="<?php echo $con;?>">
+                <table align="center" class="bordered">
+                <thead>
+                    <th>Fecha</th>
+		    <th>Documento</th>
+		    <th>Tipo</th>
+                    <th>Producto</th>
+		    <th>Clasificacion</th>
+                    <th>Proveedor</th>
+                    <th>Cantidad</th>
+                    <th>Vunitario</th>
+                    <th>Impuesto</th>
+                    <th>Vneto</th>
+                    <th>Vtotal</th>
+                    <th>Observaciones</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                    <th>Copiar</th>
+                </thead>
+                
+                    <?php
+                    foreach ($detalle as $i => $value) {
+                        ?>
+                        <tr>
+                            <td><?php echo $detalle[$i]["Fecha"]?></td>
+			    <td><?php echo $detalle[$i]["Documento"]?></td>
+			    <td><?php echo $detalle[$i]["Tipo"]?></td>
+                            <td><?php echo $detalle[$i]["Producto"]?></td>
+			    <td><?php echo $detalle[$i]["Clasificacion"]?></td>
+                            <td><?php echo $detalle[$i]["Proveedor"]?></td>
+                            <td><?php echo $detalle[$i]["Cantidad"]?></td>
+                            <td><?php echo $detalle[$i]["Vu"]?></td>
+                            <td><?php echo $detalle[$i]["Imp"]?></td>
+                            <td><?php echo "$ ".$detalle[$i]["Vn"]?></td>
+                            <td><?php echo "$ ".$detalle[$i]["Vt"]?></td>
+                            <td><?php echo $detalle[$i]["Observaciones"]?></td>
+                            <td><img title="Editar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/editar.jpg" onclick="editar('<?php echo $detalle[$i]["Id"]?>','<?php echo $detalle[$i]["Id_consumo"]?>','<?php echo "Consumo";?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/eliminar.png" onclick="eliminar('<?php echo $detalle[$i]["Id"]?>','<?php echo $detalle[$i]["Id_consumo"]?>','<?php echo "Consumo";?>')"></td>
+                            <td><input type="checkbox" class="ck" onclick="copiar('<?php echo $detalle[$i]["Id"]?>','<?php echo $detalle[$i]["Id_consumo"]?>','<?php echo "Consumo";?>');"></td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+                
+            </div>
+            <!--
+               FIN MANEJO DETALLE DE CONSUMO
+            -->
+
+            <!--
+                MANEJO DETALLE DE TRABAJOS
+            -->
+
+
+            <div id="tabla2" style="<?php echo $tra;?>">
+
+                <table align="center" class="bordered">
+                <thead>
+                    <th>Fecha</th>
+                    <th>Producto</th>
+                    <th>Docu</th>
+                    <th>Acti</th>
+                    <th>Oro. I</th>
+                    <th>Oro. F</th>
+                    <th>Profundidad</th>
+		    <th>Ancho</th>
+		    <th>Largo</th>
+		    <th>Pilotes</th>
+		    <th>Mts Cub</th>
+		    <th>Mts Lin</th>
+		    <th>Horas trabaj</th>
+                    <th>Cantidad</th>
+                    <th>Vunitario</th>
+                    <th>Vneto</th>
+                    <th>Vtotal</th>
+                    <th>Obs</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                    <th>Copiar</th>
+                </thead>
+                
+                    <?php
+                    foreach ($detalle1 as $i => $value) {
+                        ?>
+                        <tr>
+                            <td><?php echo $detalle1[$i]["Fecha"]?></td>
+                            <td><?php echo $detalle1[$i]["Producto"]?></td>
+                            <td><?php echo $detalle1[$i]["Documento"]?></td>
+                            <td><?php echo $detalle1[$i]["Actividad"]?></td>
+                            <td><?php echo $detalle1[$i]["Orometroi"]?></td>
+                            <td><?php echo $detalle1[$i]["Orometrof"]?></td>
+			    <td><?php echo $detalle1[$i]["Profundidad"]?></td>
+			    <td><?php echo $detalle1[$i]["Largo"]?></td>
+			    <td><?php echo $detalle1[$i]["Ancho"]?></td>
+			    <td><?php echo $detalle1[$i]["Pilotes"]?></td>
+			    <td><?php echo $detalle1[$i]["Mtscubicos"]?></td>
+			    <td><?php echo $detalle1[$i]["Mtslineales"]?></td>
+                            <td><?php echo $detalle1[$i]["Horastrab"]?></td>
+                            <td><?php echo $detalle1[$i]["Cantidad"]?></td>
+                            <td><?php echo $detalle1[$i]["Vu"]?></td>
+                            <td><?php echo "$ ".$detalle1[$i]["Vn"]?></td>
+                            <td><?php echo "$ ".$detalle1[$i]["Vt"]?></td>
+                            <td><?php echo $detalle1[$i]["Observaciones"]?></td>
+                           <td><img title="Editar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/editar.jpg" onclick="editar('<?php echo $detalle1[$i]["Id"]?>','<?php echo $detalle1[$i]["Id_trabajos"]?>','<?php echo "Trabajo";?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/eliminar.png" onclick="eliminar('<?php echo $detalle1[$i]["Id"]?>','<?php echo $detalle1[$i]["Id_trabajos"]?>','<?php echo "Trabajo";?>')"></td>
+                            <td><input type="checkbox" class="ck" onclick="copiar('<?php echo $detalle1[$i]["Id"]?>','<?php echo $detalle1[$i]["Id_trabajos"]?>','<?php echo "Trabajo";?>');"></td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+            </div>
+
+            <!--
+               MANEJO DETALLE DE MANTENIMIENTO
+            -->
+
+            <div class="tabla3" style="<?php echo $man;?>">
+
+                <table align="center" class="bordered">
+                <thead>
+                    <th>Fecha</th>
+                    <th>Actividad</th>
+                    <th>Documento</th>
+                    <th>Cantidad</th>
+                    <th>Vunitario</th>
+                    <th>Impuesto</th>
+                    <th>Vneto</th>
+                    <th>Vtotal</th>
+                    <th>Observaciones</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                    <th>Copiar</th>
+                </thead>
+                
+                    <?php
+                    for($i=0;$i<sizeof($detalle2);$i++){
+                        ?>
+                        <tr>
+                            <td><?php echo $detalle2[$i]["Fecha"]?></td>
+                            <td><?php echo $detalle2[$i]["Actividad"]?></td>
+                            <td><?php echo $detalle2[$i]["Documento"]?></td>
+                            <td><?php echo $detalle2[$i]["Cantidad"]?></td>
+                            <td><?php echo $detalle2[$i]["Vu"]?></td>
+                            <td><?php echo $detalle2[$i]["Imp"]?></td>
+                            <td><?php echo "$ ".$detalle2[$i]["Vn"]?></td>
+                            <td><?php echo "$ ".$detalle2[$i]["Vt"]?></td>
+                            <td><?php echo $detalle2[$i]["Observaciones"]?></td>
+                            <td><img title="Editar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/editar.jpg" onclick="editar('<?php echo $detalle2[$i]["Id"]?>','<?php echo $detalle2[$i]["Id_mante"]?>','<?php echo "Mantenimiento";?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/eliminar.png" onclick="eliminar('<?php echo $detalle2[$i]["Id"]?>','<?php echo $detalle2[$i]["Id_mante"]?>','<?php echo "Mantenimiento";?>')"></td>
+                            <td><input type="checkbox" class="ck" onclick="copiar('<?php echo $detalle2[$i]["Id"]?>','<?php echo $detalle2[$i]["Id_mante"]?>','<?php echo "Mantenimiento";?>');"></td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+            </div>
+
+
+            <div class="tabla3" style="<?php echo $eq;?>">
+
+              
+                <table align="center" class="bordered">
+                <thead>
+                    <th>Documento</th>
+                    <th>Fecha</th>
+                    <th>Actividad</th>
+                    <th>Orometroi</th>
+                    <th>Orometrof</th>
+                    <th>Horastrabaj</th>
+                    <th>Vunitario</th>
+                    <th>Vtotal</th>
+                    <th>Porcentaje</th>
+                    <th>Observaciones</th>
+		    <th>Editar</th>
+                    <th>Eliminar</th>
+                    <th>Copiar</th>
+                </thead>
+                
+                    <?php
+                    foreach ($detalle3 as $i => $value) {
+                        ?>
+                        <tr>
+                            <td><?php echo $detalle3[$i]["Documento"]?></td>
+                            <td><?php echo $detalle3[$i]["Fecha"]?></td>
+                            <td><?php echo $detalle3[$i]["Actividad"]?></td>
+                            <td><?php echo $detalle3[$i]["Orometroi"]?></td>
+                            <td><?php echo $detalle3[$i]["Orometrof"]?></td>
+                            <td><?php echo $detalle3[$i]["Horastrab"]?></td>
+                            <td><?php echo $detalle3[$i]["Vu"]?></td>
+                            <td><?php echo "$ ".$detalle3[$i]["Vt"]?></td>
+			    <td><?php echo $detalle3[$i]["Porcentaje"]?></td>
+                            <td><?php echo $detalle3[$i]["Observaciones"]?></td>
+                           <td><img title="Editar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/editar.jpg" onclick="editar('<?php echo $detalle3[$i]["Id"]?>','<?php echo $detalle3[$i]["Id_trabajos"]?>','<?php echo "Palas";?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/eliminar.png" onclick="eliminar('<?php echo $detalle3[$i]["Id"]?>','<?php echo $detalle3[$i]["Id_trabajos"]?>','<?php echo "Palas";?>')"></td>
+                            <td><input type="checkbox" class="ck" onclick="copiar('<?php echo $detalle3[$i]["Id"]?>','<?php echo $detalle3[$i]["Id_trabajos"]?>','<?php echo "Palas";?>');"></td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+
+
+            </div>
+
+
+        </div>
+        <div id="lateral_izq">
+            <ul>
+                <li><img title="Consumo" class="imagen" id="Consumo" src="<?php echo Conexion::ruta()?>images/consumo2.png"></li>
+		<li><img title="Trabajos" class="imagen" id="Palas" src="<?php echo Conexion::ruta()?>images/palas.png"></li>
+                <li><img title="Palas Y fresas" class="imagen" id="Trabajo" src="<?php echo Conexion::ruta()?>images/trabajo2.png"></li>
+                <li><img title="Mantenimiento" style="visibility:hidden" class="imagen" id="Mantenimiento" src="<?php echo Conexion::ruta()?>images/man2.png"></li>
+            </ul>
+        </div>
+
+        <div id="footer_bot">
+                <div id="formulario_bot">
+                    <img title="Agregar Actividades" class="imagen3" id="actividad" src="<?php echo Conexion::ruta()?>images/actividades.png">
+                    <br>
+                    <br>
+                    <a href="#" id="cerrar_bot">Cerrar</a>   
+                </div>
+            </div>
+
+            <div id="footer_act">
+                <div id="formulario_act">
+                    <li><div id="titulo">Actividades</div></li>
+                    <form action="" method=post name="formulario">
+                    <label>Codigo</label>
+                    <input type="text" class="ent2" name="Codigo">
+                        <br>
+                    <label>Descripcion</label>
+                    <input type="text" class="ent2" id="Descripcion" name="Descripcion">
+                        <br>
+                    <label>Valor</label>
+                    <input type="text" class="ent2" id="Valor" name="Valor">
+                        <br>
+                    <label>Sumat</label>
+                    <input type="text" class="ent2" name="Sumat" id="Sumat">
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_actividad" name="f_actividad" value="si">
+                    <input type="hidden" name="tipo" value="Consumo">
+                    <a href="#" id="cerrar_act">Cerrar</a>
+                </form>
+                </div>
+            </div>
+         
+
+        <div id="footer">
+                <div id="formulario">
+                    <li><div id="titulo">Consumo</div></li>
+                    <form action="" method=post name="formulario">
+                    <label>Id</label>
+                    <input type="text" class="ent2" name="Consecutivo" value="<?php echo $d[0]["Consecutivo"]?>" readonly>
+                    <br>
+                    <label>Fecha</label>
+                    <input type="text" class="ent2 datepicker" class="ent2" name="Fecha" id="f_fecha">
+                        <br>
+		    <label>Documento</label>
+                    <input type="text" class="ent2" id="Documento" name="Documento">
+                        <br>
+		    <label>Tipo Mant</label>
+                    <input type="text" class="ent2" id="Tipo" name="Tipo">
+                        <br>
+                    <label>Producto</label>
+                    <input type="text" class="ent2" id="Producto" name="Producto">
+                        <br>
+                    <label>Clasificacion</label>
+                    <input type="text" class="ent2" id="Clasificacion" name="Clasificacion">
+                        <br>
+                    <label>Proveedor</label>
+                    <input type="text" class="ent2" id="Proveedor" name="Proveedor">
+                        <br>
+                    <label>Cantidad</label>
+                    <input type="text" class="ent2" name="Cantidad" id="f_cantidad">
+                    <br>
+                    <label>Valor unitario</label>
+                    <input type="text" class="ent2" name="Vunitario" id="f_vu">
+                    <br>
+                    <label>Impuesto</label>
+                    <input type="text" class="ent2" name="Impuesto" id="f_imp">
+                    <br>
+                    <label>Observaciones</label>
+                    <textarea name="Observaciones" id="f_observaciones"></textarea>
+                    <br>      
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="grabar_formu" name="grabar_formu" value="si">
+                    <input type="hidden" name="tipo" value="Consumo">
+                    <input type="hidden" name="Consecutivodet" id="Consecutivodet" value="">
+                    <input type="hidden" name="Serialeq" value="<?php echo $d[0]["Serial"]?>">
+                    <a href="#" class="cerrar">Cerrar</a>
+                </form>
+            </div>  
+        </div>
+
+        <div id="footer6">
+            <div id="formulario6">
+            
+            </div>    
+        </div>
+
+<div id="footer3">
+                <div id="formulario3">
+                    <li><div id="titulo">Trabajos Palas y Fresas</div></li>
+                    <form action="" method=post name="formulario">
+                    <table>
+                        <tr>
+                            <td><label>Id</label></td>
+                            <td><input type="text" class="ent2" name="Id" value="<?php echo $d[0]["Consecutivo"]?>" readonly></td>
+                            <td><label>Fecha</label></td>
+                            <td><input type="text" class="ent2 datepicker" name="Fecha" id="fecha_t"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Documento</label></td>
+                            <td><input type="text" class="ent2 " name="Documento" id="documento_t"></td>
+                            <td><label>Tipo Actividad</label></td>
+                            <td><input type="text" class="ent2 actividad" name="Actividad" id="actividad_t"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Cantidad</label></td>
+                            <td><input type="text" class="ent2" name="Cantidad" id="cantidad_t"></td>
+                            <td><label>Valor unitario</label></td>
+                            <td><input type="text" class="ent2" name="Vunitario" id="vu_t"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Orometroi</label></td>
+                            <td><input type="text" class="ent2" name="Orometroi" id="orometroi_t"></td>
+                            <td><label>Orometrof</label></td>
+                            <td><input type="text" class="ent2" name="Orometrof" id="orometrof_t"></td>
+                        </tr>
+                        <tr>
+			    <td><label>Horas</label></td>
+                            <td><input type="text" class="ent2" name="Horas" id="horas_t"></td>
+                            <td><label>Profundidad</label></td>
+                            <td><input type="text" class="ent2" name="Profundidad" id="profundidad_t"></td>
+			</tr>
+                        <tr>
+                            <td><label>Largo</label></td>
+                            <td><input type="text" class="ent2" name="Largo" id="Largo_t"></td>
+                            <td><label>Ancho</label></td>
+                            <td><input type="text" class="ent2" name="Ancho" id="ancho_t"></td>
+			</tr>
+                        <tr>
+                            <td><label>Pilotes</label></td>
+                            <td><input type="text" class="ent2" name="Pilotes" id="pilotes_t"></td>
+			    <td><label>Porcentaje</label></td>
+                            <td><input type="text" class="ent2" name="Porcentaje" id="porcentaje_t"></td>
+			</tr>
+                        <tr>
+                            <td><label>Observaciones</label></td>
+                            <td><textarea name="Observaciones" id="observaciones_t"></textarea></td>
+                        </tr>    
+                    </table>
+                    
+                    
+                    
+                    <br>      
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_formulario3" name="f_formulario3" value="si">
+                    <input type="hidden" name="tipo" value="Trabajo">
+                    <input type="hidden" name="Consecutivodet" id="Consecutivodet_t" value="">
+                    <input type="hidden" name="Serialeq" value="<?php echo $d[0]["Serial"]?>">
+                    <a href="#" id="cerrar3">Cerrar</a>
+                </form>
+            </div>  
+        </div>
+
+        <div id="footer7">
+            <div id="formulario7">
+            
+            </div>    
+        </div>
+
+        <div id="footer4">
+                <div id="formulario4">
+                    <li><div id="titulo">Mantenimientos</div></li>
+                    <form action="" method=post name="formulario">
+                    <label>Id</label>
+                    <input type="text" class="ent2" name="Id" value="<?php echo $d[0]["Consecutivo"]?>" readonly>
+                    <br>
+                    <label>Fecha</label>
+                    <input type="text" class="ent2 datepicker" name="Fecha" id="fecha_m">
+                        <br>
+                    <label>Documento</label>
+                    <input type="text" class="ent2" name="Documento" id="documento_m">
+                    <br>
+                    <label>Tipo</label>
+                    <input type="text" class="ent2" name="Tipo" id="tipo_m" >
+                    <br>
+                    <label>Actividad</label>
+                    <input type="text" class="ent2 actividad" name="Actividad" id="actividad_m">
+                    <br>
+                    <label>Cantidad</label>
+                    <input type="text" class="ent2" name="Cantidad" id="cantidad_m">
+                    <br>
+                    <label>Valor unitario</label>
+                    <input type="text" class="ent2" name="Vunitario" id="vu_m">
+                    <br>
+                    <label>Impuesto</label>
+                    <input type="text" class="ent2" name="Impuesto" id="imp_m">
+                    <br>
+                    <label>Observaciones</label>
+                    <textarea name="Observaciones" id="observaciones_m"></textarea>
+                    <br>      
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_formulario4" name="f_formulario4" value="si">
+                    <input type="hidden" name="tipo" value="Mantenimiento">
+                    <input type="hidden" name="Consecutivo_m" id="Consecutivo_m" value="">
+                    <input type="hidden" name="Serialeq" value="<?php echo $d[0]["Serial"]?>">
+                    <input type="hidden" name="Proyecto2" value="<?php echo $d[0]["Proyecto"]?>">
+                    <a href="#" id="cerrar4">Cerrar</a>
+                </form>
+            </div>  
+        </div>
+
+
+<div id="footer8">
+            <div id="formulario8">
+            
+            </div>    
+        </div>
+        <div id="footerfoto">
+            <div id="formulariofoto">
+                <img src="<?php echo $d[0]["Foto"];?>" style="width:60%">
+            </div>    
+        </div>
+
+
+
+            <div id="footer5">
+            <div id="formulario5">
+                    <li><div id="titulo">Trabajos</div></li>
+                    <form action="" method=post name="formulario">
+                    <label>Id</label>
+                    <input type="text" class="ent2" name="Id" value="<?php echo $d[0]["Consecutivo"]?>" readonly>
+                    <br>
+                    <label>Documento</label>
+                    <input type="text"  class="ent2" name="Documento" id="documento_tra">
+                        <br>
+                    <label>Fecha</label>
+                    <input type="text"  class="ent2 datepicker" name="Fecha" id="fecha_tra">
+                        <br>
+                    <label>Actividad</label>
+                    <input type="text"  class="ent2 actividad" name="Actividad" id="actividad_tra">
+                        <br>
+                    <label>Orometroi</label>
+                    <input type="text" class="ent2" name="Orometroi" id="Orometroi_tra">
+                    <br>
+                    <label>Orometrof</label>
+                    <input type="text" class="ent2" name="Orometrof" id="Orometrof_tra">
+                    <br>
+		    <label>Horas</label>
+                    <input type="text" class="ent2" name="Horas" id="Horas_tra">
+                    <br>
+                    <label>ValorUnit</label>
+                    <input type="text" class="ent2" name="Vu" id="Vu_tra">
+                    <br>
+                    <label>Porcentaje</label>
+                    <input type="text" class="ent2" name="Porcentaje" id="Porcentaje_tra">
+                    <br>      
+                    <label>Observaciones</label>
+                    <textarea class="ent2" name="Observaciones" id="Observaciones_tra"></textarea>
+                    <br>
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_trabajos" name="f_trabajos" value="si">
+                    <input type="hidden" name="tipo" value="Palas">
+		    <input type="hidden" name="Consecutivodet_tra" id="Consecutivodet_tra" value="">
+                    <input type="hidden" name="Serialeq" value="<?php echo $d[0]["Serial"]?>">
+                    <a href="#" id="cerrar5">Cerrar</a>
+                </form>
+                </div>
+
+        <div>                
+        
+<div id="footer9">
+            <div id="formulario9">
+            
+            </div>    
+        </div>
+        
+
+
+        
+    </body>
+</html>
+
+
+
+
+

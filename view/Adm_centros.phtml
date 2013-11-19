@@ -1,0 +1,143 @@
+<html>
+    <head>
+        <title>Administrar Centros de Costo</title>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="http://www.boteroibanez.com/img/botero.ico">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos.css"></style>
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos2.css"></style>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css" />
+        <script type="text/javascript">
+            $(function(){
+                 $("#logo").click(function(){
+                    location.href="<?php echo Conexion::ruta();?>home";
+                })
+                $( "#datepicker" ).datepicker();
+
+                $("#abrir").click(function(){
+                        
+                    $("#footer,#formulario").fadeIn();
+                    });//click
+                
+                $("#cerrar").click(function(){
+                    $("#footer,#formulario").fadeOut();
+                    })
+                $("#nuevo").click(function(){
+                        $("#fproducto").val(" ");
+                        $("#fcantidad").val(" ");
+                        $("#fvu").val(" ");
+                        $("#fimp").val(" ");
+                        $("#f_grabar").val(" ");
+                    location.href="<?php echo Conexion::ruta()?>Registrar&n=1";
+                    });
+                $("#guardar").click(function(){
+                    document.form.submit();
+                    });
+
+                $("#buscar").click(function(){
+                    var dato=$("#txtbuscar").val();
+                    location.href="<?php echo Conexion::ruta()?>Registrar&b="+dato;
+                })
+
+                $("#txtbuscar").keypress(function(event){
+                    if(event.which==13){
+                        var dato=$("#txtbuscar").val();
+                        location.href="<?php echo Conexion::ruta()?>Registrar&b="+dato;    
+                    }
+                });
+
+                $("#principal").change(function(){
+                    var id=$("#principal").val();
+                    $.get("<?php echo Conexion::ruta()?>view/ajax_menu.phtml",{id:id},function(data){
+                    $("#ajax").html(data);
+                });
+                });
+
+
+                });//main    
+        </script>
+        <script type="text/javascript">
+        function eliminar(id,id_requi){
+            if(confirm("Desea eliminar este detalle")){
+                location.href="<?php echo Conexion::ruta()?>Requisicion&e="+id+"&b="+id_requi;
+            }
+        }
+
+        function editar(id,requi,producto,cantidad,Vu,imp){
+            $("#fproducto").val(producto);
+            $("#fcantidad").val(cantidad);
+            $("#fvu").val(Vu);
+            $("#fimp").val(imp);
+            $("#f_grabar").val("si2");
+            $("#fid").val(id);
+            $("#footer,#formulario").fadeIn();
+        }
+
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                
+            </div>
+            <div id="menu">
+                <?php include"view/Menu.phtml";?>
+            </div>
+             <div id="sesion">
+                <a href="<?php echo Conexion::ruta()?>cerrar" title="Cerrar Sesion"><img class="cerrar_c" src="<?php echo Conexion::ruta()?>images/cerrar.png"></a><br>
+                <?php echo $_SESSION["cedula"];?><br>
+                <strong><?php echo $nombre;?></strong>
+            </div>
+        </div>
+        <div id="linea"></div>
+        <div id="espacio"></div>
+        <form action="" method="POST" name="form">
+        <div id="lateral">
+            <ul>
+                <li><img title="Nuevo" id="nuevo" class="imagen" src="<?php echo Conexion::ruta()?>images/agregar.jpg"></li>
+                <li><img title="Guardar" class="imagen" src="<?php echo Conexion::ruta()?>images/guardar.png" id="guardar">
+                    <input type="hidden" name="grabar" value="si"></li>
+                <li><img title="Buscar" class="imagen" id="buscar" src="<?php echo Conexion::ruta()?>images/buscar.png"></li>
+                <li><input type="text" name="txtbuscar" size=10 id="txtbuscar"></li>
+            </ul>
+        </div>
+        <div id="contenido">
+            <h2>Administrar Centros de Costo</h2>
+            
+           
+            </form>      
+
+        </div>
+        
+        <div id="footer">
+                <div id="formulario">
+                    <li>Requisicion</li>
+                    <form action="" method=post name="formulario">
+                    <label>Id</label>
+                    <input type="text" name="Id_requisicion" value="<?php echo $d[0]["Id"]?>" readonly>
+                    <br>
+                    <label>Producto</label>
+                    <input name="producto" type="text" id="fproducto" value="<?php echo $detalle_id[0]["Producto"]?>">
+                        <br>
+                    <label>Cantidad</label>
+                    <input type="text" name="cantidad" id="fcantidad" value="<?php echo $detalle_id[0]["Cantidad"]?>">
+                    <br>
+                    <label>Valor unitario</label>
+                    <input type="text" name="vunitario" id="fvu" value="<?php echo $detalle_id[0]["Vu"]?>">
+                    <br>
+                    <label>Impuesto</label>
+                    <input type="text" name="impuesto" id="fimp" value="<?php echo $detalle_id[0]["Imp"]?>">
+                    <br>    
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_grabar" id name="grabar_formu" value="si">
+                    <input type="hidden" name="fid" id="fid" value="">
+                    <a href="#" id="cerrar">Cerrar</a>
+                </form>
+            </div>  
+        </div>
+    </body>
+</html>
+

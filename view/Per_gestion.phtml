@@ -1,0 +1,1152 @@
+<html>
+    <head>
+        <title>Gestion de Personal</title>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="http://www.boteroibanez.com/img/botero.ico">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos.css"></style>
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos2.css"></style>
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos3.css"></style>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <script type="text/javascript" src="<?php echo Conexion::ruta();?>script/js/traduccion.js"></script>
+        
+        <script type="text/javascript">
+            $(function(){
+                
+                $( ".datepicker" ).datepicker();
+
+                $("#Ausencia").click(function(){
+                    var id=$("#Id").val();
+                    if(!id==0){
+                        var tipo='Ausencia';
+                        location.href="<?php echo Conexion::ruta()?>Per_gestion?Con="+id+"&tipo="+tipo;
+                    } 
+                    });
+
+                $("#Beneficiarios").click(function(){
+                    var id=$("#Id").val();
+                    if(!id==0){
+                        var tipo='Beneficiarios';
+                        location.href="<?php echo Conexion::ruta()?>Per_gestion?Con="+id+"&tipo="+tipo;
+                    } 
+                      
+                    
+                    });
+
+                $("#Dotacion").click(function(){
+                     var id=$("#Id").val();
+                    if(!id==0){
+                        var tipo='Dotacion';
+                        location.href="<?php echo Conexion::ruta()?>Per_gestion?Con="+id+"&tipo="+tipo;
+                    } 
+                    });
+
+                $("#Estudios").click(function(){
+                    var id=$("#Id").val();
+                    if(!id==0){
+                        var tipo='Estudios';
+                        location.href="<?php echo Conexion::ruta()?>Per_gestion?Con="+id+"&tipo="+tipo;
+                    } 
+                    });
+
+                $("#Historial").click(function(){
+                    var id=$("#Id").val();
+                    if(!id==0){
+                        var tipo='Historial';
+                        location.href="<?php echo Conexion::ruta()?>Per_gestion?Con="+id+"&tipo="+tipo;
+                    } 
+                    });                
+
+                $("#Pagos").click(function(){
+                    var id=$("#Id").val();
+                    if(!id==0){
+                        var tipo='Pagos';
+                        location.href="<?php echo Conexion::ruta()?>Per_gestion?Con="+id+"&tipo="+tipo;
+                    } 
+                    });
+
+                $("#Reconocimiento").click(function(){
+                    var id=$("#Id").val();
+                    if(!id==0){
+                        var tipo='Reconocimiento';
+                        location.href="<?php echo Conexion::ruta()?>Per_gestion?Con="+id+"&tipo="+tipo;
+                    } 
+                    });
+
+                $("#Examen").click(function(){
+                    var id=$("#Id").val();
+                    if(!id==0){
+                        var tipo='Examen';
+                        location.href="<?php echo Conexion::ruta()?>Per_gestion?Con="+id+"&tipo="+tipo;
+                    } 
+                    });
+
+                $("#buscar").click(function(){
+                    var dato=$("#txtbuscar").val();
+
+                    location.href="<?php echo Conexion::ruta()?>Per_gestion&b="+dato;
+
+                });
+
+                $("#txtbuscar").keypress(function(event){
+                    if(event.which==13){
+                        var dato=$("#txtbuscar").val();
+                        location.href="<?php echo Conexion::ruta()?>Per_gestion&b="+dato;    
+                    }
+                });
+
+                 $("#abrir").click(function(){
+                               $("#footer,#formulario").fadeIn();    
+                    });//clic
+                 $("#cerrar").click(function(){
+                    $("#footer,#formulario").fadeOut();
+                    });
+
+                 $("#cerrar_a").click(function(){
+                    $("#footer6,#formulario6").fadeOut();
+                    });
+                 
+
+
+                 $("#ben").click(function(){
+                               $("#footer3,#formulario3").fadeIn();    
+                    });//clic
+                 $("#cerrar3").click(function(){
+                    $("#footer3,#formulario3").fadeOut();
+                    });
+
+
+                 $("#dot").click(function(){
+                               $("#footer4,#formulario4").fadeIn();    
+                    });//clic
+                 $("#cerrar4").click(function(){
+                    $("#footer4,#formulario4").fadeOut();
+                    });
+
+                 $("#est").click(function(){
+                               $("#footer5,#formulario5").fadeIn();    
+                    });//clic
+                 $("#cerrar5").click(function(){
+                    $("#footer5,#formulario5").fadeOut();
+                    });
+
+                 $("#his").click(function(){
+                    
+                       $("#footer6,#formulario6").fadeIn();    
+                    });//clic
+                 $("#cerrar6").click(function(){
+                    $("#footer6,#formulario6").fadeOut();
+                    });
+
+                $("#pag").click(function(){
+                               $("#footer7,#formulario7").fadeIn();    
+                    });//clic
+
+                $("#rec").click(function(){
+                               $("#footer8,#formulario8").fadeIn();    
+                    });//clic
+                $("#cerrar8").click(function(){
+                    $("#footer8,#formulario8").fadeOut();
+                    });
+                $("#exa").click(function(){
+                               $("#footer9,#formulario9").fadeIn();    
+                    });//clic
+                $("#cerrar9").click(function(){
+                    $("#footer9,#formulario9").fadeOut();
+                    });
+
+                 $("#cerrar7").click(function(){
+                    $("#footer7,#formulario7").fadeOut();
+                    });                 
+                });//main    
+        </script>
+        <script type="text/javascript">
+        function eliminar(id,Con,tipo,Id_ausen){
+            id_requi=$("#Id").val();
+            if(id_requi!=0){
+                if(confirm("Desea eliminar este detalle")){
+                    location.href="<?php echo Conexion::ruta()?>Per_gestion?e="+id+"&c="+Con+"&tipo="+tipo+"&id_au="+Id_ausen;
+                }
+            }
+        }
+
+        function editar(id,Con,tipo){
+                
+            switch(tipo){
+                
+                case 'Ausencia':
+                    $("#footer,#formulario").fadeIn();
+                    $("#formulario #f_ausencia").val("si2");
+                    
+                    $.ajax({
+                        type:"POST",
+                        url:'<?php echo Conexion::ruta()?>view/ajax_Per_gestion.phtml',
+                        data:"tipo="+tipo+"&Con="+Con+"&id="+id,
+                        dataType:"JSON",
+                        success:function(data){
+                            $.each(data,function(i,valor){
+                                $("#formulario #retirado_a").val(valor.Retirado);
+                                $("#formulario #fretirado_a").val(valor.Fretirado);
+                                $("#formulario #fecha_a").val(valor.Fecha);
+                                $("#formulario #tipo_a").val(valor.Tipo);
+                                $("#formulario #tiempoausente_a").val(valor.Tiempoausente);
+                                $("#formulario #fausencia_a").val(valor.Fausencia);
+                                $("#formulario #observaciones_a").val(valor.Tipo);
+                                $("#formulario #Consecutivo_a").val(valor.Consecutivo);
+                                
+                            });//each
+                        }
+                    })
+                    break;
+
+                case 'Beneficiarios':
+                    $("#footer3,#formulario3").fadeIn();
+                    $("#formulario3 #f_ben").val("si2");
+                    $.ajax({
+                        type:"POST",
+                        url:'<?php echo Conexion::ruta()?>view/ajax_Per_gestion.phtml',
+                        data:"tipo="+tipo+"&Con="+Con+"&id="+id,
+                        dataType:"JSON",
+                        success:function(data){
+                            $.each(data,function(i,valor){
+                                $("#formulario3 #retirado_b").val(valor.Retirado);    
+                                $("#formulario3 #fretirado_b").val(valor.Fretirado);    
+                                $("#formulario3 #tipo_b").val(valor.Tipo);    
+                                $("#formulario3 #nomapell_b").val(valor.Nomapell);
+                                $("#formulario3 #Fnacimiento_b").val(valor.Fnacimiento);
+                                $("#formulario3 #bccf_b").val(valor.Bccf);
+                                $("#formulario3 #beps_b").val(valor.Beps);
+                                $("#formulario3 #sexo_b").val(valor.Sexo);
+                                $("#formulario3 #Consecutivo_b").val(valor.Consecutivo);
+                            })
+                        }
+                    });//ajax
+                         
+                    break;
+                case 'Dotacion':
+                    $("#footer4,#formulario4").fadeIn();
+                    $("#formulario4 #f_dotacion").val("si2");
+                    $.ajax({
+                        type:"POST",
+                        url:'<?php echo Conexion::ruta()?>view/ajax_Per_gestion.phtml',
+                        data:"tipo="+tipo+"&Con="+Con+"&id="+id,
+                        dataType:"JSON",
+                        success:function(data){
+                            $.each(data,function(i,valor){
+                                $("#formulario4 #retirado_d").val(valor.Retirado);
+                                $("#formulario4 #fretirado_d").val(valor.Fretirado);
+                                $("#formulario4 #tipo_d").val(valor.Tipo);
+                                $("#formulario4 #talla_d").val(valor.Talla);
+                                $("#formulario4 #observaciones_d").val(valor.Observaciones);    
+                                $("#formulario4 #Consecutivo_d").val(valor.Consecutivo);    
+                            })
+                        }
+                    });//ajax
+
+                    break;
+                
+                case 'Estudios':
+                    $("#footer5,#formulario5").fadeIn();
+                    $("#formulario5 #f_estudios").val("si2");
+
+                    $.ajax({
+                        type:"POST",
+                        url:'<?php echo Conexion::ruta()?>view/ajax_Per_gestion.phtml',
+                        data:"tipo="+tipo+"&Con="+Con+"&id="+id,
+                        dataType:"JSON",
+                        success:function(data){
+                            $.each(data,function(i,valor){
+                                $("#formulario5 #retirado_e").val(valor.Retirado);
+                                $("#formulario5 #fretirado_e").val(valor.Fretirado);
+                                $("#formulario5 #tipo_e").val(valor.Tipo);
+                                $("#formulario5 #institucion_e").val(valor.Institucion);
+                                $("#formulario5 #titulo_e").val(valor.Titulo);
+                                $("#formulario5 #observacion_e").val(valor.Observaciones);
+                                $("#formulario5 #Consecutivo_e").val(valor.Consecutivo);
+                            });//each
+                        }
+                    });                    
+                    break;
+                case 'Historial':
+                    $("#footer6,#formulario6").fadeIn();
+                    $("#formulario6 #f_historial").val("si2");
+                    $.ajax({
+                        type:"POST",
+                        url:'<?php echo Conexion::ruta()?>view/ajax_Per_gestion.phtml',
+                        data:"tipo=" + tipo +"&Con="+Con+"&id="+id,
+                        dataType:"JSON",
+                        success:function(data){
+                            $.each(data,function(i,valor){
+                                $("#formulario6 #retirado_h").val(valor.Retirado);    
+                                $("#formulario6 #fretirado_h").val(valor.Fretirado);    
+                                $("#formulario6 #empresa_h").val(valor.Empresa);    
+                                $("#formulario6 #telefono_h").val(valor.Telefono);    
+                                $("#formulario6 #fingreso_h").val(valor.Fingreso);    
+                                $("#formulario6 #fretiro_h").val(valor.Fretiro);    
+                                $("#formulario6 #motivoret_h").val(valor.Motivoret);    
+                                $("#formulario6 #cargo_h").val(valor.Cargo);
+                                $("#formulario6 #jefeinm_h").val(valor.Jefeinm);
+                                $("#formulario6 #observaciones_h").val(valor.Observaciones);
+                                $("#formulario6 #Consecutivo_h").val(valor.Consecutivo);
+
+                            });//each
+                        }
+                    });//ajax
+                    break;
+                case 'Pagos':
+                        $("#footer7,#formulario7").fadeIn();
+                        $("#formulario7 #f_pagos").val("si2");
+                    $.ajax({
+                        type:"POST",
+                        url:'<?php echo Conexion::ruta()?>view/ajax_Per_gestion.phtml',
+                        data:"tipo="+tipo+"&Con="+Con+"&id="+id,
+                        dataType:"JSON",
+                        success:function(data){
+                            $.each(data,function(i,valor){
+                                $("#formulario7 #retirado_p").val(valor.Retirado);    
+                                $("#formulario7 #fretirado_p").val(valor.Fretirado);
+                                $("#formulario7 #tipo_p").val(valor.Tipo);
+                                $("#formulario7 #valor_p").val(valor.Valor);
+                                $("#formulario7 #Consecutivo_p").val(valor.Consecutivo);
+                            });//each
+                        }
+                    });//ajax
+                    break;
+                case 'Reconocimiento':
+                    $("#footer8,#formulario8").fadeIn();
+                    $("#formulario8 #f_reconocimiento").val("si2");
+                    $.ajax({
+                        type:"POST",
+                        url:'<?php echo Conexion::ruta()?>view/ajax_Per_gestion.phtml',
+                        data:"tipo="+tipo+"&Con="+Con+"&id="+id,
+                        dataType:"JSON",
+                        success:function(data){
+                            $.each(data,function(i,valor){
+                                $("#formulario8 #retirado_r").val(valor.Retirado);    
+                                $("#formulario8 #fretirado_r").val(valor.Fretirado);
+                                $("#formulario8 #tipo_r").val(valor.Retirado);
+                                $("#formulario8 #fecha_r").val(valor.Fecha);
+                                $("#formulario8 #observaciones_r").val(valor.Observaciones);
+                                $("#formulario8 #Consecutivo_r").val(valor.Consecutivo);
+                            });
+                        }
+                    });//ajax
+                    break;
+                
+
+                case 'Examen':
+                    $("#footer9,#formulario9").fadeIn();
+                    $("#formulario9 #f_examen").val("si2");
+                    $.ajax({
+                        type:"POST",
+                        url:'<?php echo Conexion::ruta()?>view/ajax_Per_gestion.phtml',
+                        data:"tipo="+tipo+"&Con="+Con+"&id="+id,
+                        dataType:"JSON",
+                        success:function(data){
+                            $.each(data,function(i,valor){
+                                $("#formulario9 #retirado_e").val(valor.Retirado);    
+                                $("#formulario9 #f_retirado_e").val(valor.Fretirado);
+                                $("#formulario9 #tipo_e").val(valor.Tipo);
+                                $("#formulario9 #fecha_e").val(valor.Fecha);
+                                $("#formulario9 #observaciones_e").val(valor.Observaciones);
+                                $("#formulario9 #Consecutivo_ex").val(valor.Consecutivo);
+                            });//each
+                        }
+                    });//ajax
+                    break;    
+                
+            }
+        }
+
+        function copiar(id,Con,tipo){
+            
+            if(confirm("Esta seguro copiar esta fila?")){
+             location.href="<?php echo Conexion::ruta()?>Per_gestion?Cop="+id+"&id="+Con+"&tipo="+tipo;   
+            }else{
+                $(".ck").removeAttr("checked");
+            }
+        }
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                
+            </div>
+            <div id="menu">
+                <?php include"view/Menu.phtml";?>
+            </div>
+             <div id="sesion">
+            <a href="<?php echo Conexion::ruta()?>cerrar" title="Cerrar Sesion"><img class="cerrar_c" src="<?php echo Conexion::ruta()?>images/cerrar.png"></a><br>
+                <?php echo ucwords($_SESSION["Nombre"]);?><br>
+                <strong><?php echo $centro;?></strong>
+            </div>
+        </div>
+        <div id="linea"></div>
+        <form action="" method="POST" name="form">
+        <div id="lateral">
+            <ul>
+                <li><img title="Buscar" class="imagen" id="buscar" src="<?php echo Conexion::ruta()?>images/buscar.png"></li>
+                <li><input type="text" name="txtbuscar" size=10 id="txtbuscar"></li>
+            </ul>
+        </div>
+        <div id="contenido">
+            <h2>Gestion de Personal</h2>
+            
+            <div class="caja">
+               <table>
+                <tr>
+                    <td><span>Id</span></td>
+                    <td><input type="text" name="Id" id="Id" value="<?php echo (isset($d[0]["Consecutivo"]))?$d[0]["Consecutivo"]:"";?>" readonly></td>
+                </tr>
+                
+                <tr>
+                    <td><span>Identificación</span></td>
+                    <td><input type="text" name="Identificacion" value="<?php echo (isset($d[0]["Identificacion"]))?$d[0]["Identificacion"]:"";?>"></td>
+                </tr>
+                <tr>
+                    <td><span>Nombres</span></td>
+                    <td><input type="text" name="Nombres" value="<?php echo (isset($d[0]["Nombres"]))?$d[0]["Nombres"]:"";?>"></td>
+                </tr>
+                <tr>
+                    <td><span>Apellidos</span></td>
+                    <td><input type="text" name="Apellidos" value="<?php echo (isset($d[0]["Apellidos"]))?$d[0]["Apellidos"]:"";?>"></td>
+                </tr>
+                
+            </table>
+          
+            </div>
+            
+            <div class="caja">
+               <table>
+            <tr>
+                    <td><span>Dirección</span></td>
+                    <td><input type="text" name="Direccion" value="<?php echo (isset($d[0]["Direccion"]))?$d[0]["Direccion"]:"";?>"></td>
+                </tr>
+                <tr>
+                    <td><span>Telefono 1</span></td>
+                    <td><input type="text" name="Telefono1" value="<?php echo (isset($d[0]["Telefono1"]))?$d[0]["Telefono1"]:"";?>"></td>
+                </tr>
+                <tr>
+                    <td><span>Telefono 2</span></td>
+                    <td><input type="text" name="Telefono2" value="<?php echo (isset($d[0]["Telefono2"]))?$d[0]["Telefono2"]:"";?>"></td>
+                </tr>      
+                <tr>
+                    <td><span>Centrocosto</span></td>
+                    <td><input type="text" name="CentroCosto" value="<?php echo (isset($d[0]["Centro_costo"]))?$d[0]["Centro_costo"]:"";?>"></td>
+                </tr>
+                </table>   
+            </div>
+            <div class="caja">
+                 <table>            
+                    <tr>
+                    <td><span>E-mail</span></td>
+                    <td><input type="text" name="Email" value="<?php echo (isset($d[0]["Email"]))?$d[0]["Email"]:"";?>"></td>
+                </tr>
+                <tr>
+                    <td><span>Centrotrabajo</span></td>
+                    <td><input type="text" name="Centrotrabajo" value="<?php echo (isset($d[0]["Centrotrabajo"]))?$d[0]["Centrotrabajo"]:"";?>"></td>
+                </tr>
+                
+                <tr>
+                    <td><span>Cargo</span></td>
+                    <td><input type="text" name="Cargo" value="<?php echo (isset($d[0]["Cargo"]))?$d[0]["Cargo"]:"";?>"></td>
+                </tr>                
+                <tr>
+                    <td><span>Estadoact</span></td>
+                    <td><input type="text" name="Estadoact" value="<?php echo (isset($d[0]["Estadoact"]))?$d[0]["Estadoact"]:"";?>"></td>
+                </tr>
+                   
+                 </table>   
+            </div>
+            <div id="boton">
+            <a href="#" id="abrir">
+                <img title="Agregar Ausencia" style="<?php echo $aus;?>" id="aus" class="imagen" src="<?php echo Conexion::ruta()?>images/detalle.png"></a>
+                <img title="Agregar Beneficiarios" style="<?php echo $ben;?>" id="ben" class="imagen" src="<?php echo Conexion::ruta()?>images/detalle.png"></a>
+                <img title="Agregar Dotacion" style="<?php echo $dot;?>" id="dot" class="imagen" src="<?php echo Conexion::ruta()?>images/detalle.png"></a>
+                <img title="Agregar Estudios" style="<?php echo $est;?>" id="est" class="imagen" src="<?php echo Conexion::ruta()?>images/detalle.png"></a>
+                <img title="Agregar Historial" style="<?php echo $his;?>" id="his" class="imagen" src="<?php echo Conexion::ruta()?>images/detalle.png"></a>
+                <img title="Agregar Pagos" style="<?php echo $pag;?>" id="pag" class="imagen" src="<?php echo Conexion::ruta()?>images/detalle.png"></a>
+                <img title="Agregar examen" style="<?php echo $exa;?>" id="exa" class="imagen" src="<?php echo Conexion::ruta()?>images/detalle.png"></a>
+                <img title="Agregar Reconocimiento" style="<?php echo $rec;?>" id="rec" class="imagen" src="<?php echo Conexion::ruta()?>images/detalle.png"></a>
+            </div>
+            </form>      
+
+            <!--
+                DETALLE AUSENTISMO
+            -->
+
+
+            <div id="tabla1" style="<?php echo $aus;?>">
+                <table align="center" class="bordered">
+                <thead>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                    <th>TiempoAusente</th>
+                    <th>Fausencia</th>
+                    <th>Observaciones</th> 
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                    <th>Copiar</th>
+
+                </thead>
+                
+                    <?php
+                    foreach ($detalle as $i => $value) {
+                        ?>
+                        <tr>
+                            <td><?php echo $detalle[$i]["Fecha"]?></td>
+                            <td><?php echo $detalle[$i]["Tipo"]?></td>
+                            <td><?php echo $detalle[$i]["Tiempoausente"]?></td>
+                            <td><?php echo $detalle[$i]["Fausencia"]?></td>
+                            <td><?php echo $detalle[$i]["Observaciones"]?></td>
+                            <td><img title="Editar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/editar.jpg" onclick="editar('<?php echo $detalle[$i]["Id"]?>','<?php echo $detalle[$i]["Consecutivo"]?>','<?php echo "Ausencia";?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/eliminar.png" onclick="eliminar('<?php echo $detalle[$i]["Id"]?>','<?php echo $detalle[$i]["Consecutivo"]?>','<?php echo "Ausencia";?>','<?php echo $detalle[$i]["Id_ausentismo"]?>')"></td>
+                            <td><input type="checkbox" class="ck" onclick="copiar('<?php echo $detalle[$i]["Id"]?>','<?php echo $detalle[$i]["Consecutivo"]?>','<?php echo "Ausencia";?>');"></td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+                
+            </div>
+
+            <!--
+                DETALLE BENEFICIARIOS
+            -->
+            
+
+            <div id="tabla2" style="<?php echo $ben;?>">
+
+                <table align="center" class="bordered">
+                <thead>
+                    <th>Tipo</th>
+                    <th>Nomape</th>
+                    <th>Fnacimiento</th>
+                    <th>BCCF</th> 
+                    <th>Beps</th> 
+                    <th>Sexo</th> 
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                    <th>Copiar</th>
+                </thead>
+                
+                    <?php
+                    foreach ($detalle1 as $i => $value) {
+                        ?>
+                        <tr>
+                            <td><?php echo $detalle1[$i]["Tipo"]?></td>
+                            <td><?php echo $detalle1[$i]["Nomapell"]?></td>
+                            <td><?php echo $detalle1[$i]["Fnacimiento"]?></td>
+                            <td><?php echo $detalle1[$i]["Bccf"]?></td>
+                            <td><?php echo $detalle1[$i]["Beps"]?></td>
+                            <td><?php echo $detalle1[$i]["Sexo"]?></td>
+                           <td><img title="Editar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/editar.jpg" onclick="editar('<?php echo $detalle1[$i]["Id"]?>','<?php echo $detalle1[$i]["Consecutivo"]?>','<?php echo "Beneficiarios";?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/eliminar.png" onclick="eliminar('<?php echo $detalle1[$i]["Id"]?>','<?php echo $detalle1[$i]["Consecutivo"]?>','<?php echo "Beneficiarios";?>','<?php echo $detalle1[$i]["Id_ben"]?>')"></td>
+                            <td><input type="checkbox" class="ck" onclick="copiar('<?php echo $detalle1[$i]["Id"]?>','<?php echo $detalle1[$i]["Consecutivo"]?>','<?php echo "Beneficiarios";?>');"></td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+            </div>
+
+            <!--
+                DETALLE DOTACION
+            -->
+
+            <div class="tabla3" style="<?php echo $dot;?>">
+
+                <table align="center" class="bordered">
+                <thead>
+                    
+                    <th>Tipo</th>
+                    <th>Talla</th>
+                    <th>Observaciones</th> 
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                    <th>Copiar</th>
+                </thead>
+                
+                    <?php
+                    for($i=0;$i<sizeof($detalle2);$i++){
+                        ?>
+                        <tr>
+                            <td><?php echo $detalle2[$i]["Tipo"]?></td>
+                            <td><?php echo $detalle2[$i]["Talla"]?></td>
+                            <td><?php echo $detalle2[$i]["Observaciones"]?></td>
+                            <td><img title="Editar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/editar.jpg" onclick="editar('<?php echo $detalle2[$i]["Id"]?>','<?php echo $detalle2[$i]["Consecutivo"]?>','<?php echo "Dotacion";?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/eliminar.png" onclick="eliminar('<?php echo $detalle2[$i]["Id"]?>','<?php echo $detalle2[$i]["Consecutivo"]?>','<?php echo "Dotacion";?>','<?php echo $detalle2[$i]["Id_dot"]?>')"></td>
+                            <td><input type="checkbox" class="ck" onclick="copiar('<?php echo $detalle2[$i]["Id"]?>','<?php echo $detalle2[$i]["Consecutivo"]?>','<?php echo "Dotacion";?>');"></td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+            </div>
+
+            <!--
+                DETALLE ESTUDIOS
+            -->
+
+            <div class="tabla3" style="<?php echo $est;?>">
+
+                 <table align="center" class="bordered">
+                <thead>
+                    
+                    <th>Tipo</th>
+                    <th>Institución</th>
+                    <th>Titulo</th>
+                    <th>Observaciones</th> 
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                    <th>Copiar</th>
+                </thead>
+                
+                    <?php
+                    for($i=0;$i<sizeof($detalle3);$i++){
+                        ?>
+                        <tr>
+                            
+                            <td><?php echo $detalle3[$i]["Tipo"]?></td>
+                            <td><?php echo $detalle3[$i]["Institucion"]?></td>
+                            <td><?php echo $detalle3[$i]["Titulo"]?></td>
+                            <td><?php echo $detalle3[$i]["Observaciones"]?></td>
+                            <td><img title="Editar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/editar.jpg" onclick="editar('<?php echo $detalle3[$i]["Id"]?>','<?php echo $detalle3[$i]["Consecutivo"]?>','<?php echo "Estudios";?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/eliminar.png" onclick="eliminar('<?php echo $detalle3[$i]["Id"]?>','<?php echo $detalle3[$i]["Consecutivo"]?>','<?php echo "Estudios";?>',<?php echo $detalle3[$i]["Id_est"]?>)"></td>
+                            <td><input type="checkbox" class="ck" onclick="copiar('<?php echo $detalle3[$i]["Id"]?>','<?php echo $detalle3[$i]["Consecutivo"]?>','<?php echo "Estudios";?>');"></td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+            </div>
+
+            <!--
+                DETALLE HISTORIAL
+            -->
+
+            <div class="tabla3" style="<?php echo $his;?>">
+
+                 <table align="center" class="bordered">
+                <thead>
+                    
+                    <th>Empresa</th>
+                    <th>Telefono</th>
+                    <th>Fingreso</th>
+                    <th>Fretiro</th>
+                    <th>Motivoret</th>
+                    <th>Cargo</th>
+                    <th>Jefeinm</th>
+                    <th>Observaciones</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                    <th>Copiar</th>
+                </thead>
+                
+                    <?php
+                    for($i=0;$i<sizeof($detalle4);$i++){
+                        ?>
+                        <tr>
+                            
+                            <td><?php echo $detalle4[$i]["Empresa"]?></td>
+                            <td><?php echo $detalle4[$i]["Telefono"]?></td>
+                            <td><?php echo $detalle4[$i]["Fingreso"]?></td>
+                            <td><?php echo $detalle4[$i]["Fretiro"]?></td>
+                            <td><?php echo $detalle4[$i]["Motivoret"]?></td>
+                            <td><?php echo $detalle4[$i]["Cargo"]?></td>
+                            <td><?php echo $detalle4[$i]["Jefeinm"]?></td>
+                            <td><?php echo $detalle4[$i]["Observaciones"]?></td>
+                            <td><img title="Editar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/editar.jpg" onclick="editar('<?php echo $detalle4[$i]["Id"]?>','<?php echo $detalle4[$i]["Consecutivo"]?>','<?php echo "Historial";?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/eliminar.png" onclick="eliminar('<?php echo $detalle4[$i]["Id"]?>','<?php echo $detalle4[$i]["Consecutivo"]?>','<?php echo "Historial";?>','<?php echo $detalle4[$i]["Id_his"]?>')"></td>
+                            <td><input type="checkbox" class="ck" onclick="copiar('<?php echo $detalle4[$i]["Id"]?>','<?php echo $detalle4[$i]["Consecutivo"]?>','<?php echo "Historial";?>');"></td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+            </div>
+
+            <!--
+                DETALLE PAGOS
+            -->
+
+            <div class="tabla3" style="<?php echo $pag;?>">
+
+                 <table align="center" class="bordered">
+                <thead>
+                    
+                    <th>Tipo</th>
+                    <th>Valor</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                    <th>Copiar</th>
+                </thead>
+                
+                    <?php
+                    for($i=0;$i<sizeof($detalle5);$i++){
+                        ?>
+                        <tr>
+                            
+                            <td><?php echo $detalle5[$i]["Tipo"]?></td>
+                            <td><?php echo $detalle5[$i]["Valor"]?></td>
+                            <td><img title="Editar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/editar.jpg" onclick="editar('<?php echo $detalle5[$i]["Id"]?>','<?php echo $detalle5[$i]["Consecutivo"]?>','<?php echo "Pagos";?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/eliminar.png" onclick="eliminar('<?php echo $detalle5[$i]["Id"]?>','<?php echo $detalle5[$i]["Consecutivo"]?>','<?php echo "Pagos";?>','<?php echo $detalle5[$i]["Id_pag"]?>')"></td>
+                            <td><input type="checkbox" class="ck" onclick="copiar('<?php echo $detalle5[$i]["Id"]?>','<?php echo $detalle5[$i]["Consecutivo"]?>','<?php echo "Pagos";?>');"></td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+            </div>
+
+            <!--
+                DETALLE RECONOCIMIENTO
+            -->
+
+            <div class="tabla3" style="<?php echo $rec;?>">
+
+                 <table align="center" class="bordered">
+                <thead>
+                    <th>Tipo</th>
+                    <th>Fecha</th>
+                    <th>Observaciones</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                    <th>Copiar</th>
+                </thead>
+                
+                    <?php
+                    for($i=0;$i<sizeof($detalle6);$i++){
+                        ?>
+                        <tr>
+                            <td><?php echo $detalle6[$i]["Tipo"]?></td>
+                            <td><?php echo $detalle6[$i]["Fecha"]?></td>
+                            <td><?php echo $detalle6[$i]["Observaciones"]?></td>
+                            <td><img title="Editar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/editar.jpg" onclick="editar('<?php echo $detalle6[$i]["Id"]?>','<?php echo $detalle6[$i]["Consecutivo"]?>','<?php echo "Reconocimiento";?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/eliminar.png" onclick="eliminar('<?php echo $detalle6[$i]["Id"]?>','<?php echo $detalle6[$i]["Consecutivo"]?>','<?php echo "Reconocimiento";?>','<?php echo $detalle6[$i]["Id_est"]?>')"></td>
+                            <td><input type="checkbox" class="ck" onclick="copiar('<?php echo $detalle6[$i]["Id"]?>','<?php echo $detalle6[$i]["Consecutivo"]?>','<?php echo "Reconocimiento";?>');"></td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+            </div>
+
+            <!--
+                DETALLE EXAMEN
+            -->
+
+            <div class="tabla3" style="<?php echo $exa;?>">
+
+                 <table align="center" class="bordered">
+                <thead>
+                    <th>Tipo</th>
+                    <th>Fecha</th>
+                    <th>Observaciones</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                    <th>Copiar</th>
+                </thead>
+                
+                    <?php
+                    for($i=0;$i<sizeof($detalle7);$i++){
+                        ?>
+                        <tr>
+                            <td><?php echo $detalle7[$i]["Tipo"]?></td>
+                            <td><?php echo $detalle7[$i]["Fecha"]?></td>
+                            <td><?php echo $detalle7[$i]["Observaciones"]?></td>
+                            <td><img title="Editar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/editar.jpg" onclick="editar('<?php echo $detalle7[$i]["Id"]?>','<?php echo $detalle7[$i]["Consecutivo"]?>','<?php echo "Examen";?>')"></td>
+                            <td><img title="Eliminar" class="icono2" src="http://monitoreoelectronicoeia.com/GIO/images/eliminar.png" onclick="eliminar('<?php echo $detalle7[$i]["Id"]?>','<?php echo $detalle7[$i]["Consecutivo"]?>','<?php echo "Examen";?>','<?php echo $detalle7[$i]["Id_exa"]?>')"></td>
+                            <td><input type="checkbox" class="ck" onclick="copiar('<?php echo $detalle7[$i]["Id"]?>','<?php echo $detalle7[$i]["Consecutivo"]?>','<?php echo "Examen";?>');"></td>
+                        </tr>        
+                        <?php
+                    }
+                    ?>
+                    
+            </table>
+            </div>
+
+        </div>
+        <div id="lateral_izq">
+            <ul>
+                <li><img title="Ausencia" class="imagen" id="Ausencia" src="<?php echo Conexion::ruta()?>images/asistencia.png"></li>
+                <li><img title="Beneficiarios" class="imagen" id="Beneficiarios" src="<?php echo Conexion::ruta()?>images/beneficiarios.png"></li>
+                <li><img title="Dotacion" class="imagen" id="Dotacion" src="<?php echo Conexion::ruta()?>images/dotacion.png"></li>
+                <li><img title="Estudios" class="imagen" id="Estudios" src="<?php echo Conexion::ruta()?>images/estudios.png"></li>
+                <li><img title="Historial" class="imagen" id="Historial" src="<?php echo Conexion::ruta()?>images/historial.png"></li>
+                <li><img title="Otros Pagos" class="imagen" id="Pagos" src="<?php echo Conexion::ruta()?>images/pagos.png"></li>
+                <li><img title="Reconocimiento" class="imagen" id="Reconocimiento" src="<?php echo Conexion::ruta()?>images/reconocimiento.png"></li>
+                <li><img title="Examen" class="imagen" id="Examen" src="<?php echo Conexion::ruta()?>images/enfermera.png"></li>
+            </ul>
+        </div>
+        <div id="footer">
+                <div id="formulario">
+                    <li><div id="titulo">Ausencia</div></li>
+                    <form action="" method=post name="formulario">
+                    <label>Id</label>
+                    <input type="text" class="ent2" name="Id_ausencia" value="<?php echo $d[0]["Consecutivo"]?>" readonly><br>
+                    <label>Fecha</label>
+                    <input type="text" class="ent2 datepicker" name="Fecha" id="fecha_a">
+                    <br>
+                    <label>Tipo</label>
+                    <select name="Tipo" class="ent2" id="tipo_a">
+                        <option value="0">Seleccione</option>
+                        <?php
+                        foreach ($tausencia as $key => $value) {
+                        ?>
+                        <option value="<?php echo $value['Numeracion']?>"><?php echo $value["Lista"]?></option>
+                        <?php
+                        }
+                        ?>
+                        
+                    </select>
+                    <br>
+                    <label>Tiempoausente</label>
+                    <input type="text" class="ent2" name="Tiempoausente" id="tiempoausente_a">
+                    <br>
+                    <label>Fausencia</label>
+                    <input type="text" class="ent2 datepicker" name="Fausencia"id="fausencia_a" >
+                    <br>
+                    <label>Observaciones</label>
+                    <textarea name="Observaciones" id="observaciones_a"></textarea>
+                    <br>      
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_ausencia" name="f_ausencia" value="si">
+                    <input type="hidden" name="tipo" value="Ausencia">
+                    <input type="hidden" name="Consecutivo_a" id="Consecutivo_a" value="">
+                    <input type="hidden" name="Identificacion" value="<?php echo $d[0]["Identificacion"]?>
+                    ">
+                    <a href="#" id="cerrar">Cerrar</a>
+                </form>
+            </div>  
+        </div>
+
+
+<div id="footer3">
+                <div id="formulario3">
+                    <li><div id="titulo">Beneficiarios</div></li>
+                    <form action="" method=post name="formulario">
+                        
+                    <label>Id</label>
+                    <input type="text" class="ent2" name="Id_ben" value="<?php echo $d[0]["Consecutivo"]?>" readonly>
+                    <br>
+                    <label>Tipo</label>
+                    <select name="Tipo" class="ent2" id="tipo_b">
+                        <option value="0">Seleccione</option>
+                        <?php
+                        foreach ($tbeneficiario as $key => $value) {
+                        ?>
+                        <option value="<?php echo $value["Numeracion"]?>"><?php echo $value["Lista"]?></option>
+                        <?php
+                        }
+                        ?>
+                        
+                    </select>
+                    <br>
+                    <label>Nomapell</label>
+                    <input type="text" class="ent2" name="Nomapell" id="nomapell_b">
+                    <br>
+                    <label>Fnacimiento</label>
+                    <input type="text" class="ent2 datepicker" name="Fnacimiento" id="Fnacimiento_b">
+                    <br>
+                    <label>Sexo</label>
+                    <select name="Sexo" class="ent2" id="sexo_b">
+                        <option value="0">Seleccione</option>
+                        <?php
+                        foreach ($sexo as $key => $value) {
+                        ?>
+                            <option value="<?php echo $value['Numeracion']?>"><?php echo $value["Lista"]?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                    <br>
+                    <label>Bccf</label>
+		    <select name="Bccf"  id="bccf_b" class="tam">
+                            <option value="0">Seleccione</option>
+                            <option value="1" <?php echo ($d[0]["Bccf"]==1)?"selected":""?> >Si</option>
+                            <option value="2" <?php echo ($d[0]["Bccf"]==2)?"selected":""?> >No</option>
+                    </select>
+                    <br>
+                    <label>Beps</label>
+		    <select name="Beps"  id="beps_b" class="tam">
+                            <option value="0">Seleccione</option>
+                            <option value="1" <?php echo ($d[0]["Beps"]==1)?"selected":""?> >Si</option>
+                            <option value="2" <?php echo ($d[0]["Beps"]==2)?"selected":""?> >No</option>
+                    </select>
+                    <br>
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_ben" name="f_ben" value="si">
+                    <input type="hidden" name="tipo" value="Beneficiarios">
+                    <input type="hidden" name="Consecutivo_b" id="Consecutivo_b" value="">
+                    <input type="hidden" name="Identificacion" value="<?php echo $d[0]["Identificacion"]?>">
+                    <a href="#" id="cerrar3">Cerrar</a>
+                </form>
+            </div>  
+        </div>
+
+
+        <div id="footer4">
+                <div id="formulario4">
+                    <li><div id="titulo">Dotación</div></li>
+                    <form action="" method=post name="formulario">
+                    <label>Id</label>
+                    <input type="text" class="ent2" name="Id" value="<?php echo $d[0]["Consecutivo"]?>" readonly>
+                    <br>
+                    <label>Tipo</label>
+                    <select name="Tipo" class="ent2" id="tipo_d">
+                        <option value="0">Seleccione</option>
+                        <?php
+                        foreach ($tdotacion as $key => $value) {
+                        ?>
+                        <option value="<?php echo $value['Numeracion']?>"><?php echo $value["Lista"]?></option>
+                        <?php
+                        }
+                        ?>
+                        
+                    </select>
+                    <br>
+                    <label>Talla</label>
+                    <input type="text" class="ent2" name="Talla" id="talla_d">
+                    <br>
+                    <label>Observaciones</label>
+                    <textarea name="Observaciones" id="observaciones_d"></textarea>
+                    <br>      
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_dotacion" name="f_dotacion" value="si">
+                    <input type="hidden" name="tipo" value="Dotacion">
+                    <input type="hidden" name="Consecutivo_d" id="Consecutivo_d" value="">
+                    <input type="hidden" name="Identificacion" value="<?php echo $d[0]["Identificacion"]?>">
+                    <a href="#" id="cerrar4">Cerrar</a>
+                </form>
+            </div>  
+        </div>
+
+
+          <div id="footer5">
+            <div id="formulario5">
+                    <li><div id="titulo">Estudios</div></li>
+                    <form action="" method=post name="formulario">
+                    <label>Id</label>
+                    <input type="text" class="ent2" name="Id" value="<?php echo $d[0]["Consecutivo"]?>" readonly>
+                    <br>
+                    <label>Tipo</label>
+                    <select name="Tipo" class="ent2" id="tipo_e">
+                        <option value="0">Seleccione</option>
+                        <?php
+                        foreach ($testudio as $key => $value) {
+                        ?>
+                        <option value="<?php echo $value['Numeracion']?>"><?php echo $value["Lista"]?></option>
+                        <?php
+                        }
+                        ?>
+                        
+                    </select>
+                    <br>
+                    <label>Institución</label>
+                    <input type="text" class="ent2" name="Institucion" id="institucion_e">
+                    <br>
+                    <label>Titulo</label>
+                    <input type="text" class="ent2" name="Titulo" id="titulo_e">
+                    <br>
+                    <label>Observaciones</label>
+                    <textarea name="Observaciones" id="observacion_e"></textarea>
+                    <br>      
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_estudios" name="f_estudios" value="si">
+                    <input type="hidden" name="tipo" value="Estudios">
+                    <input type="hidden" name="Consecutivo_e" id="Consecutivo_e" value="">
+                    <input type="hidden" name="Identificacion" value="<?php echo $d[0]["Identificacion"]?>">
+                    <a href="#" id="cerrar5">Cerrar</a>
+                </form>
+                </div>
+        </div>                
+
+       <div id="footer6">
+            <div id="formulario6">
+            <li><div id="titulo">Historial Laboral</div></li>
+                    <form action="" method=post name="formulario">
+                    <label>Id</label>
+                    <input type="text" class="ent2" name="Id" value="<?php echo $d[0]["Consecutivo"]?>" readonly>
+                    <br>
+                    <label>Empresa</label>
+                    <input type="text" class="ent2" name="Empresa" id="empresa_h">
+                    <br>
+                    <label>Telefono</label>
+                    <input type="text" class="ent2" name="Telefono" id="telefono_h">
+                    <br>
+                    <label>Fingreso</label>
+                    <input type="text" class="ent2 datepicker" name="Fingreso" id="fingreso_h">
+                    <br>
+                    <label>Fretiro</label>
+                    <input type="text" class="ent2 datepicker" name="Fretiro" id="fretiro_h">
+                    <br>
+                    <label>Motivoret</label>
+                    <input type="text" class="ent2" name="Motivoret" id="motivoret_h">
+                    <br>
+                    <label>Cargo</label>
+                    <input type="text" class="ent2" name="Cargo" id="cargo_h">
+                    <br>
+                    <label>Jefeinm</label>
+                    <input type="text" class="ent2" name="Jefeinm" id="jefeinm_h">
+                    <br>
+                    <label>Observaciones</label>
+                    <textarea name="Observaciones" id="observaciones_h"></textarea>
+                    <br>      
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_historial" name="f_historial" value="si">
+                    <input type="hidden" name="tipo" value="Historial">
+                    <input type="hidden" name="Consecutivo_h" id="Consecutivo_h" value="">
+                    <input type="hidden" name="Identificacion" value="<?php echo $d[0]["Identificacion"]?>">
+                    <a href="#" id="cerrar6">Cerrar</a>
+                </form>
+                </div>
+            </div>    
+        </div>
+        
+
+        <div id="footer10">
+            <div id="formulario10">
+            </div>
+        </div>
+
+
+        <div id="footer7">
+            <div id="formulario7">
+                <li><div id="titulo">Otros Pagos</div></li>
+                    <form action="" method=post name="formulario">
+                    <label>Id</label>
+                    <input type="text" class="ent2" name="Id" value="<?php echo $d[0]["Consecutivo"]?>" readonly>
+                    <br>
+                    <label>Tipo</label>
+                    <select name="Tipo" class="ent2" id="tipo_p">
+                        <option value="0">Seleccione</option>
+                        <?php
+                        foreach ($tpagos as $key => $value) {
+                        ?>
+                        <option value="<?php echo $value['Numeracion']?>"><?php echo $value["Lista"]?></option>
+                        <?php
+                        }
+                        ?>
+                        
+                    </select>
+                    <br>
+                    <label>Valor</label>
+                    <input type="text" class="ent2" name="Valor" id="valor_p" >
+                    <br>      
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_pagos" name="f_pagos" value="si">
+                    <input type="hidden" name="tipo" value="Pagos">
+                    <input type="hidden" name="Consecutivo_p" id="Consecutivo_p" value="">
+                    <input type="hidden" name="Identificacion" value="<?php echo $d[0]["Identificacion"]?>">
+                    <a href="#" id="cerrar7">Cerrar</a>
+                </form>
+                </div>
+            </div>  
+
+        
+
+
+<div id="footer8">
+            <div id="formulario8">
+            <li><div id="titulo">Reconocimiento</div></li>
+                    <form action="" method=post name="formulario">
+                    <label>Id</label>
+                    <input type="text" class="ent2" name="Id" value="<?php echo $d[0]["Consecutivo"]?>" readonly>
+                    <br>
+                    <label>Tipo</label>
+                    <select name="Tipo" class="ent2" id="tipo_r">
+                        <option value="0">Seleccione</option>
+                        <?php
+                        foreach ($treconocimiento as $key => $value) {
+                        ?>
+                        <option value="<?php echo $value['Numeracion']?>"><?php echo $value["Lista"]?></option>
+                        <?php
+                        }
+                        ?>
+                        
+                    </select>
+                    <br>
+                    <label>Fecha</label>
+                    <input type="text" class="ent2 datepicker" name="Fecha" id="fecha_r">
+                    <br>
+                    <label>Observaciones</label>
+                    <textarea name="Observaciones" id="observaciones_r"></textarea>
+                    <br>      
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_reconocimiento" name="f_reconocimiento" value="si">
+                    <input type="hidden" name="tipo" value="Reconocimiento">
+                    <input type="hidden" name="Consecutivo_r" id="Consecutivo_r" value="">
+                    <input type="hidden" name="Identificacion" value="<?php echo $d[0]["Identificacion"]?>">
+                    <a href="#" id="cerrar8">Cerrar</a>
+                </form>
+            </div>    
+        </div>
+
+<div id="footer9">
+            <div id="formulario9">
+            <li><div id="titulo">Examen</div></li>
+                    <form action="" method=post name="formulario">
+                    <label>Id</label>
+                    <input type="text" class="ent2" name="Id" value="<?php echo $d[0]["Consecutivo"]?>" readonly>
+                    <br>
+                    <label>Tipo</label>
+                    <select name="Tipo" class="ent2" id="tipo_e">
+                        <option value="0">Seleccione</option>
+                        <?php
+                        foreach ($texamen as $key => $value) {
+                        ?>
+                        <option value="<?php echo $value['Numeracion']?>"><?php echo $value["Lista"]?></option>
+                        <?php
+                        }
+                        ?>
+                        
+                    </select>
+                    <br>
+                    <label>Fecha</label>
+                    <input type="text" class="ent2 datepicker" name="Fecha" id="fecha_e" >
+                    <br>
+                    <label>Observaciones</label>
+                    <textarea name="Observaciones" id="observaciones_e"></textarea>
+                    <br>      
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_examen" name="f_examen" value="si">
+                    <input type="hidden" name="tipo" value="Examen">
+                    <input type="hidden" name="Consecutivo_e" id="Consecutivo_ex" value="">
+                    <input type="hidden" name="Identificacion" value="<?php echo $d[0]["Identificacion"]?>">
+                    <a href="#" id="cerrar9">Cerrar</a>
+                </form>
+            </div>    
+        
+        </div>
+    
+        
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+

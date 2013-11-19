@@ -1,0 +1,67 @@
+<?php
+
+class ajax {
+	private $requi=array();
+
+
+
+	public function conectar(){
+	    $con=mysql_connect("localhost","monitore_admin","soporte123z");
+	    mysql_select_db("monitore_ipam");
+	    //mysql_query("SET NAMES 'utf-8'");
+	    return $con;
+	}
+
+    public function get_requisiciones($centro){
+        $this->conectar();
+        $sql="SELECT * 
+        FROM Alm_requi 
+        WHERE Centrocosto=".$centro."
+        LIMIT ".$_GET["num"];
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->requi[]=$row;
+        }
+
+        return $this->requi;
+    }
+
+	
+}
+
+$obj=new ajax;
+
+$requi=$obj->get_requisiciones($_GET["centro"]);
+
+?>
+
+<table>
+	<tr align="center">
+		<td colspan="7"><h2>Requisiciones</h2></td>
+	</tr>
+	<tr style="background:#f0f0f0;font-weight:bold;">
+		<td>Consecutivo</td>
+		<td>Sucursal</td>
+		<td>Centro de costo</td>
+		<td>Fecha de entrega</td>
+		<td>Lugar de entrega</td>
+		<td>Estado proceso</td>
+		<td>Observaciones</td>
+	</tr>
+	<?php
+	for($i=0;$i<count($requi);$i++) {
+	?>
+	<tr>
+		<td><?php echo $requi[$i]["Consecutivo"]?></td>
+		<td><?php echo $requi[$i]["Sucursal"]?></td>
+		<td><?php echo $requi[$i]["Centrocosto"]?></td>
+		<td><?php echo $requi[$i]["Fentrega"]?></td>
+		<td><?php echo $requi[$i]["Lentrega"]?></td>
+		<td><?php echo $requi[$i]["Estadoproceso"]?></td>
+		<td><?php echo $requi[$i]["Observaciones"]?></td>
+	</tr>
+	<?php	
+	}
+	?>
+</table>

@@ -1,0 +1,111 @@
+<html>
+    <head>
+        <title>Entrada</title>
+        <link rel="shortcut icon" href="http://www.boteroibanez.com/img/botero.ico">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos.css"></style>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $("#abrir").click(function(){
+                    $("#footer,#formulario").fadeIn();
+                    });//click
+                
+                $("#cerrar").click(function(){
+                    $("#footer,#formulario").fadeOut();
+                    })
+                $("#nuevo").click(function(){
+                    location.href="<?php echo Conexion::ruta()?>Requisicion&n=1";
+                    });
+                $("#guardar").click(function(){
+                    document.form.submit();
+                    });
+                });//main    
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                
+            </div>
+            <div id="menu">
+                <?php include"view/Menu.phtml";?>
+            </div>
+             <div id="sesion">
+            <a href="<?php echo Conexion::ruta()?>cerrar">Cerrar Sesion</a><br>
+            <?php echo $_SESSION["usuario"];?>
+            </div>
+        </div>
+        <div id="linea"></div>
+        <form action="" method="POST" name="form">
+        <div id="lateral">
+            <ul>
+                <li><img title="Nuevo" id="nuevo" class="imagen" src="<?php echo Conexion::ruta()?>images/agregar.jpg"></li>
+                <li><img title="Guardar" class="imagen" src="<?php echo Conexion::ruta()?>images/guardar.jpg" id="guardar">
+                    <input type="hidden" name="grabar" value="si"></li>
+                <li><img title="Buscar" class="imagen" src="<?php echo Conexion::ruta()?>images/buscar.jpg"></li>
+                
+            </ul>
+        </div>
+        <div id="contenido">
+            <h2>Reportes Almacen</h2>
+            
+            <div class="caja">
+            
+          
+            </div>
+            
+            <div class="caja">
+                 <table>
+                <tr>
+                    <td>Id</td>
+                    <td><input type="text" name="Id" value="<?php echo $d[0]["Id"]?>" readonly></td>
+                </tr>
+                <tr>
+                    <td>Estadodoc</td>
+                    <td><input type="text" name="Estadodoc" value="<?php echo $d[0]["Estadodoc"]?>"></td>
+                </tr>
+                <tr>
+                    <td>Festadodoc</td>
+                    <td><input type="text" name="Festadodoc"></td>
+                </tr>
+                <tr>
+                    <td>Sucursal</td>
+                    <td><input type="text" name="Sucursal"></td>
+                </tr>
+                <tr>
+                    <td>Centrocosto</td>
+                    <td><input type="text" name="Centrocosto"></td>
+                </tr>
+                <tr>
+                    <td>Fentrega</td>
+                    <td><input type="text" name="Fentrega"></td>
+                </tr>
+                <tr>
+                    <td>Lentrega</td>
+                    <td><input type="text" name="Lentrega"></td>
+                </tr>
+                <tr>
+                    <td>Estadoproceso</td>
+                    <td><input type="text" name="Estadoproceso"></td>
+                </tr>
+                <tr>
+                    <td>Observaciones</td>
+                    <td><textarea name="Observaciones" ><?php echo $d[0]["Observaciones"]?></textarea></td>
+                </tr>
+            </table>
+            </div>
+            <div class="caja">
+                 
+            </div>
+            <div id="boton">
+            <a href="<?php echo Conexion::ruta()?>home" id="abrir" style="color: white;">Volver</a>
+            </div>
+            </form>      
+        
+        </div>
+            </div>  
+        </div>
+    
+        
+    </body>
+</html>

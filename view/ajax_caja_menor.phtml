@@ -1,0 +1,105 @@
+<?php
+class ajax {
+	private $productos=array();
+    private $consumo=array();
+    private $trabajo=array();
+    private $detalle=array();
+    private $mante=array();
+    private $equipos=array();
+
+	public function conectar(){
+	    $arcConexion="../lib/GIO.ini";
+        $datos = parse_ini_file($arcConexion,true);
+        
+        $conexion=mysql_connect($datos["database_host"],$datos["database_user"],$datos["database_pass"]);
+        mysql_select_db($datos["database_name"]);
+
+        return $conexion;
+	}
+
+    public function get_caja($id){
+        $this->conectar();
+        $sql="SELECT * from Ctb_cmdet where Id=".$id;
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->productos[]=$row;
+        }
+
+        return $this->productos;
+    }
+
+}
+
+$obj=new ajax;
+$detalle_cm=$obj->get_caja($_POST["id"]);
+?>
+<li>Caja Menor</li>
+                    <form action="" method=post name="formulario">
+                    <table>
+                        <tr>
+                            <td><span class="letra">Id</span></td>
+                            <td><input type="text" name="Id_c" value="<?php echo $detalle_cm[0]["Id_cm"]?>" readonly></td>
+                            <td><span class="letra">Fecha</span></td>
+                            <td><input name="Fecha" type="text" id="fproducto" value="<?php echo $detalle_cm[0]["Fecha"]?>"></td>
+                        </tr>    
+                        <tr>
+                            <td><span class="letra">Cod</span></td>
+                            <td><input type="text" name="Cod" id="fcantidad" value="<?php echo $detalle_cm[0]["Cod"]?>"></td>
+                            <td><span class="letra">Beneficiario</span></td>
+                            <td><input type="text" name="Beneficiario" id="fvu" value="<?php echo $detalle_cm[0]["Beneficiario"]?>"></td>
+                        </tr>
+                        <tr>
+                            <td><span class="letra">ValorRecibo</span></td>
+                            <td><input type="text" name="ValorRecibo" id="fimp" value="<?php echo $detalle_cm[0]["ValorRecibo"]?>"></td>
+                            <td><span class="letra">ReteFuente</span></td>
+                            <td><input type="text" name="ReteFuente" id="fimp" value="<?php echo $detalle_cm[0]["Retefuente"]?>"></td>
+                        </tr>
+                        <tr>
+                            <td><span class="letra">VCRetequi</span></td>
+                            <td><input type="text" name="VCRetequi" id="fimp" value="<?php echo $detalle_cm[0]["VCRetequi"]?>"></td>
+                            <td><span class="letra">Valorpagado</span></td>
+                            <td><input type="text" name="ValorPagado" id="fimp" value="<?php echo $detalle_cm[0]["ValorPagado"]?>"></td>
+                        </tr>
+                        <tr>
+                            <td><span class="letra">Reembolsable</span></td>
+                            <td><input type="text" name="Reembolsable" id="fimp" value="<?php echo $detalle_cm[0]["Reembolsable"]?>"></td>
+                            <td><span class="letra">FechaCM</span></td>
+                            <td><input type="text" name="FechaCM" id="fimp" value="<?php echo $detalle_cm[0]["FechaCM"]?>"></td>
+                        </tr>
+                        <tr>
+                            <td><span class="letra">DescConcPago</span></td>
+                            <td><input type="text" name="DescConcPago" id="fimp" value="<?php echo $detalle_cm[0]["DescConcPago"]?>"></td>
+                            <td><span class="letra">ValorReciboAI</span></td>
+                            <td><input type="text" name="ValorReciboAl" id="fimp" value="<?php echo $detalle_cm[0]["ValorReciboAI"]?>"></td>
+                        </tr>
+                        <tr>
+                            <td><span class="letra">ValorIVA</span></td>
+                            <td><input type="text" name="ValorIVA" id="fimp" value="<?php echo $detalle_cm[0]["ValorIVA"]?>"></td>
+                            <td><span class="letra">ReteIva</span></td>
+                            <td><input type="text" name="Reteiva" id="fimp" value="<?php echo $detalle_cm[0]["ReteIva"]?>"></td>
+                        </tr>
+                        <tr>
+                            <td><span class="letra">PorcentajeReteIcaRS</span></td>
+                            <td><input type="text" name="PorcentajeReteIcaRS" id="fimp" value="<?php echo $detalle_cm[0]["PorcentajeReteIcaRS"]?>"></td>
+                            <td><span class="letra">Retequi</span></td>
+                            <td><input type="text" name="Retequi" id="fimp" value="<?php echo $detalle_cm[0]["Retequi"]?>"></td>
+                        </tr>
+                        <tr>
+                            <td><span class="letra">Reteica</span></td>
+                            <td><input type="text" name="ReteIca" id="fimp" value="<?php echo $detalle_cm[0]["ReteIca"]?>"></td>
+                        </tr>
+                        <tr align="center">
+                            <td colspan="4"><input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" name="a_grabar_formu" value="si">
+                    <input type="hidden" name="Id" value="<?php echo $detalle_cm[0]["Id"]?>">
+                    <a href="#" id="cerrar">Cerrar</a>
+                </td>
+                        </tr>
+
+                    </table>    
+                </form>
+
+
+
+

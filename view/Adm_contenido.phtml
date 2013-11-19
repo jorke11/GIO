@@ -1,0 +1,223 @@
+<html>
+    <head>
+        <title>Administrar Contenido</title>
+        <link rel="shortcut icon" href="http://www.boteroibanez.com/img/botero.ico">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos2.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos4.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/css_permisos.css">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css" />
+        <script type="text/javascript">
+            $(function(){
+                 $("#logo").click(function(){
+                    location.href="<?php echo Conexion::ruta();?>home";
+                })
+                $( "#datepicker" ).datepicker();
+
+                $("#abrir").click(function(){
+                        
+                    $("#footer,#formulario").fadeIn();
+                    });//click
+                
+                $("#cerrar").click(function(){
+                    $("#footer,#formulario").fadeOut();
+                    });
+
+                $("#buscar").click(function(){
+                    var dato=$("#txtbuscar").val();
+                    if(!dato==0){
+                    location.href="<?php echo Conexion::ruta()?>Requisicion&b="+dato;    
+                    }
+                })
+
+                $("#txtbuscar").keypress(function(event){
+                    if(event.which==13){
+                        var dato=$("#txtbuscar").val();
+                        location.href="<?php echo Conexion::ruta()?>Requisicion?b="+dato;    
+                    }
+                });
+
+               
+
+                
+
+                $("#agregar_d").click(function(){
+
+                    var tipo=$("#tipo").val();
+                    var texto=$("#txt_agregar").val();
+
+                    if(texto.length>0){
+                        if($("#control").is(":checked")){    
+                            location.href="<?php echo Conexion::ruta()?>Adm_contenido?con="+texto;
+                        }else{
+                            location.href="<?php echo Conexion::ruta()?>Adm_contenido?id="+tipo+"&txt="+texto;
+                        }
+                    }                   
+                })
+
+                $("#control").click(function(){
+                    if($("#control").is(":checked")){
+                        $("#tipo").attr("disabled",true);
+                        $("#ajax").css("display","none");
+                        $("#titulo").css("display","inline");
+                        $("#titulo").html("<h2>Agregar tipo contenido</h2>");
+                    }else{
+                        $("#tipo").removeAttr("disabled");
+                        $("#ajax").css("display","inline");
+                        $("#titulo").css("display","none");
+                        
+                    }    
+                })
+
+                 $("#agregar_centro").click(function(){
+                        var Latitud=$("#Latitud").val();
+                        var Longitud=$("#Longitud").val();
+                        var nombre=$("#centro").val();
+                    location.href="<?php echo Conexion::ruta()?>Adm_contenido?Centro="+nombre+"&lat="+Latitud + "&long="+Longitud;        
+                });
+
+                });//main    
+        </script>
+        <script type="text/javascript">
+        function eliminar(id,id_requi){
+            if(confirm("Desea eliminar este detalle")){
+                location.href="<?php echo Conexion::ruta()?>Requisicion&e="+id+"&b="+id_requi;
+            }
+        }
+        function editar(id,requi,producto,cantidad,Vu,imp){
+            $("#fproducto").val(producto);
+            $("#fcantidad").val(cantidad);
+            $("#fvu").val(Vu);
+            $("#fimp").val(imp);
+            $("#f_grabar").val("si2");
+            $("#fid").val(id);
+            $("#footer,#formulario").fadeIn();
+        }
+
+        function copiar(id,id_requi){
+            if(confirm("Esta seguro copiar esta fila?")){
+             location.href="<?php echo Conexion::ruta()?>Requisicion&Con="+id+"&id="+id_requi;   
+            }else{
+                $(".ck").removeAttr("checked");
+            }
+        }
+
+        function anular(num){
+            alert(num);
+        }
+
+        function Control(valor){
+            var texto="";
+           
+
+            $("#tabla_contenido").html("");
+            $.ajax({
+                type:"POST",
+                url:'<?php echo Conexion::ruta()?>view/ajax_contenido.phtml',
+                data:"dato="+valor,
+                dataType:"JSON",
+                success:function(data){
+                    texto="<thead><th>Control</th><th>Lista</th><th>Activo</th></thead>";
+                    $("#tabla_c").empty();
+                    $("#tabla_c").append(texto);
+                    $.each(data,function(i,valor){
+                        texto='<tr><td>'+valor.Lista+'</td><td>'+
+                                        valor.Descripcion+'</td><td><input type="checkbox" value="Anular" onclick="anular(\''+valor.numeracion+'\')"></td></tr>';
+                        
+                        $("#tabla_c").append(texto);
+                    });//each
+
+                }
+            });//ajax
+        }
+
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                
+            </div>
+            <div id="menu">
+                <?php include"view/Menu.phtml";?>
+            </div>
+
+             <div id="sesion">
+                <a href="<?php echo Conexion::ruta()?>cerrar" title="Cerrar Sesion"><img class="cerrar_c" src="<?php echo Conexion::ruta()?>images/cerrar.png"></a><br>
+                <?php echo ucwords($_SESSION["Nombre"]);?><br>
+                <strong><?php echo $centro;?></strong>
+            </div>
+        </div>
+        <div id="linea"></div>
+        <form action="" method="POST" name="form">
+        <div id="lateral">
+        </div>
+        <div id="contenido">
+            <div id="tituloCon">
+                 <h2>Administrar Contenido</h2>
+            </div>
+            <div class="cuadrosCon2">
+            
+                <table align="center" class="bordered">
+                    <tr align="center">
+                        <th colspan="2"><h3 style="color:white">Crear Centros de Costo:</h3></th>
+                    </tr>
+                    <tr>
+                        <td>Nombre Centro</td>
+                        <td><input type="text" name="centro" id="centro"></td>
+                    </tr>    
+                    <tr>
+                        <td>Latitud</td>
+                        <td><input type="text" name="Latitud" id="Latitud"></td>
+                    </tr>    
+                    <tr>
+                        <td>Longitud</td>
+                        <td><input type="text" name="Longitud" id="Longitud"></td>
+                    </tr>
+                    <tr align="center">
+                        <td colspan="2"><img title="agregar" class="imagen2" id="agregar_centro" src="<?php echo Conexion::ruta()?>images/agregar_d.png"></td>
+                    </tr>
+
+                </table>    
+            </div>
+            <div class="cuadrosCon2">
+
+                <div id="tipos">
+            Tipo de Control:
+            <select name="tipo" id="tipo" onchange="Control(this.value);">
+                <option value="0" class="ent">Seleccione</option>
+                <?php
+                foreach ($control as $key => $value) {
+                    ?>
+                    <option value="<?php echo $control[$key]["No"]?>" class="ent"><?php echo $control[$key]["Descripcion"]?></option>
+                    <?php
+                }
+                ?>
+            </select>
+            <br><br>
+            <input type="text" name="agregar" id="txt_agregar">
+            <img title="agregar" class="imagen2" id="agregar_d" src="<?php echo Conexion::ruta()?>images/agregar_d.png">
+            <br>
+            </div>
+            <div id="ajax">
+                <table align="center" class="bordered" id="tabla_c">
+                    <thead>
+                        <th>Control</th>
+                        <th>Lista</th>    
+                        <th>Activo</th>    
+                    </thead>
+                </table>
+            </div>
+
+
+            </div>
+
+
+        </div>
+    </body>
+</html>
+
+

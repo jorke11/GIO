@@ -1,0 +1,75 @@
+<?php
+class ajax{
+    private $detalle=array();
+    private $editar=array();
+
+	public function conectar(){
+        
+	    $arcConexion="../lib/GIO.ini";
+        $datos = parse_ini_file($arcConexion,true);
+        
+        $conexion=mysql_connect($datos["database_host"],$datos["database_user"],$datos["database_pass"]);
+        mysql_select_db($datos["database_name"]);
+
+        return $conexion;
+	}
+
+     public function get_detalle($con,$centro){
+        $this->conectar();
+        $sql="SELECT * 
+                    FROM Ope_liquiobradet 
+                    WHERE Id_liquiobra=$con
+                    AND Centrocosto=".$centro;
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->detalle[]=$row;
+
+        }   
+        return $this->detalle;
+    }
+
+    public function get_detalle_editar($con){
+        $this->conectar();
+        $sql="SELECT * 
+                    FROM Ope_liquiobradet 
+                    WHERE Id=$con";
+                    
+        $res=mysql_query($sql);
+
+        while($row=mysql_fetch_assoc($res)){
+            $this->editar[]=$row;
+
+        }   
+        return $this->editar;
+    }
+
+}
+
+$obj=new ajax;
+
+if(isset($_POST["tipo"])){
+    switch ($_POST["tipo"]) {
+        case 'ver':
+            $datos=$obj->get_detalle($_POST["Consecutivo"],$_POST["centro"]);
+            echo json_encode($datos);
+            break;
+        case 'editar':
+            $datos=$obj->get_detalle_editar($_POST["Id"]);
+            echo json_encode($datos);
+            break;
+
+        default:
+            # code...
+            break;
+    }
+}
+
+
+
+?>
+
+
+
+
+

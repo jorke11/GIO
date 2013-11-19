@@ -1,0 +1,121 @@
+<html>
+    <head>
+        <title>Login</title>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="http://www.boteroibanez.com/img/botero.ico">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos2.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/js/funciones.js">
+        <script type="text/javascript" src="<?php echo Conexion::ruta();?>script/js/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript">
+           $(function(){
+            
+           $("#Usuario, #Clave").blur(function(){
+            var usuario=$("#Usuario").val();
+            
+                $.ajax({
+                    type:"POST",
+                    url:"<?php echo Conexion::ruta()?>view/ajax_nuevo.phtml",
+                    data:{
+                            usuario:usuario
+                        },
+                    
+                    success:function(data){
+//                        $("#centro").html("");
+//                        $.each(data,function(i,valor){
+//                            $("#centro").append("<option value='"+valor.Id+"'>"+valor.Nombre+"</option>");
+//                        });
+                    }
+                })
+                
+            });
+                
+            });
+        </script>
+    </head>
+
+    <body>
+        <div id="header">
+            <div id="logo">
+                
+            </div>
+            <div id="menu">
+                
+            </div>
+        </div>
+        <div id="linea"></div>
+        <div id="lateral"></div>
+        <div id="espacio"></div> 
+        <div id="contenido">
+            <br>
+            <h1>Bienvenidos al Sistema GIO</h1>
+            <h2>Gestion Integral de Obras</h2>
+            <div id="formu1">
+            <form action="" method="POST" name="formu">
+                        <table align="center">
+                            <tr>
+                                <td>Usuario</td>
+                                <?php
+                                if(isset($_GET["c"])){
+                                 ?>
+                                 <td><input type="text" class="ent" name="Usuario"  id="Usuario" value="<?php echo $_GET["c"]?>"></td>
+                                 <?php       
+                                }else{
+                                ?>
+                                <td><input type="text" class="ent" name="Usuario"  id="Usuario" placeholder="Ingresa tu usuario"></td>
+                                <?php    
+                                }
+                                ?>
+                            </tr>
+                            <tr>
+                                <td>Clave</td>
+                                <td><input type="password" class="ent" name="Clave" id="Clave" placeholder="Ingresa tu Clave" ></td>
+                            </tr>
+                            <tr>
+                                <td>Centro</td>
+                                <?php
+                                if(isset($_GET["c"]) and !empty($_GET["c"])){
+
+                                        $sel=$obj->get_centro($_GET["c"]);
+                                }
+                                ?>
+                                <td><div id="ajax">
+                                    <select class="ent" name="Centro" id="centro">
+                                        <option>Selecione Centro</option>
+                                    </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><br></td>
+                            </tr>
+                            <tr align=center>
+                                <td colspan="2"><input type="image" id="login" src="<?php echo Conexion::ruta()?>images/login4.png" title="Ingresar" onclick="document.form.submit();" id="login"></td>
+                            </tr>
+                            <tr align=center>
+                                <td colspan="2"><a href="<?php echo Conexion::ruta()?>olvido" class="log">Olvido Clave</a></td>
+                            </tr>
+                        </table>
+                        <input type="hidden" name="grabar" value="si" >
+                        
+                </form>
+            </div>
+
+            <?php
+            if(isset($_GET["m"])){
+                switch($_GET["m"]){
+                    case "1":{
+                        ?>
+                        <h2 style="color:red;">Usuario no existe ó Clave incorrecta,<br> por favor Verifique con un Administrador</h2>
+                        <?php
+                        break;
+                    }
+                }
+            }
+            ?>
+        </div>
+        <div id="footer">
+                
+        </div>
+    </body>
+</html>

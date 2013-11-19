@@ -1,0 +1,230 @@
+<html>
+    <head>
+        <title>Contratos</title>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="http://www.boteroibanez.com/img/botero.ico">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo Conexion::ruta();?>script/estilos/estilos2.css">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="<?php echo Conexion::ruta()?>script/js/jquery-1.10.2.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <script src="<?php echo Conexion::ruta()?>script/js/traduccion.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                 $("#logo").click(function(){
+                    location.href="<?php echo Conexion::ruta();?>home";
+                })
+                $( ".datepicker" ).datepicker();
+
+                $("#abrir").click(function(){
+                        
+                    $("#footer,#formulario").fadeIn();
+                    });//click
+                
+                $("#cerrar").click(function(){
+                    $("#footer,#formulario").fadeOut();
+                    });
+
+                $("#nuevo").click(function(){
+                        $("#fproducto").val(" ");
+                        $("#fcantidad").val(" ");
+                        $("#fvu").val(" ");
+                        $("#fimp").val(" ");
+                        $("#f_grabar").val(" ");
+                    location.href="<?php echo Conexion::ruta()?>Ope_liquidacion?n=1";
+                    });
+
+
+
+                $("#guardar").click(function(){
+                    document.form.submit();
+                    });
+
+                $("#Imprimir").click(function(){
+                    var id=$("#Id").val();
+                    window.open("<?php echo Conexion::ruta()?>view/pdf/pdf_requi.phtml?Requi="+id+"&id_centro=<?php echo $_SESSION["Id_centro"]?>","Impresion" ,"width=700,height=700,scrollbars=NO"); 
+                    location.href="<?php echo Conexion::ruta()?>Requisicion?i="+id;
+
+                })
+
+                $("#buscar").click(function(){
+                    var dato=$("#txtbuscar").val();
+                    if(!dato==0){
+                    location.href="<?php echo Conexion::ruta()?>Requisicion&b="+dato;    
+                    }
+                })
+
+                $("#txtbuscar").keypress(function(event){
+                    if(event.which==13){
+                        var dato=$("#txtbuscar").val();
+                        location.href="<?php echo Conexion::ruta()?>Requisicion?b="+dato;    
+                    }
+                });
+
+                $("#agregar_d").click(function(){
+                    $("#footer,#formulario").fadeIn();               
+                })
+
+                $("#cerrar").click(function(){
+                    $("#footer,#formulario").fadeOut();               
+                })
+
+                });//main    
+        </script>
+        <script type="text/javascript">
+        
+        function eliminar(id,id_requi){
+            if(confirm("Desea eliminar este detalle")){
+                location.href="<?php echo Conexion::ruta()?>Requisicion?e="+id+"&b="+id_requi;
+            }
+        }
+
+        function editar(id,requi,producto,cantidad,Vu,imp){
+            $("#fproducto").val(producto);
+            $("#fcantidad").val(cantidad);
+            $("#fvu").val(Vu);
+            $("#fimp").val(imp);
+            $("#f_grabar").val("si2");
+            $("#fid").val(id);
+            $("#footer,#formulario").fadeIn();
+        }
+
+        function copiar(id,id_requi){
+            if(confirm("Esta seguro copiar esta fila?")){
+             location.href="<?php echo Conexion::ruta()?>Requisicion?Con="+id+"&id="+id_requi;   
+            }else{
+                $(".ck").removeAttr("checked");
+            }
+        }
+
+         function Save(No,Consecutivo){
+
+            if($("#guardar_"+No).is(":checked")){
+                if(confirm("Realmente desea guardar esta información?")){
+                var acuerdo=$("#Acuerdo_"+No).val();
+                var fecha=$("#Fecha_"+No).val();
+                var acta=$("#Acta_"+No).val();
+                var observaciones=$("#Observaciones_"+No).val();
+
+                if(fecha!=0){
+                    var arreglo=fecha.split("/");
+                    var fechareal=arreglo[2] + "/" + arreglo[1] + "/" + arreglo[0];
+                }
+                
+                location.href="<?php echo Conexion::ruta()?>Ope_liquidacion?Sav="+Consecutivo + "&acuerdo=" + acuerdo + "&fecha="+fechareal + "&acta="+ acta + "&observaciones=" + observaciones;   
+                }
+            }
+           
+        }
+
+        function Add(No,Consecutivo){
+
+            if($("#agregar_"+No).is(":checked")){
+                $("#ver").css("visibility","visible");
+                $("#f_consecutivo").val(Consecutivo);
+            }else{
+                $("#ver").css("visibility","hidden");
+            }
+        }
+
+        </script>
+        
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                
+            </div>
+            <div id="menu">
+                <?php include"view/Menu.phtml";?>
+            </div>
+
+             <div id="sesion">
+                <a href="<?php echo Conexion::ruta()?>cerrar" title="Cerrar Sesion"><img class="cerrar_c" src="<?php echo Conexion::ruta()?>images/cerrar.png"></a><br>
+                <?php echo ucwords($_SESSION["Nombre"]);?><br>
+                <strong><?php echo $centro;?></strong>
+            </div>
+        </div>
+        <div id="linea"></div>
+        <div id="espacio"></div>
+        <form action="" method="POST" name="form">
+        <div id="lateral">
+            <ul>
+                <li><img title="Nuevo" id="nuevo" class="imagen" src="<?php echo Conexion::ruta()?>images/agregar.jpg"></li>
+                <li><img title="Guardar" class="imagen" src="<?php echo Conexion::ruta()?>images/guardar.png" id="guardar">
+                    <input type="hidden" name="grabar" value="si"></li>
+                <li><img title="Imprimir" id="Imprimir" class="imagen" src="<?php echo Conexion::ruta()?>images/impresora.png"></li>
+                <li><img title="Buscar" class="imagen" id="buscar" src="<?php echo Conexion::ruta()?>images/buscar.png"></li>
+                <li><input type="text" name="txtbuscar" size=10 id="txtbuscar"></li>
+            </ul>
+        </div>
+        <div id="contenido">
+            <h2>Contratos</h2>
+            <div id="tablaesp">
+            <h3>Contratista</h3>
+            <img title="agregar" class="imagen2" id="agregar_d" src="<?php echo Conexion::ruta()?>images/agregar_d.png">
+            <select name="contratista1">
+                <option value="0">Seleccione</option>
+                <?php
+                foreach ($contratistas as $key => $value) {
+                ?>
+                <option value="<?php echo $key?>"><?php echo $value["Nombre"]?></option>
+                <?php
+                }
+                ?>
+                
+            </select>    
+            
+        </div>
+          
+            <div id="boton">
+            <a href="#" id="ver" style="color: rgb(0,43,87);visibility:hidden;;"><img title="Agregar Detalle" id="abrir" class="imagen" style="" src="<?php echo Conexion::ruta()?>images/detalle.png"></a>
+            </div>
+            </form>      
+            <div id="tabla">
+
+            <table align="center" class="bordered">
+                <thead>
+                    <th>Nombre</th>
+                    <th>Cednit</th>
+                    
+                </thead>
+                
+                    <?php
+                    for($i=0;$i<sizeof($contratistas);$i++){
+                        ?>
+                        <tr align="center">
+                            <td><?php echo $contratistas[$i]["Nombre"]?></td>
+                            <td><?php echo $contratistas[$i]["Cednit"]?></td>
+                            
+                        </tr>        
+                        <?php
+                    }
+                    ?>  
+            </table>
+        </div>
+
+        </div>
+        
+        <div id="footer">
+                <div id="formulario">
+                    <li>Agregar Contratratistas</li>
+                    <form action="" method=post name="formulario">
+                    <label>CedNit</label>
+                    <input type="text" name="Cednit" class="ent2"><br>
+                    <label>Nombre</label>
+                    <input type="text" name="Nombre" class="ent2"><br>
+                    <br>
+                        <br>
+                    <input type="submit" name="guardar" value="Guardar">
+                    <input type="hidden" id="f_agregar" name="f_agregar" value="si">
+                    <a href="#" id="cerrar">Cerrar</a>
+                </form>
+            </div>  
+        </div>
+        
+    </body>
+</html>
+
+
+
